@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import type { Project } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 export function ProjectCard({ project }: { project: Project }) {
     return (
