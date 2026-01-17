@@ -8,7 +8,7 @@ export const projects: Project[] = [
       "A web platform that allows users to browse Indonesian recipes and upload their own recipes for public viewing.",
     objective:
       "A web platform that allows users to browse Indonesian recipes and upload their own recipes for public viewing.",
-    year: "2024",
+    year: "2025",
     role: "Frontend Developer",
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     liveUrl: "https://csp-project-final.vercel.app",
@@ -34,7 +34,7 @@ The most important design decision was establishing clear UI criteria for typogr
       "A static event website designed to present information for a fictional anime convention.",
     objective:
       "A static event website designed to present information for a fictional anime convention.",
-    year: "2024",
+    year: "2026",
     role: "UI/UX Developer",
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     liveUrl: "https://kurofest.vercel.app",
@@ -60,7 +60,7 @@ The central design decision was to strictly adhere to predefined UI criteria der
       "A dashboard that provides an analytical overview of user reviews for the BCA Mobile application.",
     objective:
       "A dashboard that provides an analytical overview of user reviews for the BCA Mobile application, intended to support product-level insights.",
-    year: "2024",
+    year: "2026",
     role: "Data Analyst",
     stack: ["Python", "Streamlit", "BERTopic", "Pandas", "Plotly"],
     liveUrl: "https://bca-mobile-dashboard.streamlit.app/",
@@ -74,6 +74,37 @@ The application operates in a read-only mode, with limited filtering for explora
 No user authentication or data input features were implemented, keeping the scope aligned with course requirements.`,
     outcome: `The project successfully demonstrates the application of text mining techniques to real-world product review data. The dashboard provides clear visualizations of sentiment patterns and topic distributions.`,
     reflection: `Working with BERTopic revealed the importance of preprocessing decisions in topic modeling. The quality of insights depends heavily on how text data is cleaned and prepared before analysis.`,
+    featured: true,
+  },
+  {
+    slug: "vertex-inventory-os",
+    title: "Vertex",
+    description:
+      "A high-density operational dashboard that transforms raw sales data into actionable inventory intelligence and demand forecasting.",
+    objective:
+      "Develop a deterministic decision-support system that helps retailers optimize capital allocation and prevent stockouts through mathematical modeling.",
+    year: "2026",
+    role: "Full-stack Developer & UI Designer",
+    stack: [
+      "Next.js 15",
+      "Supabase",
+      "PostgreSQL",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion",
+    ],
+    liveUrl: "https://vertex-inventory.vercel.app",
+    context: `Vertex was built to bridge the gap between simple POS systems and complex enterprise ERPs. Small to medium retailers often struggle with 'Capital Traps', which is money tied up in slow-moving stock and lost revenue due to stockouts. 
+
+The project focus was to create an 'Industrial Cockpit' that provides immediate situational awareness and predictive modeling without the complexity of traditional warehouse software.`,
+    architecture: `The system architecture leverages a 'Logic-in-Database' approach. Instead of performing heavy calculations on the client, I implemented PostgreSQL Views and Security Invokers to handle demand forecasting (Moving Averages) and Reorder Point (ROP) math server-side.
+
+For data integrity, I implemented an immutable audit trail using Database Triggers. This ensures every stock change, whether via a manual adjustment or a sale is permanently logged at the database level, creating a fail-safe forensic history.`,
+    tradeoffs: `The most significant design tradeoff was the choice between 'Aesthetic Minimalism' and 'Industrial Information Density.' While modern web design favors large whitespace, operational tools require high data visibility. I opted for a 'Cockpit' aesthetic, reducing vertical padding and using high-contrast semantic indicators to ensure users can see critical data points above the fold.
+
+Another technical decision involved forecasting models. I initially explored EWMA (Exponentially Weighted Moving Average) but reverted to a 30-day SMA (Simple Moving Average) to prioritize 'Stability' over 'Recency Bias,' ensuring that short-term sales spikes didn't trigger erratic over-ordering signals for the user.`,
+    outcome: `The resulting platform provides a comprehensive suite of operational tools, including a 'What-If' scenario simulator, financial capital concentration analysis, and a high-speed global command palette (⌘K) for rapid navigation.`,
+    reflection: `Developing Vertex highlighted the complexities of 'Hydration' in Next.js 15 when dealing with real-time data visualization. Ensuring that complex chart data matched between the server-render and client-mount required a disciplined approach to React state synchronization and locale-aware number formatting.`,
     featured: true,
   },
 ];

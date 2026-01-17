@@ -2,7 +2,7 @@ import { Container } from '@/components/layout/container'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'About — Timothy Evan',
+    title: 'About',
 }
 
 export default function AboutPage() {

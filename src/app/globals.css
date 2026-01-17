@@ -1,3 +1,4 @@
+/* app/globals.css */
 @import "tailwindcss";
 
 @theme {
@@ -25,21 +26,27 @@
     font-family: var(--font-sans);
     font-size: 15px;
     line-height: 1.6;
-    background-color: #F6F5F3;
-    color: #1A1A1A;
+    background-color: #f6f5f3;
+    color: #1a1a1a;
     letter-spacing: -0.01em;
   }
 
+  /* Single selection style - choosing the subtle version */
   ::selection {
-    background-color: #8B1E1E;
-    color: #F6F5F3;
+    background: rgba(139, 30, 30, 0.08);
+    color: inherit;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
     font-weight: 600;
     letter-spacing: -0.03em;
-    color: #1A1A1A;
+    color: #1a1a1a;
   }
 
   a {
@@ -57,31 +64,136 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #F6F5F3;
+    background: #f6f5f3;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #E0DFDC;
+    background: #e0dfdc;
+    border-radius: 2px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #D0CFCC;
+    background: #d0cfcc;
   }
 }
 
+@layer utilities {
+  /* Logo animations */
+  @keyframes pulse-subtle {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.95;
+    }
+  }
+
+  @keyframes float-up {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-1px);
+    }
+  }
+
+  @keyframes float-down {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(1px);
+    }
+  }
+
+  /* Fracture animation for special elements */
+  @keyframes fracture {
+    0%,
+    100% {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    50% {
+      clip-path: polygon(0 0, 95% 0, 100% 100%, 0 95%);
+    }
+  }
+
+  .animate-pulse-subtle {
+    animation: pulse-subtle 4s ease-in-out infinite;
+  }
+
+  .animate-float-up {
+    animation: float-up 6s ease-in-out infinite;
+  }
+
+  .animate-float-down {
+    animation: float-down 6s ease-in-out infinite;
+    animation-delay: 3s;
+  }
+
+  .animate-fracture {
+    animation: fracture 8s ease-in-out infinite;
+  }
+
+  /* Custom focus states - fixed version without opacity modifier */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-1 focus:ring-offset-2;
+  }
+
+  .focus-ring:focus {
+    --tw-ring-color: rgba(122, 30, 30, 0.2);
+    --tw-ring-offset-color: #f7f7f5;
+  }
+
+  /* Micro interaction classes */
+  .hover-lift {
+    @apply transition-transform ease-out hover:-translate-y-0.5;
+  }
+
+  .hover-push {
+    @apply transition-transform ease-out active:translate-y-0.5;
+  }
+
+  /* Text balance utilities */
+  .text-edge-cap {
+    text-edge: cap;
+    leading-trim: both;
+  }
+
+  /* Asymmetric padding utilities */
+  .p-tension-sm {
+    padding-top: var(--spacing-3);
+    padding-right: var(--spacing-2-5); /* Note the hyphen instead of the dot */
+    padding-bottom: var(--spacing-2);
+    padding-left: var(--spacing-3);
+  }
+
+  .p-tension-md {
+    padding-top: var(--spacing-5);
+    padding-right: var(--spacing-4);
+    padding-bottom: var(--spacing-3-5); /* Note the hyphen instead of the dot */
+    padding-left: var(--spacing-4);
+  }
+}
+
+/* Logo idle animation - refined */
+.logo-idle rect:nth-child(2) {
+  animation: float-up 6s ease-in-out infinite;
+}
+
+.logo-idle rect:nth-child(3) {
+  animation: float-down 6s ease-in-out infinite;
+  animation-delay: 3s;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
-
-.logo-idle rect:nth-child(2) {
-  animation: pulse 6s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.85; }
-  50% { opacity: 0.55; }
 }
