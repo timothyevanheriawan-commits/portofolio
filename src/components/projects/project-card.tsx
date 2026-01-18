@@ -39,7 +39,7 @@ export function ProjectCard({ project }: { project: Project }) {
                         className={cn(
                             "font-mono text-meta text-text-secondary",
                             "transition-transform duration-base ease-out",
-                            "group-hover:translate-x-[2px]"
+                            "group-hover:translate-x-0.5"
                         )}
                         aria-hidden="true"
                     >

@@ -85,7 +85,7 @@ export function SelectedProjects() {
                                             className="overflow-hidden"
                                         >
                                             <div className="pb-6 space-y-4">
-                                                <p className="text-[14px] text-[#6F6F6F] leading-relaxed max-w-[520px]">
+                                                <p className="text-[14px] text-[#6F6F6F] leading-relaxed max-w-130">
                                                     {project.description}
                                                 </p>
 

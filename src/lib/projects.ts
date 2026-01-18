@@ -2,30 +2,89 @@ import { Project } from "./types";
 
 export const projects: Project[] = [
   {
-    slug: "recipeshare",
-    title: "RecipeShare",
+    slug: "auraflow",
+    title: "AuraFlow",
     description:
-      "A web platform that allows users to browse Indonesian recipes and upload their own recipes for public viewing.",
+      "A personal finance dashboard built for users who prefer manual control, speed, and local reasoning over automated bank integrations.",
     objective:
-      "A web platform that allows users to browse Indonesian recipes and upload their own recipes for public viewing.",
-    year: "2025",
-    role: "Frontend Developer",
-    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    liveUrl: "https://csp-project-final.vercel.app",
-    context: `RecipeShare was developed as a group final project for a Client-Side Programming course. The primary constraints were focus on frontend implementation, limited project timeline, and no requirement for role-based access control or administration features.
+      "Replace fragmented spreadsheets with a single, fast interface for tracking net worth and cash flow without third-party data dependencies.",
+    year: "2026",
+    role: "Full-Stack Developer (Product-Led Project)",
+    stack: [
+      "TypeScript",
+      "Next.js",
+      "Supabase",
+      "Tailwind CSS",
+      "Framer Motion",
+    ],
+    liveUrl: "https://auraflow-os.vercel.app",
+    context: `AuraFlow originated from frustration with consumer finance apps that obscure data behind automation and opaque sync behavior. While spreadsheets offer control, they break down under frequent updates and multi-account tracking.
 
-The project scope emphasized client-side functionality and UI consistency rather than backend complexity.`,
-    architecture: `The application is a frontend-driven web system built with Next.js. Core functionality includes rendering a list of user-submitted recipes, client-side forms for recipe submission, and basic data persistence via an external backend service.
+The project targets users who prefer explicit data entry and predictable calculations, valuing transparency and responsiveness over convenience features.`,
+    architecture: `The application is built using Next.js App Router with a server-first approach. Financial records are protected using Supabase Row Level Security, ensuring that all data access rules are enforced at the database layer rather than the client.
 
-The system follows a simple read-and-write flow without moderation layers: users can read all recipes, users can submit new recipes, with no intermediate validation beyond basic input handling.`,
-    tradeoffs: `No admin panel or moderation workflow was implemented. All submitted content is treated equally, with no approval process. The system prioritizes simplicity over control or scalability.
+State changes are handled via Server Actions combined with optimistic updates, allowing the interface to respond instantly while maintaining consistency with the backend. Currency formatting and date-based calculations are centralized in a shared utility layer to avoid duplicated logic.`,
+    tradeoffs: `A deliberate decision was made to avoid bank API integrations. While this removes automation, it eliminates dependency on third-party aggregators and avoids sync errors, data leakage risks, and API volatility.
 
-These tradeoffs were accepted to keep the project aligned with course scope and time constraints.
-
-The most important design decision was establishing clear UI criteria for typography and color usage early in development. This decision aimed to make the interface feel consistent and natural, despite being a group project with multiple contributors.`,
-    outcome: `The project was successfully completed and deployed as a functional web application. By defining visual rules upfront, UI fragmentation was reduced during implementation.`,
-    reflection: `This project highlighted the importance of careful environment and configuration setup early in development. Small misconfigurations can slow down collaboration and debugging later in the project lifecycle.`,
+Visually, the interface avoids translucent or layered effects in favor of solid surfaces and clear borders. This improves numerical readability and prevents contrast issues when switching between light and dark modes.`,
+    outcome: `The resulting MVP includes real-time net worth summaries, a date-grouped transaction ledger, and data export tools for CSV and PDF formats.`,
+    reflection: `This project reinforced the value of defining semantic design tokens early. Abstracting colors and surfaces into CSS variables made global theme changes predictable and prevented visual inconsistencies during iteration.`,
     featured: true,
+  },
+  {
+    slug: "vertex",
+    title: "Vertex",
+    description:
+      "An internal inventory dashboard designed to surface stock risk and demand trends without relying on black-box forecasting tools.",
+    objective:
+      "Provide decision-ready inventory insights while keeping forecasting logic transparent and auditable.",
+    year: "2026",
+    role: "Full-Stack Developer (Analytics Dashboard)",
+    stack: [
+      "TypeScript",
+      "Next.js",
+      "PostgreSQL",
+      "Supabase",
+      "Recharts",
+      "Tailwind CSS",
+    ],
+    liveUrl: "https://vertex-inventory.vercel.app",
+    context: `Vertex was built to address a common gap in small to mid-scale inventory systems: visibility without interpretability. Many tools present forecasts but obscure how those numbers are derived, making it difficult for operators to trust or adjust decisions.
+
+The dashboard is aimed at users who want to reason about inventory behavior directly, using historical signals rather than fully automated predictions.`,
+    architecture: `Inventory, sales, and restock events are modeled as separate but related entities, allowing time-series analysis without denormalizing core tables. Aggregations are computed server-side to keep client components focused on presentation rather than business logic.
+
+Chart components are intentionally stateless, receiving pre-shaped datasets to avoid coupling visualization concerns with data derivation.`,
+    tradeoffs: `Rather than implementing advanced forecasting algorithms, the system focuses on rolling averages and trend deltas. This limits predictive depth but preserves explainability and reduces the risk of misleading outputs.
+
+The UI favors dense information layouts over whitespace-heavy designs. This increases cognitive load slightly but allows operators to compare categories and time ranges without excessive navigation.`,
+    outcome: `The MVP supports category-level stock distribution, low-stock alerts based on configurable thresholds, and historical demand visualization across selectable time windows.`,
+    reflection: `Working on Vertex highlighted how quickly dashboards become untrustworthy when calculations are split across the client and server. Centralizing derivations early reduced both bugs and mental overhead during iteration.`,
+    featured: true,
+  },
+  {
+    slug: "bca-product-intelligence",
+    title: "BCA Product Intelligence",
+    description:
+      "A review analytics dashboard that extracts recurring user pain points from Google Play feedback for the BCA Mobile app.",
+    objective:
+      "Transform unstructured app reviews into actionable product insights with minimal manual analysis.",
+    year: "2025",
+    role: "Data Analyst & Dashboard Developer",
+    stack: ["Python", "Streamlit", "Pandas", "NLTK", "Plotly"],
+    liveUrl: "https://bca-mobile-dashboard.streamlit.app",
+    context: `User reviews often contain high-signal feedback, but their volume and inconsistency make manual analysis impractical. This project explores how lightweight NLP techniques can surface dominant themes without complex machine learning pipelines.
+
+The dashboard is designed for product and UX teams who need fast directional insight rather than statistically exhaustive sentiment models.`,
+    architecture: `Reviews are preprocessed using token normalization and stopword removal before being grouped by keyword frequency and sentiment polarity. Aggregations are cached to ensure responsive interaction despite Streamlit’s rerun model.
+
+Visualizations are derived directly from transformed datasets, avoiding post-processing in the UI layer.`,
+    tradeoffs: `Advanced transformer-based sentiment models were intentionally avoided. While they offer higher accuracy, they introduce opacity and heavier infrastructure requirements that are misaligned with exploratory analysis use cases.
+
+The interface prioritizes clarity over customization, limiting user controls to prevent misinterpretation of weak signals.`,
+    outcome: `The final dashboard highlights dominant complaint categories, sentiment distribution over time, and representative review excerpts for qualitative follow-up.`,
+    reflection: `This project reinforced that imperfect models can still be useful if their limitations are explicit. Designing for interpretability proved more valuable than chasing marginal accuracy gains.`,
+    featured: false,
   },
   {
     slug: "kurofest",
@@ -51,61 +110,33 @@ These limitations were intentional and aligned with the project goal of demonstr
 The central design decision was to strictly adhere to predefined UI criteria derived from the event theme. All layout, typography, and color choices were evaluated against this criteria to maintain consistency across the site.`,
     outcome: `The project was completed and deployed as a live portfolio piece. This approach prioritized system coherence over feature breadth.`,
     reflection: `This project reinforced the importance of analyzing and understanding a brief before implementation. Clear interpretation and planning significantly reduce rework during the design and development process.`,
-    featured: true,
+    featured: false,
   },
   {
-    slug: "bca-product-intelligence",
-    title: "BCA Product Intelligence",
+    slug: "recipeshare",
+    title: "RecipeShare",
     description:
-      "A dashboard that provides an analytical overview of user reviews for the BCA Mobile application.",
+      "A web platform that allows users to browse Indonesian recipes and upload their own recipes for public viewing.",
     objective:
-      "A dashboard that provides an analytical overview of user reviews for the BCA Mobile application, intended to support product-level insights.",
-    year: "2026",
-    role: "Data Analyst",
-    stack: ["Python", "Streamlit", "BERTopic", "Pandas", "Plotly"],
-    liveUrl: "https://bca-mobile-dashboard.streamlit.app/",
+      "A web platform that allows users to browse Indonesian recipes and upload their own recipes for public viewing.",
+    year: "2025",
+    role: "Frontend Developer",
+    stack: ["Next.js", "PostgreSQL", "TypeScript", "Tailwind CSS"],
+    liveUrl: "https://csp-project-final.vercel.app",
+    context: `RecipeShare was developed as a group final project for a Client-Side Programming course. The primary constraints were focus on frontend implementation, limited project timeline, and no requirement for role-based access control or administration features.
 
-    context: `This project was developed as a group assignment for a Text and Web Mining course. Constraints included reliance on preprocessed review data, focus on analysis and visualization rather than application interactivity, and no requirement for content creation or user input.`,
-    architecture: `The system is a data visualization dashboard built using Streamlit. Its core pipeline consists of textual review data processed using BERTopic, sentiment and topic modeling outputs, and visual components that present topic distributions and sentiment trends.
+The project scope emphasized client-side functionality and UI consistency rather than backend complexity.`,
+    architecture: `The application is a frontend-driven web system built with Next.js. Core functionality includes rendering a list of user-submitted recipes, client-side forms for recipe submission, and basic data persistence via an external backend service.
 
-The application operates in a read-only mode, with limited filtering for exploration.`,
-    tradeoffs: `The dashboard focuses on presenting pre-computed analysis rather than real-time processing. This tradeoff was made to ensure reliable performance and consistent results across sessions.
+The system follows a simple read-and-write flow without moderation layers: users can read all recipes, users can submit new recipes, with no intermediate validation beyond basic input handling.`,
+    tradeoffs: `No admin panel or moderation workflow was implemented. All submitted content is treated equally, with no approval process. The system prioritizes simplicity over control or scalability.
 
-No user authentication or data input features were implemented, keeping the scope aligned with course requirements.`,
-    outcome: `The project successfully demonstrates the application of text mining techniques to real-world product review data. The dashboard provides clear visualizations of sentiment patterns and topic distributions.`,
-    reflection: `Working with BERTopic revealed the importance of preprocessing decisions in topic modeling. The quality of insights depends heavily on how text data is cleaned and prepared before analysis.`,
-    featured: true,
-  },
-  {
-    slug: "vertex-inventory-os",
-    title: "Vertex",
-    description:
-      "A high-density operational dashboard that transforms raw sales data into actionable inventory intelligence and demand forecasting.",
-    objective:
-      "Develop a deterministic decision-support system that helps retailers optimize capital allocation and prevent stockouts through mathematical modeling.",
-    year: "2026",
-    role: "Full-stack Developer & UI Designer",
-    stack: [
-      "Next.js 15",
-      "Supabase",
-      "PostgreSQL",
-      "TypeScript",
-      "Tailwind CSS",
-      "Framer Motion",
-    ],
-    liveUrl: "https://vertex-inventory.vercel.app",
-    context: `Vertex was built to bridge the gap between simple POS systems and complex enterprise ERPs. Small to medium retailers often struggle with 'Capital Traps', which is money tied up in slow-moving stock and lost revenue due to stockouts. 
+These tradeoffs were accepted to keep the project aligned with course scope and time constraints.
 
-The project focus was to create an 'Industrial Cockpit' that provides immediate situational awareness and predictive modeling without the complexity of traditional warehouse software.`,
-    architecture: `The system architecture leverages a 'Logic-in-Database' approach. Instead of performing heavy calculations on the client, I implemented PostgreSQL Views and Security Invokers to handle demand forecasting (Moving Averages) and Reorder Point (ROP) math server-side.
-
-For data integrity, I implemented an immutable audit trail using Database Triggers. This ensures every stock change, whether via a manual adjustment or a sale is permanently logged at the database level, creating a fail-safe forensic history.`,
-    tradeoffs: `The most significant design tradeoff was the choice between 'Aesthetic Minimalism' and 'Industrial Information Density.' While modern web design favors large whitespace, operational tools require high data visibility. I opted for a 'Cockpit' aesthetic, reducing vertical padding and using high-contrast semantic indicators to ensure users can see critical data points above the fold.
-
-Another technical decision involved forecasting models. I initially explored EWMA (Exponentially Weighted Moving Average) but reverted to a 30-day SMA (Simple Moving Average) to prioritize 'Stability' over 'Recency Bias,' ensuring that short-term sales spikes didn't trigger erratic over-ordering signals for the user.`,
-    outcome: `The resulting platform provides a comprehensive suite of operational tools, including a 'What-If' scenario simulator, financial capital concentration analysis, and a high-speed global command palette (⌘K) for rapid navigation.`,
-    reflection: `Developing Vertex highlighted the complexities of 'Hydration' in Next.js 15 when dealing with real-time data visualization. Ensuring that complex chart data matched between the server-render and client-mount required a disciplined approach to React state synchronization and locale-aware number formatting.`,
-    featured: true,
+The most important design decision was establishing clear UI criteria for typography and color usage early in development. This decision aimed to make the interface feel consistent and natural, despite being a group project with multiple contributors.`,
+    outcome: `The project was successfully completed and deployed as a functional web application. By defining visual rules upfront, UI fragmentation was reduced during implementation.`,
+    reflection: `This project highlighted the importance of careful environment and configuration setup early in development. Small misconfigurations can slow down collaboration and debugging later in the project lifecycle.`,
+    featured: false,
   },
 ];
 

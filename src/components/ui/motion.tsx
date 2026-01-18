@@ -1,10 +1,14 @@
+// src/components/ui/motion.tsx
 'use client'
 
-import { motion, useReducedMotion, AnimatePresence } from 'framer-motion'
-import { ReactNode, useState } from 'react'
+import { motion as framerMotion, useReducedMotion } from 'framer-motion'
+import { ReactNode } from 'react'
 import { useMounted } from '@/hooks/use-mounted'
+import { motion as config } from '@/lib/motion'
 
-// Staggered fade
+// ============================================
+// FADE — Section entrance (use once per section)
+// ============================================
 interface FadeProps {
     children: ReactNode
     delay?: number
@@ -20,23 +24,25 @@ export function Fade({ children, delay = 0, className }: FadeProps) {
     }
 
     return (
-        <motion.div
+        <framerMotion.div
             className={className}
-            initial={{ opacity: 0, y: 2 }}
+            initial={{ opacity: 0, y: config.translate.md }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{
-                duration: 0.5,
-                delay: delay * 0.1,
-                ease: [0.25, 0.1, 0.25, 1],
+                duration: config.duration.base,
+                delay: delay * config.stagger,
+                ease: config.ease,
             }}
         >
             {children}
-        </motion.div>
+        </framerMotion.div>
     )
 }
 
-// Line that draws from left
+// ============================================
+// LINE — Draws once on view
+// ============================================
 interface LineProps {
     className?: string
     delay?: number
@@ -46,88 +52,68 @@ export function Line({ className = '', delay = 0 }: LineProps) {
     const mounted = useMounted()
     const prefersReducedMotion = useReducedMotion()
 
-    const baseClass = `h-px w-full bg-[#E8E7E4] ${className}`
+    const baseClass = `h-px w-full bg-divider ${className}`
 
     if (!mounted || prefersReducedMotion) {
         return <div className={baseClass} />
     }
 
     return (
-        <motion.div
+        <framerMotion.div
             className={baseClass}
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{
-                duration: 0.6,
-                delay: delay * 0.1,
-                ease: [0.25, 0.1, 0.25, 1],
+                duration: config.duration.slow,
+                delay: delay * config.stagger,
+                ease: config.ease,
             }}
             style={{ transformOrigin: 'left' }}
         />
     )
 }
 
-// Expandable section
-interface ExpandableProps {
-    trigger: ReactNode
-    children: ReactNode
-    defaultOpen?: boolean
-}
-
-export function Expandable({ trigger, children, defaultOpen = false }: ExpandableProps) {
-    const [isOpen, setIsOpen] = useState(defaultOpen)
-    const mounted = useMounted()
-    const prefersReducedMotion = useReducedMotion()
-
-    return (
-        <div>
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="w-full text-left group"
-                aria-expanded={isOpen}
-            >
-                {trigger}
-            </button>
-
-            <AnimatePresence initial={false}>
-                {isOpen && (
-                    <motion.div
-                        initial={!mounted || prefersReducedMotion ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
-                        transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
-                        className="overflow-hidden"
-                    >
-                        {children}
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </div>
-    )
-}
-
-// Status indicator
+// ============================================
+// STATUS — Static dot (no idle animation)
+// ============================================
 interface StatusProps {
     className?: string
 }
 
 export function Status({ className = '' }: StatusProps) {
-    const mounted = useMounted()
+    return (
+        <span className={`w-1.5 h-1.5 rounded-full bg-accent ${className}`} />
+    )
+}
+
+// ============================================
+// EXPAND — For collapsible content
+// ============================================
+interface ExpandProps {
+    children: ReactNode
+    isOpen: boolean
+    className?: string
+}
+
+export function Expand({ children, isOpen, className = '' }: ExpandProps) {
     const prefersReducedMotion = useReducedMotion()
 
-    const baseClass = `w-1.5 h-1.5 rounded-full bg-[#1A1A1A] ${className}`
-
-    if (!mounted || prefersReducedMotion) {
-        return <span className={baseClass} />
+    if (prefersReducedMotion) {
+        return isOpen ? <div className={className}>{children}</div> : null
     }
 
     return (
-        <motion.span
-            className={baseClass}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.3 }}
-        />
+        <framerMotion.div
+            initial={false}
+            animate={isOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
+            transition={{
+                duration: config.duration.base,
+                ease: config.ease,
+            }}
+            className={`overflow-hidden ${className}`}
+        >
+            {children}
+        </framerMotion.div>
     )
 }

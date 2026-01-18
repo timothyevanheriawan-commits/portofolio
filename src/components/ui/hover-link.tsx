@@ -1,9 +1,11 @@
+// src/components/ui/hover-link.tsx
 'use client'
 
 import { motion, useReducedMotion } from 'framer-motion'
 import NextLink from 'next/link'
 import { ReactNode, useState } from 'react'
 import { useMounted } from '@/hooks/use-mounted'
+import { motion as config } from '@/lib/motion'
 
 interface HoverLinkProps {
     href: string
@@ -18,69 +20,53 @@ export function HoverLink({
     children,
     className = '',
     external = false,
-    showArrow = false
+    showArrow = false,
 }: HoverLinkProps) {
     const mounted = useMounted()
     const [isHovered, setIsHovered] = useState(false)
     const prefersReducedMotion = useReducedMotion()
 
+    const shouldAnimate = mounted && !prefersReducedMotion
+
+    const Wrapper = external ? 'a' : NextLink
     const linkProps = external
-        ? { target: '_blank' as const, rel: 'noopener noreferrer' }
-        : {}
-
-    const content = (
-        <>
-            <span className="relative">
-                {children}
-                {mounted && !prefersReducedMotion ? (
-                    <motion.span
-                        className="absolute left-0 -bottom-px h-px bg-[#8B1E1E] origin-left"
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: isHovered ? 1 : 0 }}
-                        transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
-                    />
-                ) : (
-                    <span
-                        className={`absolute left-0 -bottom-px h-px bg-[#8B1E1E] origin-left transition-transform duration-200 ${isHovered ? 'scale-x-100' : 'scale-x-0'
-                            }`}
-                    />
-                )}
-            </span>
-
-            {showArrow && (
-                <motion.span
-                    className="text-[#6F6F6F] group-hover:text-[#8B1E1E] transition-colors duration-200"
-                    animate={mounted && !prefersReducedMotion ? { x: isHovered ? 4 : 0 } : {}}
-                    transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-                >
-                    →
-                </motion.span>
-            )}
-        </>
-    )
-
-    if (external) {
-        return (
-            <a
-                href={href}
-                {...linkProps}
-                className={`group relative inline-flex items-center gap-1.5 ${className}`}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-            >
-                {content}
-            </a>
-        )
-    }
+        ? { href, target: '_blank', rel: 'noopener noreferrer' }
+        : { href }
 
     return (
-        <NextLink
-            href={href}
+        <Wrapper
+            {...linkProps}
             className={`group relative inline-flex items-center gap-1.5 ${className}`}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            {content}
-        </NextLink>
+            <span className="relative">
+                {children}
+
+                {/* Underline — slides in on hover */}
+                <motion.span
+                    className="absolute left-0 -bottom-px h-px bg-accent origin-left"
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: shouldAnimate && isHovered ? 1 : 0 }}
+                    transition={{
+                        duration: config.duration.fast,
+                        ease: config.ease
+                    }}
+                />
+            </span>
+
+            {showArrow && (
+                <motion.span
+                    className="text-text-tertiary group-hover:text-accent transition-colors"
+                    animate={shouldAnimate ? { x: isHovered ? config.translate.sm : 0 } : {}}
+                    transition={{
+                        duration: config.duration.fast,
+                        ease: config.ease
+                    }}
+                >
+                    →
+                </motion.span>
+            )}
+        </Wrapper>
     )
 }

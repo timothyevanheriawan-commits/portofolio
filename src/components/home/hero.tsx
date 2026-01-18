@@ -6,7 +6,7 @@ import { Fade, Line, Status } from '@/components/ui/motion'
 export function Hero() {
     return (
         <section className="pt-24 pb-20 md:pt-32 md:pb-24">
-            <div className="max-w-[580px]">
+            <div className="max-w-145">
                 {/* Status */}
                 <Fade delay={0}>
                     <div className="flex items-center gap-3 mb-10">
