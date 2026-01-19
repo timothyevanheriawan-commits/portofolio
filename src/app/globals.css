@@ -5,8 +5,6 @@
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-display: var(--font-space), var(--font-inter), sans-serif;
   --font-mono: var(--font-jetbrains), monospace;
-  
-  /* Custom easing */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -28,22 +26,35 @@
 
   body {
     font-family: var(--font-sans);
-    font-size: 15px;
-    line-height: 1.6;
     background-color: #F7F7F5;
     color: #1A1A1A;
-    letter-spacing: -0.01em;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    letter-spacing: -0.02em;
+    /* Use a pseudo-element for the grain to keep the DOM clean */
+    &::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      opacity: 0.015;
+      z-index: 9999;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
   }
 
   /* Selection - subtle oxidized red */
   ::selection {
-    background: rgba(122, 30, 30, 0.1);
-    color: #1A1A1A;
+    background: #7A1E1E; 
+    color: #F7F7F5;
+    text-shadow: none;
   }
 
   /* Typography */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
     font-weight: 600;
     letter-spacing: -0.03em;
@@ -51,10 +62,10 @@
     text-wrap: balance;
   }
 
- p {
-  line-height: 1.65 !important; /* The Golden Ratio-ish for reading */
-  color: #4A4A4A; /* Slightly softer than pure black to reduce eye strain */
-}
+  p {
+    line-height: 1.65 !important; /* The Golden Ratio-ish for reading */
+    color: #4a4a4a; /* Slightly softer than pure black to reduce eye strain */
+  }
 
   a {
     color: inherit;
@@ -72,19 +83,19 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #D8D8D8;
+    background: #d8d8d8;
     border-radius: 4px;
-    border: 2px solid #F7F7F5;
+    border: 2px solid #f7f7f5;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #BFBFBF;
+    background: #bfbfbf;
   }
 
   /* Firefox scrollbar */
   * {
     scrollbar-width: thin;
-    scrollbar-color: #D8D8D8 transparent;
+    scrollbar-color: #d8d8d8 transparent;
   }
 
   /* Focus visible */
@@ -99,7 +110,8 @@
   }
 
   /* Refined list styling */
-  ul, ol {
+  ul,
+  ol {
     padding-left: 1.25em;
   }
 
@@ -122,8 +134,11 @@
 
   /* Smooth image loading */
   img {
-    opacity: 0;
-    transition: opacity 0.3s ease-out;
+    font-style: italic; /* Style the alt text */
+    shape-margin: 0.75rem;
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
   }
 
   img[src] {
@@ -132,17 +147,23 @@
 
   /* Better blockquote */
   blockquote {
-    border-left: 2px solid #E8E7E4;
+    border-left: 2px solid #e8e7e4;
     padding-left: 1.25em;
     font-style: italic;
-    color: #6F6F6F;
+    color: #6f6f6f;
   }
 
   /* Horizontal rule refinement */
   hr {
     border: none;
     height: 1px;
-    background: linear-gradient(to right, transparent, #E8E7E4 10%, #E8E7E4 90%, transparent);
+    background: linear-gradient(
+      to right,
+      transparent,
+      #e8e7e4 10%,
+      #e8e7e4 90%,
+      transparent
+    );
     margin: 2em 0;
   }
 
@@ -175,7 +196,7 @@
 
 /* Add subtle page background texture (optional) */
 body::before {
-  content: '';
+  content: "";
   position: fixed;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
@@ -184,33 +205,35 @@ body::before {
   z-index: -1;
 }
 
-
 @layer utilities {
   /* Logo animations - refined timing */
   @keyframes pulse-subtle {
-    0%, 100% { 
-      opacity: 1; 
+    0%,
+    100% {
+      opacity: 1;
     }
-    50% { 
-      opacity: 0.88; 
+    50% {
+      opacity: 0.88;
     }
   }
 
   @keyframes float-up {
-    0%, 100% { 
-      transform: translateY(0); 
+    0%,
+    100% {
+      transform: translateY(0);
     }
-    50% { 
-      transform: translateY(-2px); 
+    50% {
+      transform: translateY(-2px);
     }
   }
 
   @keyframes float-down {
-    0%, 100% { 
-      transform: translateY(0); 
+    0%,
+    100% {
+      transform: translateY(0);
     }
-    50% { 
-      transform: translateY(2px); 
+    50% {
+      transform: translateY(2px);
     }
   }
 
@@ -232,7 +255,7 @@ body::before {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
@@ -241,15 +264,15 @@ body::before {
   .safe-top {
     padding-top: env(safe-area-inset-top);
   }
-  
+
   .safe-bottom {
     padding-bottom: env(safe-area-inset-bottom);
   }
-  
+
   .safe-left {
     padding-left: env(safe-area-inset-left);
   }
-  
+
   .safe-right {
     padding-right: env(safe-area-inset-right);
   }
@@ -268,6 +291,7 @@ body::before {
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+  
 }
 
 /* Logo idle state */
@@ -280,32 +304,15 @@ body::before {
   animation-delay: 3s;
 }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
 /* Print styles */
 @media print {
   body {
     background: white;
   }
-  
+
   .no-print {
     display: none !important;
   }
-}
-
-/* globals.css */
-::selection {
-  background: rgba(122, 30, 30, 0.15); /* Slightly darker */
-  color: #7A1E1E; /* Text itself changes color when highlighted */
-  text-shadow: 0 0 8px rgba(122, 30, 30, 0.2);
 }
 
 body::after {
@@ -319,4 +326,7 @@ body::after {
   z-index: 9999;
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #7A1E1E; /* Red eye color on interaction */
 }

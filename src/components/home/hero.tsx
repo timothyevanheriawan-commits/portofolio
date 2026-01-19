@@ -1,74 +1,85 @@
+// src/components/home/hero.tsx
 'use client'
 
-import { HoverLink } from '@/components/ui/hover-link'
-import { Fade, Line, Status } from '@/components/ui/motion'
+import { Fade, Line } from '@/components/ui/motion'
+import Link from 'next/link'
 
 export function Hero() {
     return (
-        <section className="pt-24 pb-20 md:pt-32 md:pb-24">
-            <div className="max-w-145">
-                {/* Status */}
+        <section className="py-12 md:py-16 lg:py-20">
+            {/* Main Headline */}
+            <div className="mb-10 md:mb-14">
                 <Fade delay={0}>
-                    <div className="flex items-center gap-3 mb-10">
-                        <Status />
-                        <span className="w-1 h-1 rounded-full bg-black" />
-                        <span className="text-[10px] font-mono uppercase tracking-widest text-[#4A4A4A]">
-                            Open to opportunities
-                        </span>
-                    </div>
-                </Fade>
-
-                {/* Name */}
-                <Fade delay={1}>
-                    <h1 className="text-[44px] md:text-[56px] font-semibold tracking-tight leading-[1.08] text-[#1A1A1A] font-(family-name:--font-space) mb-5">
-                        Timothy Evan
-                    </h1>
-                </Fade>
-
-                {/* Role */}
-                <Fade delay={2}>
-                    <p className="text-[17px] text-[#6F6F6F] mb-10 leading-relaxed">
-                        Frontend development & data analysis.
-                        <br />
-                        Information Systems, Petra Christian University.
+                    <p className="text-[11px] md:text-[12px] font-mono text-[#9F9F9F] uppercase tracking-widest mb-4 md:mb-6">
+                        Timothy Evan — Frontend & Data
                     </p>
                 </Fade>
 
-                {/* Links */}
-                <Fade delay={3}>
-                    <div className="flex items-center gap-8">
-                        <HoverLink href="/projects" showArrow className="text-[14px] font-medium text-[#1A1A1A]">
-                            View Projects
-                        </HoverLink>
+                <Fade delay={1}>
+                    <h1 className="text-[32px] sm:text-[44px] md:text-[60px] lg:text-[72px] font-semibold tracking-[-0.03em] leading-[1.05] text-[#111]">
+                        Building interfaces
+                        <br />
+                        <span className="text-[#6F6F6F] hover:text-[#7A1E1E] transition-colors duration-700 cursor-default">
+                            with clarity.
+                        </span>
+                    </h1>
+                </Fade>
+            </div>
 
-                        <HoverLink href="/about" className="text-[14px] font-medium text-[#6F6F6F] hover:text-[#1A1A1A]">
-                            About
-                        </HoverLink>
+            <Line delay={2} />
+
+            {/* Bottom Row */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-0 mt-8 md:mt-10 border-t border-[#E8E7E4]">
+                {/* Description - Left Panel */}
+                <Fade delay={3}>
+                    <div className="md:col-span-2 py-8 md:pr-10">
+                        <p className="text-[14px] md:text-[15px] text-[#4A4A4A] leading-[1.7] max-w-[480px]">
+                            Information Systems student at Petra Christian University.
+                            I focus on frontend development and data visualization,
+                            creating tools that <span className="text-[#1A1A1A] font-medium">reduce friction</span> and communicate clearly.
+                        </p>
+                    </div>
+                </Fade>
+
+                {/* Links - Right Panel with a 'Swiss' vertical line */}
+                <Fade delay={4}>
+                    <div className="flex flex-row md:flex-col gap-4 md:gap-3 md:items-end py-8 md:border-l border-[#E8E7E4] md:pl-10">
+                        <Link
+                            href="/projects"
+                            className="group inline-flex items-center gap-2 text-[13px] font-medium text-[#1A1A1A]"
+                        >
+                            <span>Projects</span>
+                            <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                        </Link>
+                        <Link
+                            href="/about"
+                            className="group inline-flex items-center gap-2 text-[13px] font-medium text-[#6F6F6F] hover:text-[#1A1A1A] transition-colors duration-300"
+                        >
+                            <span>About</span>
+                            <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                        </Link>
+                        <a
+                            href="mailto:timothy.evan.heriawan@gmail.com"
+                            className="group inline-flex items-center gap-2 text-[13px] font-medium text-[#6F6F6F] hover:text-[#1A1A1A] transition-colors duration-300"
+                        >
+                            <span>Contact</span>
+                            <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                        </a>
                     </div>
                 </Fade>
             </div>
 
-            {/* Divider */}
-            <div className="mt-20">
-                <Line delay={4} />
-            </div>
-
-            {/* Stats */}
+            {/* Status Badge */}
             <Fade delay={5}>
-                <div className="flex items-baseline gap-12 mt-10">
-                    {[
-                        { label: 'Stack', value: 'Next.js / React / Python' },
-                        { label: 'Focus', value: 'UI Systems / Data Visualisation' },
-                    ].map((item) => (
-                        <div key={item.label}>
-                            <span className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest block mb-1">
-                                {item.label}
-                            </span>
-                            <span className="text-[13px] font-mono text-[#6F6F6F]">
-                                {item.value}
-                            </span>
-                        </div>
-                    ))}
+                <div className="inline-flex items-center gap-2 mt-10 md:mt-12 px-3 py-1.5 border border-[#E8E7E4] hover:border-[#7A1E1E]/30 transition-colors duration-500 group">
+                    {/* The 'Eye' dot */}
+                    <span className="relative flex h-1.5 w-1.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7A1E1E] opacity-40"></span>
+                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#1A1A1A] group-hover:bg-[#7A1E1E] transition-colors"></span>
+                    </span>
+                    <span className="text-[11px] font-mono text-[#6F6F6F] group-hover:text-[#1A1A1A] uppercase tracking-wide transition-colors">
+                        Open to opportunities
+                    </span>
                 </div>
             </Fade>
         </section>

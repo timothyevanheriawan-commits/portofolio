@@ -69,8 +69,9 @@ export function Header() {
                                             <span className={`text-[13px] font-medium tracking-wide transition-colors duration-300 ${isActive ? 'text-[#1A1A1A]' : 'text-[#6F6F6F] group-hover:text-[#1A1A1A]'}`}>
                                                 {item.label}
                                             </span>
-                                            <span className={`absolute bottom-1 left-4 right-4 h-px transition-all duration-300 ease-out ${isActive ? 'bg-[#1A1A1A]' : 'bg-[#1A1A1A] opacity-0 group-hover:opacity-30'}`} />
-                                        </NextLink>
+                                            <span className={`absolute bottom-1 left-4 right-4 h-[2px] transition-all duration-500 ease-out-expo 
+    ${isActive ? 'bg-[#7A1E1E] scale-x-100' : 'bg-[#1A1A1A] scale-x-0 group-hover:scale-x-100 group-hover:opacity-30'}`}
+                                            />                                        </NextLink>
                                     )
                                 })}
                             </div>
@@ -103,22 +104,25 @@ export function Header() {
             </header>
 
             {/* Mobile Menu */}
-            <div
-                className={`fixed inset-0 z-40 md:hidden transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-            >
+            <div className={`fixed inset-0 z-40 md:hidden transition-all duration-500 ease-out-expo ${mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                {/* Darker background for the menu to differentiate it from the page */}
                 <div className="absolute inset-0 bg-[#F7F7F5]" />
 
-                <div className="relative h-full pt-20 pb-8 px-6 flex flex-col">
+                <div className="relative h-full pt-24 pb-8 px-6 flex flex-col">
                     <nav className="flex-1">
-                        <ul className="space-y-1">
-                            {navItems.map((item) => {
+                        <ul className="space-y-0">
+                            {navItems.map((item, i) => {
                                 const isActive = pathname === item.href
                                 return (
-                                    <li key={item.href}>
+                                    <li key={item.href} className="overflow-hidden">
                                         <NextLink
                                             href={item.href}
                                             onClick={() => setMobileMenuOpen(false)}
-                                            className={`block py-4 text-[32px] font-semibold tracking-[-0.02em] transition-colors duration-200 ${isActive ? 'text-[#1A1A1A]' : 'text-[#6F6F6F] active:text-[#1A1A1A]'}`}
+                                            // Added a slide-up animation effect and red hover
+                                            className={`block py-3 text-[42px] font-semibold tracking-[-0.04em] transition-all duration-300 
+                                ${mobileMenuOpen ? 'translate-y-0' : 'translate-y-full'}
+                                ${isActive ? 'text-[#7A1E1E]' : 'text-[#1A1A1A] hover:text-[#7A1E1E]'}`}
+                                            style={{ transitionDelay: `${i * 100}ms` }}
                                         >
                                             {item.label}
                                         </NextLink>

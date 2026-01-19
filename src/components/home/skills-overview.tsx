@@ -48,7 +48,8 @@ export function SkillsOverview() {
                         <div className="bg-[#F7F7F5] p-5 md:p-8 border border-[#E8E7E4] md:border-0 group hover:bg-[#FAFAF9] transition-colors duration-500">
                             {/* Category Header */}
                             <div className="mb-4 md:mb-6">
-                                <h3 className="text-[10px] md:text-[11px] font-mono text-[#6F6F6F] uppercase tracking-[0.08em] md:tracking-widest mb-1 md:mb-2 group-hover:text-[#1A1A1A] transition-colors duration-300">
+                                <h3 className="text-[10px] md:text-[11px] font-mono text-[#6F6F6F] uppercase tracking-[0.08em] md:tracking-widest mb-1 md:mb-2 flex items-center gap-2">
+                                    <span className="text-[#7A1E1E] opacity-0 group-hover:opacity-100 transition-opacity">/</span>
                                     {group.category}
                                 </h3>
                                 <p className="text-[11px] md:text-[12px] text-[#9F9F9F]">
@@ -65,7 +66,7 @@ export function SkillsOverview() {
                                         style={{ transitionDelay: `${itemIndex * 50}ms` }}
                                     >
                                         <span className="hidden md:block w-1 h-1 rounded-full bg-[#D8D8D8] group-hover/item:bg-[#1A1A1A] transition-colors duration-300" />
-                                        <span className="text-[12px] md:text-[14px] text-[#4A4A4A] group-hover/item:text-[#1A1A1A] transition-colors duration-300">
+                                        <span className="text-[12px] md:text-[14px] text-[#4A4A4A] group-hover/item:text-[#1A1A1A] group-hover/item:translate-x-1 transition-all duration-300 ease-out-expo">
                                             {item}
                                         </span>
                                     </span>

@@ -15,8 +15,7 @@ export default function ProjectsPage() {
             {/* Header */}
             <Fade>
                 <header className="mb-14">
-                    <h1 className="text-[32px] md:text-[44px] font-semibold tracking-[-0.03em] 
-                                 text-[#111] mb-4">
+                    <h1 className="text-[32px] md:text-[44px] font-semibold tracking-[-0.03em]text-[#111] mb-4">
                         Projects
                     </h1>
                     <p className="text-[15px] text-[#6F6F6F] max-w-[48ch] leading-[1.65]">
@@ -26,7 +25,9 @@ export default function ProjectsPage() {
                 </header>
             </Fade>
 
-            <Line />
+            <div className="relative w-full h-[1px] bg-[#E8E7E4] mb-10">
+                <div className="absolute left-0 top-0 h-full w-[15%] bg-[#7A1E1E] opacity-70" />
+            </div>
 
             {/* Projects List */}
             <div className="mt-10">
@@ -47,8 +48,7 @@ export default function ProjectsPage() {
                                             {/* Left: Index + Content */}
                                             <div className="flex items-start gap-6 flex-1 min-w-0">
                                                 {/* Index */}
-                                                <span className="text-[11px] font-mono text-[#BFBFBF] 
-                                                              pt-1 shrink-0 hidden sm:block">
+                                                <span className="text-[11px] font-mono text-[#BFBFBF] pt-1 shrink-0 hidden sm:block">
                                                     {String(index + 1).padStart(2, '0')}
                                                 </span>
 
@@ -64,11 +64,11 @@ export default function ProjectsPage() {
 
                                                     {/* Meta */}
                                                     <div className="flex items-center gap-2 flex-wrap">
-                                                        <span className="text-[11px] font-mono text-[#9F9F9F]">
+                                                        <span className="text-[11px] font-mono text-[#9F9F9F] hover:bg-[#1A1A1A] hover:text-[#1A1A1A] transition-colors cursor-help">
                                                             {project.year}
                                                         </span>
                                                         <span className="w-1 h-1 rounded-full bg-[#D8D8D8]" />
-                                                        <span className="text-[11px] text-[#9F9F9F] uppercase">
+                                                        <span className="text-[11px] text-[#9F9F9F] uppercase tracking-widest hover:text-[#7A1E1E] transition-colors">
                                                             {project.role}
                                                         </span>
                                                     </div>
@@ -77,13 +77,12 @@ export default function ProjectsPage() {
 
                                             {/* Right: Toggle */}
                                             <span className={`
-                                                shrink-0 w-8 h-8 flex items-center justify-center
-                                                text-[16px] text-[#9F9F9F] 
-                                                group-hover:text-[#1A1A1A]
-                                                transition-all duration-300
-                                                ${isExpanded ? 'rotate-45' : ''}
-                                            `}>
-                                                +
+    shrink-0 w-8 h-8 flex items-center justify-center
+    text-[20px] transition-all duration-500 ease-out-expo
+    ${isExpanded ? 'text-[#7A1E1E] rotate-45 scale-125' : 'text-[#9F9F9F]'}
+    group-hover:text-[#1A1A1A]
+`}>
+                                                {isExpanded ? '×' : '+'}
                                             </span>
                                         </div>
                                     </button>
@@ -96,8 +95,7 @@ export default function ProjectsPage() {
                                     `}>
                                         <div className="pb-8 pl-0 sm:pl-15.5">
                                             {/* Description */}
-                                            <p className="text-[14px] text-[#6F6F6F] leading-[1.7] 
-                                                        mb-5 max-w-[55ch]">
+                                            <p className="text-[14px] text-[#6F6F6F] leading-[1.7] mb-5 max-w-[55ch]">
                                                 {project.description}
                                             </p>
 

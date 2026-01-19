@@ -57,7 +57,8 @@ export function SelectedProjects() {
                                         {/* Left: Content */}
                                         <div className="flex items-start gap-3 md:gap-6 flex-1 min-w-0">
                                             {/* Index - hidden on smallest screens */}
-                                            <span className="hidden sm:block text-[11px] font-mono text-[#BFBFBF] pt-1 md:pt-1.5 shrink-0 w-5 md:w-6">
+                                            <span className={`hidden sm:block text-[11px] font-mono pt-1 md:pt-1.5 shrink-0 w-5 md:w-6 transition-colors duration-300 
+    ${isExpanded ? 'text-[#7A1E1E]' : 'text-[#BFBFBF]'}`}>
                                                 {String(index + 1).padStart(2, '0')}
                                             </span>
 

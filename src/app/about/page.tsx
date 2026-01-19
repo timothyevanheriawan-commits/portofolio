@@ -31,27 +31,40 @@ export default function AboutPage() {
 
                     <hr className="border-[#E8E7E4]" />
 
-                    <section>
-                        <h2 className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest mb-5">
+                    <section className="py-6 border-t border-[#E8E7E4] grid grid-cols-4 gap-4">
+                        <h2 className="col-span-1 text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest">
                             Education
                         </h2>
-                        <div className="flex justify-between items-baseline mb-1">
-                            <span className="text-[14px] font-medium text-[#1A1A1A]">Petra Christian University</span>
-                            <span className="text-[11px] font-mono text-[#9F9F9F]">2022–2026</span>
+                        <div className="col-span-3">
+                            <div className="flex justify-between items-baseline mb-1">
+                                <span className="text-[14px] font-bold text-[#1A1A1A]">Petra Christian University</span>
+                                <span className="text-[11px] font-mono text-[#7A1E1E]">2022—2026</span>
+                            </div>
+                            <p className="text-[13px] text-[#6F6F6F]">Bachelor of Science in Information Systems</p>
                         </div>
-                        <p className="text-[13px] text-[#6F6F6F]">BSc Information Systems</p>
                     </section>
 
-                    <hr className="border-[#E8E7E4]" />
 
-                    <section>
-                        <h2 className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest mb-5">
-                            Approach
+                    <section className="py-8 border-t border-[#E8E7E4] grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <h2 className="md:col-span-1 text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest">
+                            Philosophy
                         </h2>
-                        <p className="text-[14px] text-[#4A4A4A] leading-[1.8]">
-                            Clarity over cleverness. Structure before style.
-                            Documentation as part of the work.
-                        </p>
+                        <div className="md:col-span-3">
+                            <ul className="space-y-3">
+                                <li className="flex gap-4 items-start">
+                                    <span className="text-[#7A1E1E] font-mono text-[12px] mt-0.5">01</span>
+                                    <p className="text-[14px] text-[#4A4A4A]">Clarity over cleverness. No decorative elements without functional purpose.</p>
+                                </li>
+                                <li className="flex gap-4 items-start">
+                                    <span className="text-[#7A1E1E] font-mono text-[12px] mt-0.5">02</span>
+                                    <p className="text-[14px] text-[#4A4A4A]">Structure before style. Grid systems define the rhythm of the content.</p>
+                                </li>
+                                <li className="flex gap-4 items-start">
+                                    <span className="text-[#7A1E1E] font-mono text-[12px] mt-0.5">03</span>
+                                    <p className="text-[14px] text-[#4A4A4A]">Documentation as a deliverable. Code clarity is as important as performance.</p>
+                                </li>
+                            </ul>
+                        </div>
                     </section>
                 </div>
 
