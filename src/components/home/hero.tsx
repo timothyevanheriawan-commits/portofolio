@@ -11,7 +11,8 @@ export function Hero() {
                 <Fade delay={0}>
                     <div className="flex items-center gap-3 mb-10">
                         <Status />
-                        <span className="text-[11px] font-mono text-[#6F6F6F] uppercase tracking-widest">
+                        <span className="w-1 h-1 rounded-full bg-black" />
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-[#4A4A4A]">
                             Open to opportunities
                         </span>
                     </div>

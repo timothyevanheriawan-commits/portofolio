@@ -117,3 +117,4 @@ export function Expand({ children, isOpen, className = '' }: ExpandProps) {
         </framerMotion.div>
     )
 }
+

@@ -1,14 +1,14 @@
-// src/app/icon.tsx
+// src/app/apple-icon.tsx
 import { ImageResponse } from "next/og";
 
 export const size = {
-    width: 32,
-    height: 32,
+    width: 180,
+    height: 180,
 };
 
 export const contentType = "image/png";
 
-export default function Icon() {
+export default function AppleIcon() {
     return new ImageResponse(
         (
             <div
@@ -19,13 +19,13 @@ export default function Icon() {
                     alignItems: "center",
                     justifyContent: "center",
                     background: "#F7F7F5",
+                    borderRadius: "22%",
                 }}
             >
                 <svg
-                    width="22"
-                    height="22"
+                    width="100"
+                    height="100"
                     viewBox="0 0 28 28"
-                    style={{ color: '#1A1A1A' }}
                 >
                     {/* Left pillar */}
                     <rect

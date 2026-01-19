@@ -1,22 +1,12 @@
 import { Container } from './container'
-import { MarkLogo } from '@/components/ui/logo'
 
 export function Footer() {
-    const year = new Date().getFullYear()
-
     return (
-        <footer className="py-10 mt-8">
+        <footer className="py-8 border-t border-[#E8E7E4]">
             <Container>
-                <div className="border-t border-[#E8E7E4] pt-8">
-                    <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest">
-                            © {year}
-                        </span>
-                        <MarkLogo className="text-neutral-900" />
-                        <span className="text-[10px] font-mono text-[#9F9F9F]">
-                            Built with Next.js
-                        </span>
-                    </div>
+                <div className="flex justify-between items-center font-mono text-[9px] text-[#9F9F9F] uppercase tracking-[0.2em]">
+                    <span>© {new Date().getFullYear()} / Timothy Evan</span>
+                    <span>Built with Precison / Next.js</span>
                 </div>
             </Container>
         </footer>

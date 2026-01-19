@@ -30,7 +30,7 @@ export function Contact() {
                 <div className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-12 md:gap-24">
                     {/* Left — statement */}
                     <Fade delay={0.1}>
-                        <p className="text-[14px] text-[#6A6A6A] leading-relaxed max-w-[280px]">
+                        <p className="text-[14px] text-[#6A6A6A] leading-relaxed max-w-70">
                             Seeking roles in frontend development, data analysis, or design systems.
                             Based in Indonesia.
                         </p>

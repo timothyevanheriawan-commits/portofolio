@@ -33,7 +33,7 @@ export function ContactSection() {
 
             <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-10 md:gap-16">
                 <Fade delay={1}>
-                    <p className="text-[14px] text-[#6F6F6F] leading-[1.7] max-w-[280px]">
+                    <p className="text-[14px] text-[#6F6F6F] leading-[1.7] max-w-70">
                         Open to internships and entry-level roles.
                         Based in Indonesia, available remotely.
                     </p>
