@@ -34,7 +34,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: {
     default: 'Timothy Evan',
-    template: '%s — Timothy Evan',
+    template: '%s',
   },
   description: 'Frontend developer and data analyst. Building interfaces with clarity and data-informed decisions.',
   keywords: ['frontend', 'developer', 'react', 'next.js', 'data analysis', 'ui/ux'],
