@@ -26,8 +26,8 @@
 
   body {
     font-family: var(--font-sans);
-    background-color: #F7F7F5;
-    color: #1A1A1A;
+    background-color: #f7f7f5;
+    color: #1a1a1a;
     letter-spacing: -0.02em;
     /* Use a pseudo-element for the grain to keep the DOM clean */
     &::after {
@@ -43,8 +43,8 @@
 
   /* Selection - subtle oxidized red */
   ::selection {
-    background: #7A1E1E; 
-    color: #F7F7F5;
+    background: #7a1e1e;
+    color: #f7f7f5;
     text-shadow: none;
   }
 
@@ -56,10 +56,9 @@
   h5,
   h6 {
     font-family: var(--font-display);
-    font-weight: 600;
-    letter-spacing: -0.03em;
-    color: #111111;
-    text-wrap: balance;
+    font-weight: 700; /* Increased from 600 for more 'Swiss' impact */
+    letter-spacing: -0.05em; /* Tighter for that 'Helvetica' poster look */
+    line-height: 0.85; /* Imposing and architectural */
   }
 
   p {
@@ -157,14 +156,9 @@
   hr {
     border: none;
     height: 1px;
-    background: linear-gradient(
-      to right,
-      transparent,
-      #e8e7e4 10%,
-      #e8e7e4 90%,
-      transparent
-    );
-    margin: 2em 0;
+    background: #1a1a1a;
+    opacity: 0.1;
+    margin: 3rem 0;
   }
 
   /* Better touch targets */
@@ -206,6 +200,14 @@ body::before {
 }
 
 @layer utilities {
+  .ghoul-reveal {
+    transition: filter 0.5s var(--ease-out-expo);
+  }
+  
+  .ghoul-reveal:hover {
+    filter: grayscale(1) contrast(1.2) sepia(0.5) hue-rotate(-50deg); 
+    /* This creates a cold, bone-like highlight with a red-tinted shadow */
+  }
   /* Logo animations - refined timing */
   @keyframes pulse-subtle {
     0%,
@@ -291,7 +293,6 @@ body::before {
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  
 }
 
 /* Logo idle state */
@@ -328,5 +329,5 @@ body::after {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #7A1E1E; /* Red eye color on interaction */
+  background: #7a1e1e; /* Red eye color on interaction */
 }
