@@ -2,6 +2,10 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
+import Cursor from '@/components/ui/cursor'
+import { IntroLoader } from '@/components/layout/intro-loader' // Import here
+import './globals.css'
+
 import './globals.css'
 
 const inter = Inter({
@@ -69,20 +73,19 @@ export default function RootLayout({
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen flex flex-col antialiased bg-[#F7F7F5] text-[#1A1A1A]">
-        {/* Skip link for accessibility */}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 
-                   focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-[#1A1A1A]
-                   focus:border focus:border-[#E8E7E4] focus:rounded-sm"
-        >
-          Skip to main content
-        </a>
+      <body className="min-h-screen flex flex-col antialiased bg-[#F7F7F5] text-[#1A1A1A] cursor-none">
+        {/* Intro Loader must be here to overlay everything */}
+        <IntroLoader />
 
+        {/* Feature 1: The Scanner Grid Overlay */}
+        <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+          <div className="absolute left-0 w-full h-px bg-accent/20 shadow-[0_0_15px_rgba(122,30,30,0.5)]" />
+        </div>
+
+        <Cursor />
         <Header />
 
-        <main id="main-content" className="flex-1">
+        <main id="main-content" className="flex-1 relative z-10">
           {children}
         </main>
 

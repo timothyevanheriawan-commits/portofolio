@@ -9,12 +9,12 @@
 }
 
 @layer base {
-  *,
-  *::before,
-  *::after {
+  * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    cursor: none !important; /* Force hide everywhere */
   }
 
   html {
@@ -28,16 +28,16 @@
     font-family: var(--font-sans);
     background-color: #f7f7f5;
     color: #1a1a1a;
-    letter-spacing: -0.02em;
-    /* Use a pseudo-element for the grain to keep the DOM clean */
+    overflow-x: hidden;
+    /* The "Manga Grain" Overlay */
     &::after {
       content: "";
       position: fixed;
       inset: 0;
-      opacity: 0.015;
+      opacity: 0.02;
       z-index: 9999;
       pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
   }
 
@@ -46,6 +46,16 @@
     background: #7a1e1e;
     color: #f7f7f5;
     text-shadow: none;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.06em; /* Extremely tight for impact */
+    line-height: 0.9;
+    text-transform: uppercase;
   }
 
   /* Typography */
@@ -71,31 +81,7 @@
     text-decoration: none;
   }
 
-  /* Scrollbar - minimal */
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
 
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #d8d8d8;
-    border-radius: 4px;
-    border: 2px solid #f7f7f5;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #bfbfbf;
-  }
-
-  /* Firefox scrollbar */
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: #d8d8d8 transparent;
-  }
 
   /* Focus visible */
   :focus-visible {
@@ -133,6 +119,10 @@
 
   /* Smooth image loading */
   img {
+    transition:
+      filter 0.6s var(--ease-out-expo),
+      transform 0.6s var(--ease-out-expo);
+    filter: grayscale(0.2) contrast(1.05); /* Slightly desaturated/clinical by default */
     font-style: italic; /* Style the alt text */
     shape-margin: 0.75rem;
     max-width: 100%;
@@ -142,6 +132,10 @@
 
   img[src] {
     opacity: 1;
+  }
+
+  img:hover {
+    filter: grayscale(0) contrast(1); /* "Heals" to full color on hover */
   }
 
   /* Better blockquote */
@@ -186,6 +180,43 @@
   body {
     overscroll-behavior-y: none;
   }
+html {
+    /* Prevents the page from shifting left/right when the scrollbar appears */
+    scrollbar-gutter: stable;
+    /* Firefox: Maroon thumb on transparent track */
+    scrollbar-color: #7A1E1E transparent;
+    scrollbar-width: thin;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px; /* Base width */
+    height: 10px;
+  }
+
+  /* 2. Make the track invisible so it matches the page bg */
+  ::-webkit-scrollbar-track {
+    background: #F7F7F5; 
+  }
+
+  /* 3. The Needle (Thumb) */
+  ::-webkit-scrollbar-thumb {
+    background-color: #7A1E1E; /* Your Maroon */
+    /* This creates the illusion of a much thinner bar */
+    /* by surrounding the red with the page's background color */
+    border: 3px solid #F7F7F5; 
+    border-radius: 100px; /* Optional: set to 0 for a sharp pillar look */
+  }
+
+  /* 4. Interaction */
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #1A1A1A; /* Turns black when you touch it */
+  }
+
+  /* Firefox Fix */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #7A1E1E #F7F7F5;
+  }
 }
 
 /* Add subtle page background texture (optional) */
@@ -200,12 +231,68 @@ body::before {
 }
 
 @layer utilities {
+  .crop-marks {
+    position: relative;
+  }
+  /* The L-shaped brackets in the corners */
+  .crop-marks::before, .crop-marks::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-color: #7A1E1E;
+    opacity: 0;
+    transition: all 0.4s var(--ease-out-expo);
+  }
+  /* Top Left */
+  .crop-marks::before {
+    top: -5px;
+    left: -5px;
+    border-top: 1px solid;
+    border-left: 1px solid;
+  }
+  /* Bottom Right */
+  .crop-marks::after {
+    bottom: -5px;
+    right: -5px;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+  }
+  .crop-marks:hover::before, .crop-marks:hover::after {
+    opacity: 1;
+    transform: translate(5px, 5px); /* Snaps inward on hover */
+  }
+  .crop-marks:hover::after {
+    transform: translate(-5px, -5px);
+  }
+
+  /* The "Scanner" line that moves down the screen */
+  .animate-scan {
+    animation: scan 8s linear infinite;
+  }
+
+  @keyframes scan {
+    0% {
+      top: -10%;
+    }
+    100% {
+      top: 110%;
+    }
+  }
+
+  .ghoul-grid {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, rgba(122, 30, 30, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(122, 30, 30, 0.05) 1px, transparent 1px);
+  }
+
   .ghoul-reveal {
     transition: filter 0.5s var(--ease-out-expo);
   }
-  
+
   .ghoul-reveal:hover {
-    filter: grayscale(1) contrast(1.2) sepia(0.5) hue-rotate(-50deg); 
+    filter: grayscale(1) contrast(1.2) sepia(0.5) hue-rotate(-50deg);
     /* This creates a cold, bone-like highlight with a red-tinted shadow */
   }
   /* Logo animations - refined timing */
@@ -252,15 +339,7 @@ body::before {
     animation-delay: 3.5s;
   }
 
-  /* Hide scrollbar on mobile for horizontal scroll areas */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
+  
 
   /* Safe area padding for notched phones */
   .safe-top {
@@ -327,7 +406,4 @@ body::after {
   z-index: 9999;
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #7a1e1e; /* Red eye color on interaction */
 }

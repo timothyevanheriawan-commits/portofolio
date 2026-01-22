@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { getFeaturedProjects } from '@/lib/projects'
 import { Fade, Line } from '@/components/ui/motion'
 import { HoverLink } from '@/components/ui/hover-link'
+import { cn } from '@/lib/utils'
+import Link from 'next/link'
 
 export function SelectedProjects() {
     const projects = getFeaturedProjects()
@@ -15,28 +17,27 @@ export function SelectedProjects() {
 
             {/* Section Header */}
             <Fade delay={0}>
-                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mt-8 md:mt-12 mb-8 md:mb-10">
-                    <div className="flex items-baseline gap-4 md:gap-6">
-                        <span className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest">
-                            01
-                        </span>
-                        <div>
-                            <h2 className="text-[13px] md:text-[14px] font-semibold text-[#1A1A1A] uppercase tracking-wide mb-0.5 md:mb-1">
-                                Selected Work
-                            </h2>
-                            <p className="text-[12px] md:text-[13px] text-[#9F9F9F]">
-                                Recent projects and case studies
-                            </p>
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mt-8 md:mt-12 mb-12">
+                    <div className="md:col-span-8 flex flex-col gap-2">
+                        <div className="flex items-center gap-2 text-[#7A1E1E] font-mono text-[10px] tracking-[0.3em]">
+                            <span>INDEX</span>
+                            <span className="text-[#E8E7E4]">/</span>
+                            <span>01</span>
                         </div>
+                        <h2 className="text-[12px] font-mono text-[#1A1A1A] uppercase tracking-[0.15em] font-medium">
+                            Selected Work
+                        </h2>
                     </div>
 
-                    <HoverLink
-                        href="/projects"
-                        showArrow
-                        className="text-[12px] font-medium text-[#6F6F6F] hidden sm:flex"
-                    >
-                        All Projects
-                    </HoverLink>
+                    {/* Archive Link - Visible on Desktop, stacks on mobile if needed but hidden here for clean header */}
+                    <div className="hidden md:flex md:col-span-4 justify-end items-end pb-1">
+                        <HoverLink
+                            href="/projects"
+                            className="text-[10px] font-mono uppercase tracking-widest text-[#9F9F9F] hover:text-[#1A1A1A] transition-colors"
+                        >
+                            View Archive index —&gt;
+                        </HoverLink>
+                    </div>
                 </div>
             </Fade>
 
@@ -46,77 +47,112 @@ export function SelectedProjects() {
                     const isExpanded = expandedIndex === index
 
                     return (
-                        <Fade key={project.slug} delay={(index + 1) * 0.5}>
-                            <article className="border-b border-[#E8E7E4]">
+                        <Fade key={project.slug} delay={index * 0.1}>
+                            <article className="border-b border-[#E8E7E4] group">
                                 <button
                                     onClick={() => setExpandedIndex(isExpanded ? null : index)}
-                                    className="w-full py-5 md:py-8 text-left group"
-                                    aria-expanded={isExpanded}
+                                    className="w-full py-6 md:py-10 text-left active:bg-[#F9F9F8] transition-colors"
                                 >
-                                    <div className="flex items-start justify-between gap-4 md:gap-6">
-                                        {/* Left: Content */}
-                                        <div className="flex items-start gap-3 md:gap-6 flex-1 min-w-0">
-                                            {/* Index - hidden on smallest screens */}
-                                            <span className={`hidden sm:block text-[11px] font-mono pt-1 md:pt-1.5 shrink-0 w-5 md:w-6 transition-colors duration-300 
-    ${isExpanded ? 'text-[#7A1E1E]' : 'text-[#BFBFBF]'}`}>
+                                    <div className="grid grid-cols-1 md:grid-cols-12 gap-0 items-center">
+                                        {/* Left: Metadata & Title */}
+                                        <div className="md:col-span-8 flex items-baseline gap-4 md:gap-6 min-w-0">
+                                            <span className={cn(
+                                                "hidden sm:block text-[10px] font-mono tabular-nums transition-colors duration-500",
+                                                isExpanded ? "text-[#7A1E1E]" : "text-[#BFBFBF]"
+                                            )}>
                                                 {String(index + 1).padStart(2, '0')}
                                             </span>
 
-                                            {/* Content */}
                                             <div className="flex-1 min-w-0">
-                                                {/* Meta */}
-                                                <div className="flex items-center gap-2 md:gap-2.5 mb-1.5 md:mb-2">
-                                                    <span className="text-[10px] md:text-[11px] font-mono text-[#9F9F9F]">
-                                                        {project.year}
-                                                    </span>
-                                                    <span className="w-px h-2.5 md:h-3 bg-[#E8E7E4]" />
-                                                    <span className="text-[10px] md:text-[11px] text-[#9F9F9F] uppercase tracking-wide truncate">
-                                                        {project.role}
-                                                    </span>
+                                                <div className="flex items-center gap-3 mb-2">
+                                                    <span className="text-[10px] font-mono text-[#9F9F9F] uppercase">{project.year}</span>
+                                                    <span className="w-1 h-px bg-[#E8E7E4]" />
+                                                    <span className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-wider truncate">{project.role}</span>
                                                 </div>
-
-                                                {/* Title */}
-                                                <h3 className="text-[17px] sm:text-[20px] md:text-[24px] font-semibold text-[#1A1A1A] tracking-[-0.01em] md:tracking-[-0.02em] group-hover:text-[#6F6F6F] transition-colors duration-300 line-clamp-2 sm:line-clamp-none">
+                                                <h3 className="text-[20px] md:text-[32px] font-bold tracking-[-0.03em] text-[#1A1A1A] group-hover:translate-x-1 transition-transform duration-500 leading-tight">
                                                     {project.title}
                                                 </h3>
                                             </div>
                                         </div>
 
-                                        {/* Toggle */}
-                                        <span className={`shrink-0 w-7 h-7 md:w-8 md:h-8 flex items-center justify-center text-[16px] md:text-[18px] text-[#9F9F9F] font-light transition-all duration-300 ease-out-expo group-hover:text-[#1A1A1A] ${isExpanded ? 'rotate-45' : ''}`}>
-                                            +
-                                        </span>
+                                        {/* Right: Interaction State (Desktop Only) */}
+                                        <div className="hidden md:flex md:col-span-4 h-full items-center justify-end pr-4">
+                                            <div className="flex items-center gap-8">
+                                                <span className={cn(
+                                                    "text-[9px] font-mono uppercase tracking-[0.2em] transition-all duration-500",
+                                                    isExpanded ? "text-[#7A1E1E] translate-x-0" : "text-[#BFBFBF] group-hover:text-[#6F6F6F] group-hover:-translate-x-1"
+                                                )}>
+                                                    {isExpanded ? "Close" : "Details"}
+                                                </span>
+                                                <div className={cn(
+                                                    "h-px transition-all duration-500 ease-out-expo",
+                                                    isExpanded ? "w-8 bg-[#7A1E1E]" : "w-4 bg-[#E8E7E4] group-hover:w-6 group-hover:bg-[#BFBFBF]"
+                                                )} />
+                                            </div>
+                                        </div>
                                     </div>
                                 </button>
 
                                 {/* Expanded Content */}
-                                <div className={`overflow-hidden transition-all duration-500 ease-out-expo ${isExpanded ? 'max-h-125 opacity-100' : 'max-h-0 opacity-0'}`}>
-                                    <div className="pb-6 md:pb-8 pl-0 sm:pl-8 md:pl-12">
-                                        {/* Description */}
-                                        <p className="text-[13px] md:text-[14px] text-[#6F6F6F] leading-[1.6] md:leading-[1.7] mb-4 md:mb-5 max-w-[52ch]">
-                                            {project.description}
-                                        </p>
+                                <div className={cn(
+                                    "overflow-hidden transition-all duration-700 ease-out-expo",
+                                    isExpanded ? "max-h-200 opacity-100" : "max-h-0 opacity-0"
+                                )}>
+                                    <div className="grid grid-cols-1 md:grid-cols-12 gap-0 pb-10">
+                                        <div className="md:col-span-8 sm:pl-10 md:pl-12">
+                                            <p className="text-[14px] md:text-[15px] text-[#4A4A4A] leading-[1.6] max-w-[48ch] mb-8">
+                                                {project.description}
+                                            </p>
 
-                                        {/* Tech Stack - scrollable on mobile */}
-                                        <div className="flex flex-wrap gap-1.5 mb-5 md:mb-6">
-                                            {project.stack.map((tech) => (
-                                                <span
-                                                    key={tech}
-                                                    className="px-2 py-0.5 text-[10px] md:text-[11px] font-mono text-[#6F6F6F] bg-[#EEEEEC] rounded-sm whitespace-nowrap"
+                                            {/* Tech Stack */}
+                                            <div className="flex flex-wrap gap-x-6 gap-y-3 mb-8 md:mb-0">
+                                                {project.stack.map((tech) => (
+                                                    <div key={tech} className="flex items-center gap-2">
+                                                        <span className="w-1 h-1 bg-[#7A1E1E]" />
+                                                        <span className="text-[10px] font-mono text-[#1A1A1A] uppercase tracking-wider">{tech}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+
+                                            {/* Mobile CTA: Visible only on small screens */}
+                                            <div className="md:hidden pt-8 border-t border-[#E8E7E4] mt-4">
+                                                <Link
+                                                    href={`/projects/${project.slug}`}
+                                                    className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#7A1E1E] flex justify-between items-center"
                                                 >
-                                                    {tech}
-                                                </span>
-                                            ))}
+                                                    Full Case Study <span>→</span>
+                                                </Link>
+                                            </div>
                                         </div>
 
-                                        {/* Link */}
-                                        <HoverLink
-                                            href={`/projects/${project.slug}`}
-                                            showArrow
-                                            className="text-[12px] md:text-[13px] font-medium text-[#1A1A1A]"
-                                        >
-                                            View Details
-                                        </HoverLink>
+                                        {/* Desktop CTA: Visible only on large screens */}
+                                        <div className="hidden md:flex md:flex-col md:justify-between md:col-span-4 border-l border-[#E8E7E4] pl-12 py-1">
+                                            <div className="flex flex-col gap-6">
+                                                {/* Internal Case Study Link */}
+                                                <HoverLink
+                                                    href={`/projects/${project.slug}`}
+                                                    showArrow
+                                                    className="text-[11px] font-mono uppercase tracking-widest text-[#1A1A1A]"
+                                                >
+                                                    Full Case Study
+                                                </HoverLink>
+
+                                                {/* Live Site External Link */}
+                                                {project.liveUrl && (
+                                                    <a
+                                                        href={project.liveUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="group flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-[#7A1E1E] transition-colors hover:text-[#1A1A1A]"
+                                                    >
+                                                        <span>Live Site</span>
+                                                        <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5">
+                                                            ↗
+                                                        </span>
+                                                    </a>
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </article>
@@ -125,18 +161,15 @@ export function SelectedProjects() {
                 })}
             </div>
 
-            {/* Mobile Link */}
-            <Fade delay={projects.length + 1}>
-                <div className="mt-6 sm:hidden">
-                    <HoverLink
-                        href="/projects"
-                        showArrow
-                        className="text-[13px] font-medium text-[#6F6F6F]"
-                    >
-                        View All Projects
-                    </HoverLink>
-                </div>
-            </Fade>
+            {/* Mobile Bottom Link */}
+            <div className="mt-12 md:hidden">
+                <Link
+                    href="/projects"
+                    className="text-[10px] font-mono uppercase tracking-widest text-[#9F9F9F] flex items-center justify-center gap-2"
+                >
+                    View Archive index <span>→</span>
+                </Link>
+            </div>
         </section>
     )
 }

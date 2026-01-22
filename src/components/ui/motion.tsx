@@ -5,9 +5,10 @@ import { motion as framerMotion, useReducedMotion } from 'framer-motion'
 import { ReactNode } from 'react'
 import { useMounted } from '@/hooks/use-mounted'
 import { motion as config } from '@/lib/motion'
+import { cn } from '@/lib/utils' // Assuming this is where your cn helper lives
 
 // ============================================
-// FADE — Section entrance (use once per section)
+// FADE — Section entrance
 // ============================================
 interface FadeProps {
     children: ReactNode
@@ -19,13 +20,16 @@ export function Fade({ children, delay = 0, className }: FadeProps) {
     const mounted = useMounted()
     const prefersReducedMotion = useReducedMotion()
 
+    // Normalize class names to prevent hydration mismatch
+    const combinedClass = cn(className)
+
     if (!mounted || prefersReducedMotion) {
-        return <div className={className}>{children}</div>
+        return <div className={combinedClass}>{children}</div>
     }
 
     return (
         <framerMotion.div
-            className={className}
+            className={combinedClass}
             initial={{ opacity: 0, y: config.translate.md }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
@@ -48,11 +52,13 @@ interface LineProps {
     delay?: number
 }
 
-export function Line({ className = '', delay = 0 }: LineProps) {
+export function Line({ className, delay = 0 }: LineProps) {
     const mounted = useMounted()
     const prefersReducedMotion = useReducedMotion()
 
-    const baseClass = `h-px w-full bg-divider ${className}`
+    // Using cn ensures the string "h-px w-full bg-divider" 
+    // is cleanly merged with any incoming custom classes.
+    const baseClass = cn("h-px w-full bg-divider", className)
 
     if (!mounted || prefersReducedMotion) {
         return <div className={baseClass} />
@@ -75,15 +81,15 @@ export function Line({ className = '', delay = 0 }: LineProps) {
 }
 
 // ============================================
-// STATUS — Static dot (no idle animation)
+// STATUS — Static dot
 // ============================================
 interface StatusProps {
     className?: string
 }
 
-export function Status({ className = '' }: StatusProps) {
+export function Status({ className }: StatusProps) {
     return (
-        <span className={`w-1.5 h-1.5 rounded-full bg-accent ${className}`} />
+        <span className={cn("w-1.5 h-1.5 rounded-full bg-accent", className)} />
     )
 }
 
@@ -96,11 +102,12 @@ interface ExpandProps {
     className?: string
 }
 
-export function Expand({ children, isOpen, className = '' }: ExpandProps) {
+export function Expand({ children, isOpen, className }: ExpandProps) {
     const prefersReducedMotion = useReducedMotion()
+    const combinedClass = cn("overflow-hidden", className)
 
     if (prefersReducedMotion) {
-        return isOpen ? <div className={className}>{children}</div> : null
+        return isOpen ? <div className={combinedClass}>{children}</div> : null
     }
 
     return (
@@ -111,10 +118,9 @@ export function Expand({ children, isOpen, className = '' }: ExpandProps) {
                 duration: config.duration.base,
                 ease: config.ease,
             }}
-            className={`overflow-hidden ${className}`}
+            className={combinedClass}
         >
             {children}
         </framerMotion.div>
     )
 }
-
