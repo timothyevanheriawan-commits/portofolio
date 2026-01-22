@@ -64,8 +64,12 @@ export default function Cursor() {
             animate={{
                 width: isHovered ? 40 : 12,
                 height: isHovered ? 40 : 12,
-                backgroundColor: isClicked ? '#7A1E1E' : isHovered ? 'transparent' : '#1A1A1A',
-                border: isHovered ? '1px solid #1A1A1A' : 'none',
+                backgroundColor: isClicked
+                    ? '#7A1E1E'
+                    : isHovered
+                        ? 'rgba(26, 26, 26, 0)' // #1A1A1A at 0% opacity
+                        : 'rgba(26, 26, 26, 1)', // #1A1A1A at 100% opacity
+                border: isHovered ? '1px solid #1A1A1A' : '0px solid rgba(26, 26, 26, 0)',
             }}
             transition={{
                 type: 'spring',
