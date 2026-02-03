@@ -1,4 +1,3 @@
-// src/app/apple-icon.tsx
 import { ImageResponse } from "next/og";
 
 export const size = {
@@ -27,7 +26,6 @@ export default function AppleIcon() {
                     height="100"
                     viewBox="0 0 28 28"
                 >
-                    {/* Left pillar */}
                     <rect
                         x="6"
                         y="4"
@@ -36,7 +34,6 @@ export default function AppleIcon() {
                         rx="1"
                         fill="#1A1A1A"
                     />
-                    {/* Right top */}
                     <rect
                         x="14"
                         y="4"
@@ -46,7 +43,6 @@ export default function AppleIcon() {
                         fill="#1A1A1A"
                         opacity="0.9"
                     />
-                    {/* Right bottom */}
                     <rect
                         x="14"
                         y="16"

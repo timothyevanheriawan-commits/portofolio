@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { Container } from '@/components/layout/container'
 import { getProject, getAllProjects } from '@/lib/projects'
 import { cn } from '@/lib/utils' // Import missing 'cn'
-import type { Metadata } from 'next'
 
 interface Project {
     slug: string;
@@ -25,12 +24,6 @@ export async function generateStaticParams() {
     return getAllProjects().map(p => ({ slug: p.slug }))
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { slug } = await params
-    const project = getProject(slug)
-    if (!project) return { title: 'Not Found' }
-    return { title: project.title }
-}
 
 export default async function ProjectPage({ params }: Props) {
     const { slug } = await params

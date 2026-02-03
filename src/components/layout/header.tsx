@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import NextLink from 'next/link'
 import { usePathname } from 'next/navigation'
+import { motion, AnimatePresence } from 'framer-motion' // Added missing imports
 import { Container } from './container'
 import { MarkLogo } from '../ui/logo'
 import { cn } from '@/lib/utils'
@@ -17,18 +18,19 @@ export function Header() {
     const pathname = usePathname()
     const mounted = useMounted()
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const [prevPathname, setPrevPathname] = useState(pathname)
 
-    // Inside your Header component, before the return:
-    const [prevPathname, setPrevPathname] = useState(pathname);
-
+    // Close mobile menu on route change
     if (pathname !== prevPathname) {
-        setPrevPathname(pathname);
-        setMobileMenuOpen(false);
+        setPrevPathname(pathname)
+        setMobileMenuOpen(false)
     }
 
     // Prevent scroll when menu is open
     useEffect(() => {
-        document.body.style.overflow = mobileMenuOpen ? 'hidden' : ''
+        if (typeof window !== 'undefined') {
+            document.body.style.overflow = mobileMenuOpen ? 'hidden' : ''
+        }
         return () => { document.body.style.overflow = '' }
     }, [mobileMenuOpen])
 
@@ -38,44 +40,50 @@ export function Header() {
                 <Container>
                     <nav className="relative flex items-center justify-between h-14 md:h-16">
 
-                        {/* Logo - Fixed Position Anchor */}
+                        {/* Logo */}
                         <div className="shrink-0 relative z-70">
                             <NextLink href="/" aria-label="Home" className="flex items-center">
                                 <MarkLogo size={22} className="text-[#1A1A1A]" />
                             </NextLink>
                         </div>
 
-                        {/* Desktop Navigation - Right Aligned */}
-                        <div className="hidden md:flex items-center space-x-2">
-                            <div className="flex items-center">
+                        {/* Desktop Navigation - Swiss Grid Style */}
+                        <div className="hidden md:flex items-center h-full">
+                            <div className="flex items-center border-l border-[#E8E7E4] h-full">
                                 {navItems.map((item) => {
                                     const isActive = pathname === item.href
                                     return (
-                                        <NextLink key={item.href} href={item.href} className="relative px-4 py-2 group">
+                                        <NextLink
+                                            key={item.href}
+                                            href={item.href}
+                                            className="relative px-8 h-14 md:h-16 flex items-center border-r border-[#E8E7E4] group overflow-hidden"
+                                        >
                                             <span className={cn(
-                                                "text-[11px] font-mono uppercase tracking-widest transition-colors duration-300",
-                                                isActive ? 'text-[#1A1A1A]' : 'text-[#6F6F6F] group-hover:text-[#1A1A1A]'
+                                                "text-[10px] font-mono uppercase tracking-[0.25em] transition-colors duration-300 relative z-10",
+                                                isActive ? 'text-[#1A1A1A]' : 'text-[#9F9F9F] group-hover:text-[#1A1A1A]'
                                             )}>
                                                 {item.label}
                                             </span>
-                                            <span className={cn(
-                                                "absolute bottom-2 left-4 right-4 h-px transition-transform duration-500 ease-out-expo origin-left",
-                                                isActive ? 'bg-[#7A1E1E] scale-x-100' : 'bg-[#1A1A1A] scale-x-0 group-hover:scale-x-100'
-                                            )} />
+
+                                            {/* Swiss Rationalist Active State: Subtle Background Shift */}
+                                            {isActive && (
+                                                <motion.div
+                                                    layoutId="activeNav"
+                                                    className="absolute inset-0 bg-[#F0F0EE] z-0"
+                                                    transition={{ type: "spring", bounce: 0, duration: 0.6 }}
+                                                />
+                                            )}
                                         </NextLink>
                                     )
                                 })}
+
+                                <a
+                                    href="mailto:timothy.evan.heriawan@gmail.com"
+                                    className="px-8 h-14 md:h-16 flex items-center text-[10px] font-mono uppercase tracking-[0.25em] text-[#9F9F9F] hover:text-[#7A1E1E] border-r border-[#E8E7E4] transition-colors"
+                                >
+                                    Contact
+                                </a>
                             </div>
-
-                            {/* Divider */}
-                            <span className="w-px h-3 bg-[#E8E7E4] mx-2" aria-hidden="true" />
-
-                            <a
-                                href="mailto:timothy.evan.heriawan@gmail.com"
-                                className="px-4 py-2 text-[11px] font-mono uppercase tracking-widest text-[#6F6F6F] hover:text-[#1A1A1A] transition-colors"
-                            >
-                                Contact
-                            </a>
                         </div>
 
                         {/* Mobile Toggle */}
@@ -86,15 +94,15 @@ export function Header() {
                         >
                             <div className="w-5 h-2.5 flex flex-col justify-between items-end">
                                 <span className={cn(
-                                    "h-px bg-[#1A1A1A] transition-all duration-500 ease-out-expo",
+                                    "h-px bg-[#1A1A1A] transition-all duration-500",
                                     mobileMenuOpen ? "w-5 rotate-45 translate-y-[4.5px]" : "w-5"
                                 )} />
                                 <span className={cn(
-                                    "h-px bg-[#1A1A1A] transition-all duration-500 ease-out-expo",
+                                    "h-px bg-[#1A1A1A] transition-all duration-500",
                                     mobileMenuOpen ? "opacity-0 w-0" : "w-3"
                                 )} />
                                 <span className={cn(
-                                    "h-px bg-[#1A1A1A] transition-all duration-500 ease-out-expo",
+                                    "h-px bg-[#1A1A1A] transition-all duration-500",
                                     mobileMenuOpen ? "w-5 -rotate-45 -translate-y-[4.5px]" : "w-4"
                                 )} />
                             </div>
@@ -103,59 +111,59 @@ export function Header() {
                 </Container>
             </header>
 
-            {/* Mobile Menu Overlay */}
-            <div className={cn(
-                "fixed inset-0 z-50 md:hidden bg-[#F7F7F5] transition-all duration-700 ease-out-expo",
-                mobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
-            )}>
-                <div className="relative h-full pt-32 pb-12 px-8 flex flex-col justify-between max-w-lg mx-auto w-full">
-                    <nav>
-                        <ul className="space-y-4">
-                            {navItems.map((item, i) => (
-                                <li key={item.href} className="overflow-hidden">
-                                    <NextLink
-                                        href={item.href}
-                                        className={cn(
-                                            "block text-[42px] font-bold tracking-tight transition-all duration-500",
-                                            mobileMenuOpen ? "translate-y-0" : "translate-y-full",
-                                            pathname === item.href ? "text-[#7A1E1E]" : "text-[#1A1A1A]"
-                                        )}
-                                        style={{ transitionDelay: `${i * 0.1}s` }}
-                                    >
-                                        {item.label}
-                                    </NextLink>
-                                </li>
-                            ))}
-                        </ul>
-                    </nav>
+            {/* Mobile Menu Overlay - Swiss Table Style */}
+            <AnimatePresence>
+                {mobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="fixed inset-0 z-50 md:hidden bg-[#F7F7F5]"
+                    >
+                        <div className="relative h-full pt-24 pb-12 px-6 flex flex-col justify-between w-full max-w-lg mx-auto">
+                            <nav className="w-full">
+                                <ul className="divide-y divide-[#E8E7E4] border-y border-[#E8E7E4]">
+                                    {navItems.map((item, i) => (
+                                        <li key={item.href} className="overflow-hidden">
+                                            <NextLink
+                                                href={item.href}
+                                                className="flex items-center justify-between py-8 group"
+                                            >
+                                                <div className="flex items-baseline gap-6">
+                                                    <span className="text-[12px] font-mono text-[#7A1E1E]">0{i + 1}</span>
+                                                    <span className={cn(
+                                                        "text-[32px] font-bold uppercase tracking-tighter transition-colors",
+                                                        pathname === item.href ? "text-[#1A1A1A]" : "text-[#9F9F9F] group-hover:text-[#1A1A1A]"
+                                                    )}>
+                                                        {item.label}
+                                                    </span>
+                                                </div>
+                                                <span className="text-[20px] text-[#E8E7E4] group-hover:text-[#7A1E1E] transition-all group-hover:translate-x-1">→</span>
+                                            </NextLink>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </nav>
 
-                    <div className={cn(
-                        "space-y-8 transition-all duration-700 delay-300",
-                        mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                    )}>
-                        <div className="h-px bg-[#E8E7E4] w-full" />
+                            {/* Bottom Meta-Data Grid */}
+                            <div className="grid grid-cols-2 gap-px bg-[#E8E7E4] mt-auto border border-[#E8E7E4]">
+                                <div className="bg-[#F7F7F5] p-5">
+                                    <p className="text-[9px] font-mono text-[#9F9F9F] uppercase tracking-widest mb-2">Location</p>
+                                    <p className="text-[11px] font-mono uppercase text-[#1A1A1A]">Indonesia</p>
+                                </div>
+                                <div className="bg-[#F7F7F5] p-5">
+                                    <p className="text-[9px] font-mono text-[#9F9F9F] uppercase tracking-widest mb-2">Availability</p>
+                                    <p className="text-[11px] font-mono uppercase text-[#7A1E1E]">Open for Hire</p>
+                                </div>
+                            </div>
 
-                        <div className="grid grid-cols-2 gap-8">
-                            <div>
-                                <p className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest mb-2">Connect</p>
-                                <a href="mailto:timothy.evan.heriawan@gmail.com" className="block text-[14px] font-mono text-[#1A1A1A] hover:text-[#7A1E1E] transition-colors">
-                                    Email
-                                </a>
-                            </div>
-                            <div>
-                                <p className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest mb-2">Social</p>
-                                <a href="#" target="_blank" className="block text-[14px] font-mono text-[#1A1A1A]">
-                                    LinkedIn
-                                </a>
-                            </div>
+                            <p className="text-[9px] font-mono text-[#9F9F9F] uppercase tracking-[0.3em] mt-8 text-center">
+                                © {mounted ? new Date().getFullYear() : '2026'} Timothy Evan
+                            </p>
                         </div>
-
-                        <p className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-[0.2em]">
-                            © {mounted ? new Date().getFullYear() : '2026'} Timothy Evan
-                        </p>
-                    </div>
-                </div>
-            </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     )
 }

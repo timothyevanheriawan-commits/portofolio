@@ -64,18 +64,20 @@ export default function Cursor() {
             animate={{
                 width: isHovered ? 40 : 12,
                 height: isHovered ? 40 : 12,
-                backgroundColor: isClicked
-                    ? '#7A1E1E'
-                    : isHovered
-                        ? 'rgba(26, 26, 26, 0)' // #1A1A1A at 0% opacity
-                        : 'rgba(26, 26, 26, 1)', // #1A1A1A at 100% opacity
+                scale: isClicked ? 1.3 : 1, // Slightly less aggressive scale
+                backgroundColor: isClicked ? '#7A1E1E' : isHovered ? 'rgba(26,26,26,0)' : '#1A1A1A',
                 border: isHovered ? '1px solid #1A1A1A' : '0px solid rgba(26, 26, 26, 0)',
             }}
             transition={{
                 type: 'spring',
                 damping: 20,
                 stiffness: 300,
-                mass: 0.5
+                mass: 0.5,
+                scale: {
+                    type: "spring",
+                    stiffness: 400,
+                    damping: 10 // Lower damping makes it "boing" or pulse more on click
+                }
             }}
             className="fixed top-0 left-0 z-10000 pointer-events-none mix-blend-difference rounded-full hidden md:block"
         />

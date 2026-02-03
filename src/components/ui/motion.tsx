@@ -66,16 +66,16 @@ export function Line({ className, delay = 0 }: LineProps) {
 
     return (
         <framerMotion.div
-            className={baseClass}
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{
-                duration: config.duration.slow,
-                delay: delay * config.stagger,
-                ease: config.ease,
+            initial={{ scaleX: 0, opacity: 0.2 }}
+            animate={{
+                scaleX: 1,
+                opacity: [0.2, 0.5, 0.2], // Subtle pulse
             }}
-            style={{ transformOrigin: 'left' }}
+            transition={{
+                scaleX: { duration: 1.5, ease: "circOut" },
+                opacity: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+            }}
+            className="h-px w-full bg-[#7A1E1E] origin-left"
         />
     )
 }
@@ -124,3 +124,4 @@ export function Expand({ children, isOpen, className }: ExpandProps) {
         </framerMotion.div>
     )
 }
+

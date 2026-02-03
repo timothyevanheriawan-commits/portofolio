@@ -11,8 +11,8 @@ const contactLinks = [
     },
     {
         label: 'GitHub',
-        value: 'github.com/timothyevanheriawan',
-        href: 'https://github.com/timothyevanheriawan',
+        value: 'github.com/timothyevanheriawan-commits',
+        href: 'https://github.com/timothyevanheriawan-commits',
     },
     {
         label: 'LinkedIn',

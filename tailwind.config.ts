@@ -175,6 +175,7 @@ const config: Config = {
         breathe: "breathe 4s ease-in-out infinite",
         "fade-in": "fade-in 0.5s ease-out",
         "slide-up": "slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+        scan: "scan 8s linear infinite",
       },
 
       keyframes: {
@@ -201,6 +202,10 @@ const config: Config = {
         "slide-up": {
           "0%": { opacity: "0", transform: "translateY(8px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        scan: {
+          "0%": { top: "-5%" },
+          "100%": { top: "105%" },
         },
       },
 

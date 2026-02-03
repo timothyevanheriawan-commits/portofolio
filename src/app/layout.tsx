@@ -3,9 +3,8 @@ import { Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import Cursor from '@/components/ui/cursor'
-import { IntroLoader } from '@/components/layout/intro-loader' // Import here
-import './globals.css'
-
+import { IntroLoader } from '@/components/layout/intro-loader'
+import { MangaGrain } from '@/components/ui/manga-grain' // Don't forget to import this!
 import './globals.css'
 
 const inter = Inter({
@@ -38,27 +37,51 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: {
     default: 'Timothy Evan',
-    template: '%s',
+    template: 'Timothy Evan / %s',
   },
-  description: 'Frontend developer and data analyst. Building interfaces with clarity and data-informed decisions.',
-  keywords: ['frontend', 'developer', 'react', 'next.js', 'data analysis', 'ui/ux'],
+  description: 'A clinical approach to frontend architecture and data systems. Focused on clarity, structure, and functional logic.',
+  keywords: [
+    'Frontend Systems',
+    'Interface Architecture',
+    'Data Analytics',
+    'Swiss Rationalism',
+    'React',
+    'Next.js'
+  ],
   authors: [{ name: 'Timothy Evan' }],
   creator: 'Timothy Evan',
+  metadataBase: new URL('https://your-domain.com'), // Replace with your actual domain
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    siteName: 'Timothy Evan',
-    title: 'Timothy Evan — Frontend Developer',
-    description: 'Frontend developer and data analyst. Building interfaces with clarity.',
+    url: 'https://your-domain.com',
+    siteName: 'Timothy Evan / System Archive',
+    title: 'Timothy Evan — Frontend Systems & Data',
+    description: 'Digital systems developed with clinical precision.',
+    images: [
+      {
+        url: '/og-image.png', // Ensure this exists in your public folder
+        width: 1200,
+        height: 630,
+        alt: 'Timothy Evan / Digital Systems Archive',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Timothy Evan — Frontend Developer',
-    description: 'Frontend developer and data analyst. Building interfaces with clarity.',
+    title: 'Timothy Evan / Systems',
+    description: 'Frontend architecture and data-informed design.',
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 }
 
@@ -73,16 +96,14 @@ export default function RootLayout({
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen flex flex-col antialiased bg-[#F7F7F5] text-[#1A1A1A] cursor-none">
-        {/* Intro Loader must be here to overlay everything */}
+      <body className="min-h-screen flex flex-col antialiased bg-[#F7F7F5] text-[#1A1A1A] cursor-none relative">
+        {/* Intro Loader overlays everything during initial boot */}
         <IntroLoader />
 
-        {/* Feature 1: The Scanner Grid Overlay */}
-        <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-          <div className="absolute left-0 w-full h-px bg-accent/20 shadow-[0_0_15px_rgba(122,30,30,0.5)]" />
-        </div>
-
+        {/* Atmospheric Layers */}
+        <MangaGrain />
         <Cursor />
+
         <Header />
 
         <main id="main-content" className="flex-1 relative z-10">
