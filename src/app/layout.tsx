@@ -50,11 +50,11 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Timothy Evan' }],
   creator: 'Timothy Evan',
-  metadataBase: new URL('https://your-domain.com'), // Replace with your actual domain
+  metadataBase: new URL('https://timothy-evan.vercel.app'), // Replace with your actual domain
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://your-domain.com',
+    url: 'https://timothy-evan.vercel.app',
     siteName: 'Timothy Evan / System Archive',
     title: 'Timothy Evan — Frontend Systems & Data',
     description: 'Digital systems developed with clinical precision.',
