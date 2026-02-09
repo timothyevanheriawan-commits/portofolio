@@ -18,13 +18,7 @@ export function Header() {
     const pathname = usePathname()
     const mounted = useMounted()
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-    const [prevPathname, setPrevPathname] = useState(pathname)
 
-    // Close mobile menu on route change
-    if (pathname !== prevPathname) {
-        setPrevPathname(pathname)
-        setMobileMenuOpen(false)
-    }
 
     // Prevent scroll when menu is open
     useEffect(() => {
@@ -127,6 +121,7 @@ export function Header() {
                                         <li key={item.href} className="overflow-hidden">
                                             <NextLink
                                                 href={item.href}
+                                                onClick={() => setMobileMenuOpen(false)}
                                                 className="flex items-center justify-between py-8 group"
                                             >
                                                 <div className="flex items-baseline gap-6">

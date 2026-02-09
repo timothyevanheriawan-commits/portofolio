@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { getFeaturedProjects } from '@/lib/projects'
-import { Fade, Line } from '@/components/ui/motion'
+import { Fade, Line, Expand } from '@/components/ui/motion'
 import { HoverLink } from '@/components/ui/hover-link'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
@@ -51,6 +51,8 @@ export function SelectedProjects() {
                             <article className="border-b border-[#E8E7E4] group">
                                 <button
                                     onClick={() => setExpandedIndex(isExpanded ? null : index)}
+                                    aria-expanded={isExpanded}
+                                    aria-controls={`project-details-${project.slug}`}
                                     className="w-full py-6 md:py-10 text-left active:bg-[#F9F9F8] transition-colors"
                                 >
                                     <div className="grid grid-cols-1 md:grid-cols-12 gap-0 items-center">
@@ -94,10 +96,7 @@ export function SelectedProjects() {
                                 </button>
 
                                 {/* Expanded Content */}
-                                <div className={cn(
-                                    "overflow-hidden transition-all duration-700 ease-out-expo",
-                                    isExpanded ? "max-h-200 opacity-100" : "max-h-0 opacity-0"
-                                )}>
+                                <Expand isOpen={isExpanded} id={`project-details-${project.slug}`}>
                                     <div className="grid grid-cols-1 md:grid-cols-12 gap-0 pb-10">
                                         <div className="md:col-span-8 sm:pl-10 md:pl-12">
                                             <p className="text-[14px] md:text-[15px] text-[#4A4A4A] leading-[1.6] max-w-[48ch] mb-8">
@@ -138,7 +137,7 @@ export function SelectedProjects() {
                                                 </HoverLink>
 
                                                 {/* Live Site External Link */}
-                                                {project.liveUrl && (
+                                                {project.liveUrl && project.liveUrl.startsWith('http') && (
                                                     <a
                                                         href={project.liveUrl}
                                                         target="_blank"
@@ -154,7 +153,7 @@ export function SelectedProjects() {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </Expand>
                             </article>
                         </Fade>
                     )

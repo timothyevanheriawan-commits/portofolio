@@ -100,6 +100,7 @@ interface ExpandProps {
     children: ReactNode
     isOpen: boolean
     className?: string
+    id?: string
 }
 
 export function Expand({ children, isOpen, className }: ExpandProps) {

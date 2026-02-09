@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Container } from '@/components/layout/container'
 import { cn } from '@/lib/utils'
 import { getAllProjects } from '@/lib/projects'
-import { Fade } from '@/components/ui/motion'
+import { Fade, Expand } from '@/components/ui/motion'
 import Link from 'next/link'
 
 export default function ProjectsPage() {
@@ -42,8 +42,9 @@ export default function ProjectsPage() {
                                 {/* Interaction Trigger */}
                                 <button
                                     onClick={() => setExpandedId(isExpanded ? null : project.slug)}
-                                    className="w-full py-6 md:py-10 text-left active:bg-[#F9F9F8] transition-colors duration-300"
                                     aria-expanded={isExpanded}
+                                    aria-controls={`project-details-${project.slug}`}
+                                    className="w-full py-6 md:py-10 text-left active:bg-[#F9F9F8] transition-colors duration-300"
                                 >
                                     <div className="grid grid-cols-1 md:grid-cols-12 gap-0 items-center">
 
@@ -93,10 +94,7 @@ export default function ProjectsPage() {
                                 </button>
 
                                 {/* 4. Expanded Content - Swiss Grid Aligned */}
-                                <div className={cn(
-                                    "overflow-hidden transition-all duration-700 ease-out-expo",
-                                    isExpanded ? "max-h-300 opacity-100" : "max-h-0 opacity-0"
-                                )}>
+                                <Expand isOpen={isExpanded} id={`project-details-${project.slug}`}>
                                     <div className="grid grid-cols-1 md:grid-cols-12 gap-0 pb-10">
 
                                         {/* Left Column (Span 8) */}
@@ -125,7 +123,7 @@ export default function ProjectsPage() {
                                                 >
                                                     Full Case Study <span>→</span>
                                                 </Link>
-                                                {project.liveUrl && (
+                                                {project.liveUrl && project.liveUrl.startsWith('http') && (
                                                     <a
                                                         href={project.liveUrl}
                                                         target="_blank"
@@ -151,7 +149,7 @@ export default function ProjectsPage() {
                                                     </span>
                                                 </Link>
 
-                                                {project.liveUrl && (
+                                                {project.liveUrl && project.liveUrl.startsWith('http') && (
                                                     <a
                                                         href={project.liveUrl}
                                                         target="_blank"
@@ -168,7 +166,7 @@ export default function ProjectsPage() {
                                         </div>
 
                                     </div>
-                                </div>
+                                </Expand>
                             </article>
                         </Fade>
                     )

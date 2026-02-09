@@ -3,19 +3,9 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { Container } from '@/components/layout/container'
 import { getProject, getAllProjects } from '@/lib/projects'
-import { cn } from '@/lib/utils' // Import missing 'cn'
+import { cn } from '@/lib/utils'
+import { Project } from '@/lib/types'
 
-interface Project {
-    slug: string;
-    title: string;
-    year: string;
-    role: string;
-    objective: string;
-    stack: string[];
-    liveUrl?: string;
-    // Add other fields (context, architecture, etc.) if they are used here
-}
-// Define the Props interface that was missing
 interface Props {
     params: Promise<{ slug: string }>
 }
@@ -82,7 +72,7 @@ export default async function ProjectPage({ params }: Props) {
                     </div>
                 </div>
 
-                {project.liveUrl && (
+                {project.liveUrl && project.liveUrl.startsWith('http') && (
                     <a
                         href={project.liveUrl}
                         target="_blank"
