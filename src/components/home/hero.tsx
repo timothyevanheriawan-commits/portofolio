@@ -20,13 +20,13 @@ export function Hero() {
                         <h1 className="text-[40px] sm:text-[60px] md:text-[80px] lg:text-[110px] font-bold leading-[0.85] tracking-[-0.05em] text-[#1A1A1A]">
                             Building <br />
                             <span className="relative inline-block group">
-                                <span className="relative z-10">interfaces</span>
-                                {/* Tokyo Ghoul: Red 'eye' flicker on hover */}
-                                <span className="absolute inset-0 bg-[#7A1E1E]/5 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                                <span className="relative z-10 transition-colors duration-500 group-hover:text-[#F7F7F5]">interfaces</span>
+                                {/* Subtle Tokyo Ghoul Flicker */}
+                                <span className="absolute inset-0 bg-[#7A1E1E] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom" />
                             </span>
                             <br />
-                            <motion.span 
-                                whileHover={{ skewX: -5 }}
+                            <motion.span
+                                whileHover={{ skewX: -8, x: 10 }}
                                 className="text-[#9F9F9F] hover:text-[#7A1E1E] transition-all duration-700 cursor-crosshair inline-block"
                             >
                                 with clarity.
@@ -46,14 +46,20 @@ export function Hero() {
                 <div className="md:col-span-4 md:border-l border-[#E8E7E4] pl-0 md:pl-12 flex flex-col justify-between pt-12 md:pt-0">
                     <Fade delay={0.8} className="space-y-8">
                         {/* Navigation Links */}
+                        {/* Navigation Links */}
                         <nav className="flex flex-col gap-4">
-                            {['Work', 'Info', 'Email'].map((item) => (
+                            {[
+                                { label: 'Work', href: '/projects' },
+                                { label: 'Info', href: '/about' },
+                                { label: 'Email', href: 'mailto:timothy.evan.heriawan@gmail.com' }
+                            ].map((item) => (
                                 <Link
-                                    key={item}
-                                    href={item === 'Email' ? `mailto:tim@evan.com` : `/${item.toLowerCase()}`}
+                                    key={item.label}
+                                    href={item.href}
+                                    {...(item.label === 'Email' ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                                     className="group flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.2em] text-[#9F9F9F] hover:text-[#1A1A1A] transition-colors"
                                 >
-                                    <span>{item}</span>
+                                    <span>{item.label}</span>
                                     <span className="h-px w-0 bg-[#7A1E1E] group-hover:w-8 transition-all duration-500" />
                                 </Link>
                             ))}

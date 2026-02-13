@@ -5,14 +5,8 @@ import { useState, useEffect } from 'react'
 
 export function IntroLoader() {
     const [isLoading, setIsLoading] = useState(true)
-    const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
-        // Moves the update to the next frame, satisfying the linter
-        const frame = requestAnimationFrame(() => {
-            setMounted(true);
-        });
-
         document.body.classList.add('loading');
 
         const timer = setTimeout(() => {
@@ -21,14 +15,10 @@ export function IntroLoader() {
         }, 2600);
 
         return () => {
-            cancelAnimationFrame(frame); // Cleanup the frame request
             clearTimeout(timer);
             document.body.classList.remove('loading');
         };
     }, []);
-
-    // Prevent hydration mismatch by returning null until mounted on client
-    if (!mounted) return null
 
     return (
         <AnimatePresence>
@@ -41,7 +31,7 @@ export function IntroLoader() {
                         transition: { duration: 0.8, delay: 0.2 }
                     }}
                     /* 2. FIX: Added brackets to z-[9999] */
-                    className="fixed inset-0 z-9999 flex flex-col bg-[#1A1A1A] text-[#F7F7F5]"
+                    className="fixed inset-0 z-[9999] flex flex-col bg-[#1A1A1A] text-[#F7F7F5]"
                 >
                     <motion.div
                         exit={{ y: '-100%' }}

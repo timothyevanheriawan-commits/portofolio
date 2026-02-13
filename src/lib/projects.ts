@@ -129,8 +129,7 @@ The project scope emphasized client-side functionality and UI consistency rather
     architecture: `The application is a frontend-driven web system built with Next.js. Core functionality includes rendering a list of user-submitted recipes, client-side forms for recipe submission, and basic data persistence via an external backend service.
 
 The system follows a simple read-and-write flow without moderation layers: users can read all recipes, users can submit new recipes, with no intermediate validation beyond basic input handling.`,
-    tradeoffs: `No admin panel or moderation workflow was implemented. All submitted content is treated equally, with no approval process. The system prioritizes simplicity over control or scalability.
-
+    tradeoffs: `No moderation workflow was implemented. All submitted content is treated equally, with no approval process. 
 These tradeoffs were accepted to keep the project aligned with course scope and time constraints.
 
 The most important design decision was establishing clear UI criteria for typography and color usage early in development. This decision aimed to make the interface feel consistent and natural, despite being a group project with multiple contributors.`,

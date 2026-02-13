@@ -2,7 +2,7 @@
 'use client'
 
 import { motion as framerMotion, useReducedMotion } from 'framer-motion'
-import { ReactNode } from 'react'
+import { ReactNode, useState, useEffect } from 'react'
 import { useMounted } from '@/hooks/use-mounted'
 import { motion as config } from '@/lib/motion'
 import { cn } from '@/lib/utils' // Assuming this is where your cn helper lives
@@ -105,9 +105,18 @@ interface ExpandProps {
 
 export function Expand({ children, isOpen, className }: ExpandProps) {
     const prefersReducedMotion = useReducedMotion()
+    const [shouldReduceMotion, setShouldReduceMotion] = useState(false)
+
+    useEffect(() => {
+        if (prefersReducedMotion) {
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+            setShouldReduceMotion(true)
+        }
+    }, [prefersReducedMotion])
+
     const combinedClass = cn("overflow-hidden", className)
 
-    if (prefersReducedMotion) {
+    if (shouldReduceMotion) {
         return isOpen ? <div className={combinedClass}>{children}</div> : null
     }
 
