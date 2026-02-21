@@ -43,7 +43,7 @@ export function SkillsOverview() {
 
             {/* Grid Container: Added mobile bottom border since right-border won't wrap correctly */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-0 border-t border-r border-[#E8E7E4]">
-                {skills.map((group, groupIndex) => (
+                {skills.map((group) => (
                     <div key={group.category} className="contents">
                         {/* Category Header - Spans full width on mobile, 4 cols on desktop */}
                         <div className="col-span-1 md:col-span-4 pt-10 pb-6 border-l border-[#E8E7E4] px-6 md:px-12 bg-[#F7F7F5]/50">

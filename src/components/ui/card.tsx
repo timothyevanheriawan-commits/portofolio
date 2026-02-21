@@ -27,7 +27,7 @@ export function Card({
                 'bg-bg-secondary/80 backdrop-blur-sm',
                 'hover:border-text-secondary/40',
                 'hover:shadow-[0_2px_8px_rgba(0,0,0,0.04)]',
-                'hover:translate-y-[-1px]',
+                'hover:translate-y-px',
             ],
 
             variant === 'ghost' && [

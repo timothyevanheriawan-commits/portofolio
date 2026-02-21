@@ -11,7 +11,7 @@ export function Hero() {
             className="py-12 md:py-20 lg:py-32 relative border-r border-[#E8E7E4]"
         >
             <div className="grid grid-cols-1 md:grid-cols-12 gap-0">
-                
+
                 {/* Left Side: Headline & Brand */}
                 <div className="md:col-span-8 pr-6 md:pr-12">
 
@@ -85,7 +85,7 @@ export function Hero() {
 
             {/* Bottom Accent Line */}
             <div className="absolute bottom-0 left-0 w-full">
-                <Line delay={1.2} />
+                <Line />
             </div>
         </section>
     )

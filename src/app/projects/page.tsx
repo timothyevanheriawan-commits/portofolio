@@ -42,7 +42,7 @@ export default function ProjectsPage() {
                                 {/* Interaction Trigger */}
                                 <button
                                     onClick={() => setExpandedId(isExpanded ? null : project.slug)}
-                                    aria-expanded={isExpanded}
+                                    aria-expanded={isExpanded ? "true" : "false"}
                                     aria-controls={`project-details-${project.slug}`}
                                     className="w-full py-6 md:py-10 text-left active:bg-[#F9F9F8] transition-colors duration-300"
                                 >

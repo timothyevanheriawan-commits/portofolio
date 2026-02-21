@@ -1,0 +1,38 @@
+﻿
+> timothy-evan-portfolio@0.1.0 lint
+> eslint
+
+
+C:\Users\MSI-PC\Downloads\portofolio\timothy-evan-portfolio\src\components\home\skills-overview.tsx
+  46:37  warning  'groupIndex' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\MSI-PC\Downloads\portofolio\timothy-evan-portfolio\src\components\layout\header.tsx
+  31:9  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\MSI-PC\Downloads\portofolio\timothy-evan-portfolio\src\components\layout\header.tsx:31:9
+  29 |     // Close menu on route change
+  30 |     useEffect(() => {
+> 31 |         setMobileMenuOpen(false)
+     |         ^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  32 |     }, [pathname])
+  33 |
+  34 |     return (  react-hooks/set-state-in-effect
+
+C:\Users\MSI-PC\Downloads\portofolio\timothy-evan-portfolio\src\components\layout\intro-loader.tsx
+  3:35  warning  'useMotionValue' is defined but never used  @typescript-eslint/no-unused-vars
+  3:51  warning  'useTransform' is defined but never used    @typescript-eslint/no-unused-vars
+  3:65  warning  'animate' is defined but never used         @typescript-eslint/no-unused-vars
+
+C:\Users\MSI-PC\Downloads\portofolio\timothy-evan-portfolio\src\components\ui\motion.tsx
+   55:35  warning  'delay' is assigned a value but never used                                                      @typescript-eslint/no-unused-vars
+  112:13  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/exhaustive-deps')
+
+Γ£û 7 problems (1 error, 6 warnings)
+  0 errors and 1 warning potentially fixable with the `--fix` option.
+
