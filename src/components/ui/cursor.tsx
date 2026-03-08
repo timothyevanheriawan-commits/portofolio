@@ -79,7 +79,7 @@ export default function Cursor() {
                     damping: 10 // Lower damping makes it "boing" or pulse more on click
                 }
             }}
-            className="fixed top-0 left-0 z-10000 pointer-events-none mix-blend-difference rounded-full hidden md:block"
+            className="fixed top-0 left-0 z-(--z-cursor) pointer-events-none mix-blend-difference rounded-full hidden md:block"
         />
     )
 }

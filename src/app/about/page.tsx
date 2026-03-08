@@ -8,7 +8,7 @@ export default function AboutPage() {
         <Container className="py-16 md:py-24">
             <header className="mb-12 md:mb-16">
                 <Fade delay={0}>
-                    <h1 className="text-[32px] md:text-[40px] font-bold tracking-[-0.02em] text-[#1A1A1A]">
+                    <h1 className="text-[32px] md:text-[44px] font-semibold tracking-[-0.03em] text-[#1A1A1A] mb-4">
                         About
                     </h1>
                 </Fade>
@@ -39,9 +39,9 @@ export default function AboutPage() {
                                 Education
                             </h2>
                             <div className="md:col-span-3">
-                                <div className="flex justify-between items-baseline mb-1">
+                                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-1 gap-1 sm:gap-4">
                                     <span className="text-[15px] font-bold text-[#1A1A1A]">Petra Christian University</span>
-                                    <span className="text-[11px] font-mono text-[#7A1E1E]">2022—2026</span>
+                                    <span className="text-[11px] font-mono text-[#7A1E1E]">2022-2026</span>
                                 </div>
                                 <p className="text-[13px] text-[#6F6F6F]">Bachelor of Science in Information Systems</p>
                             </div>
@@ -58,7 +58,7 @@ export default function AboutPage() {
                             </h2>
                             <div className="md:col-span-3 space-y-8">
                                 <div>
-                                    <div className="flex justify-between items-baseline mb-1">
+                                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-1 gap-1 sm:gap-4">
                                         <span className="text-[15px] font-bold text-[#1A1A1A]">Search Engine Optimization Analyst</span>
                                         <span className="text-[11px] font-mono text-[#7A1E1E]">2025</span>
                                     </div>
@@ -93,9 +93,9 @@ export default function AboutPage() {
                             <div className="md:col-span-3 space-y-8">
                                 {/* Role 01 */}
                                 <div>
-                                    <div className="flex justify-between items-baseline mb-1">
+                                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-1 gap-1 sm:gap-4">
                                         <span className="text-[14px] font-bold text-[#1A1A1A]">Coordinator of Logistics</span>
-                                        <span className="text-[11px] font-mono text-[#7A1E1E]">2023—2024</span>
+                                        <span className="text-[11px] font-mono text-[#7A1E1E]">2023-2024</span>
                                     </div>
                                     <p className="text-[13px] text-[#6F6F6F] mb-2">UKM Ilustrasi Petra</p>
                                     <p className="text-[13px] text-[#9F9F9F] leading-relaxed max-w-[50ch]">
@@ -106,9 +106,9 @@ export default function AboutPage() {
 
                                 {/* Role 02 */}
                                 <div className="pt-4 border-t border-[#F0F0EE]">
-                                    <div className="flex justify-between items-baseline mb-1">
+                                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-1 gap-1 sm:gap-4">
                                         <span className="text-[14px] font-bold text-[#1A1A1A]">Technical Logistics Staff</span>
-                                        <span className="text-[11px] font-mono text-[#9F9F9F]">2023—2024</span>
+                                        <span className="text-[11px] font-mono text-[#9F9F9F]">2023-2024</span>
                                     </div>
                                     <p className="text-[13px] text-[#6F6F6F] mb-3">Various Committees (WGG, SAN X LKTI, Tutorial UAS)</p>
                                     <ul className="space-y-2">
@@ -176,7 +176,7 @@ export default function AboutPage() {
                                             href={link.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-[13px] text-[#4A4A4A] hover:text-[#1A1A1A] transition-colors truncate"
+                                            className="text-[12px] text-[#4A4A4A] hover:text-[#1A1A1A] transition-colors break-all leading-relaxed"
                                         >
                                             {link.value}
                                         </a>
@@ -195,7 +195,7 @@ export default function AboutPage() {
                         </div>
                         <div className="pt-8 border-t border-[#E8E7E4]">
                             <h3 className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest mb-6">
-                                CAPABILITIES     
+                                CAPABILITIES
                             </h3>
                             <div className="space-y-5">
                                 {[
@@ -218,8 +218,8 @@ export default function AboutPage() {
                                                 <div
                                                     key={i}
                                                     className={`h-1.5 w-full transition-all duration-500 ${i < item.level
-                                                            ? 'bg-[#7A1E1E] opacity-100 group-hover:bg-[#1A1A1A]'
-                                                            : 'bg-[#E8E7E4]'
+                                                        ? 'bg-[#7A1E1E] opacity-100 group-hover:bg-[#1A1A1A]'
+                                                        : 'bg-[#E8E7E4]'
                                                         }`}
                                                 />
                                             ))}

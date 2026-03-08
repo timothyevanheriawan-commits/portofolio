@@ -43,7 +43,7 @@ export function HoverLink({
             <span className="relative">
                 {children}
 
-                {/* Underline — slides in on hover */}
+                {/* Underline - slides in on hover */}
                 <motion.span
                     className="absolute left-0 -bottom-px h-px bg-accent origin-left"
                     initial={{ scaleX: 0 }}

@@ -26,22 +26,40 @@ export function Footer() {
                         </span>
                     </div>
 
+                    {/* Navigation */}
+                    <div className="flex gap-8">
+                        {[
+                            { label: 'Work', href: '/projects' },
+                            { label: 'About', href: '/about' },
+                            { label: 'Source', href: 'https://github.com/timothyevanheriawan-commits/portofolio' }
+                        ].map((link) => (
+                            <a
+                                key={link.label}
+                                href={link.href}
+                                className="hover:text-[#1A1A1A] transition-colors"
+                            >
+                                {link.label}
+                            </a>
+                        ))}
+                    </div>
+
                     {/* Bottom/Right Block: System Info */}
-                    {/* We use flex-wrap here so if the screen is VERY narrow, it still looks intentional */}
                     <div className="flex flex-wrap items-center gap-x-4 gap-y-2 md:gap-x-6">
                         <div className="flex items-center gap-2">
-                            <span className="w-1 h-1 rounded-full bg-[#E8E7E4] group-hover/footer:bg-[#7A1E1E] transition-colors duration-500" />
-                            <span>Indonesia</span>
+                            <span className="relative flex h-1.5 w-1.5 shrink-0">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7A1E1E] opacity-40" style={{ animationDuration: '1.8s' }} />
+                                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#7A1E1E]" />
+                            </span>
+                            <span className="text-[#1A1A1A]">Open to Opportunities</span>
                         </div>
 
                         <span className="text-[#E8E7E4]">/</span>
 
-                        <span>V.01</span>
+                        <span>V.2026</span>
 
                         <span className="text-[#E8E7E4]">/</span>
 
-                        {/* Whitespace nowrap keeps the tech stack together on one line if possible */}
-                        <span className="whitespace-nowrap">Next.js — Tailwind</span>
+                        <span className="whitespace-nowrap">Next.js - Tailwind v4</span>
                     </div>
                 </div>
             </Container>

@@ -36,7 +36,7 @@ export function Projects() {
                                     whileHover={prefersReducedMotion ? {} : { x: 4 }}
                                     transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
                                 >
-                                    {/* Top row — meta */}
+                                    {/* Top row - meta */}
                                     <div className="flex items-center gap-4 mb-4">
                                         <span className="text-[11px] font-mono text-[#4A4A4A]">
                                             0{index + 1}
@@ -50,12 +50,12 @@ export function Projects() {
                                     </div>
 
                                     {/* Title row */}
-                                    <div className="flex items-baseline justify-between gap-8">
+                                    <div className="flex flex-wrap items-baseline justify-between gap-4 md:gap-8">
                                         <h3 className="text-[24px] md:text-[28px] font-medium text-[#E8E8E8] tracking-tight group-hover:text-[#8C8C8C] transition-colors duration-300">
                                             {project.title}
                                         </h3>
 
-                                        {/* Arrow — appears on hover */}
+                                        {/* Arrow - appears on hover */}
                                         <motion.span
                                             className="text-[14px] text-[#4A4A4A] opacity-0 group-hover:opacity-100 group-hover:text-[#8B1E1E] transition-all duration-300"
                                             initial={{ x: -4 }}
@@ -65,8 +65,8 @@ export function Projects() {
                                         </motion.span>
                                     </div>
 
-                                    {/* Stack — mono, system voice */}
-                                    <div className="mt-4 flex items-center gap-2">
+                                    {/* Stack - mono, system voice */}
+                                    <div className="mt-4 flex flex-wrap items-center gap-2">
                                         {project.stack.slice(0, 4).map((tech, i) => (
                                             <span key={tech} className="flex items-center gap-2">
                                                 <span className="text-[11px] font-mono text-[#4A4A4A]">

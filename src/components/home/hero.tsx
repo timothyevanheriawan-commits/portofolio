@@ -1,89 +1,200 @@
 'use client'
 
-import { Fade, Line } from '@/components/ui/motion'
+import { Line } from '@/components/ui/motion'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+
+function RevealWord({
+    children,
+    delay,
+    className,
+}: {
+    children: React.ReactNode
+    delay: number
+    className?: string
+}) {
+    return (
+        <span className="block overflow-hidden">
+            <motion.span
+                className={`block ${className ?? ''}`}
+                initial={{ y: '110%' }}
+                animate={{ y: '0%' }}
+                transition={{ duration: 1, delay, ease: [0.16, 1, 0.3, 1] }}
+            >
+                {children}
+            </motion.span>
+        </span>
+    )
+}
+
+const LINKS = [
+    { label: 'Work', href: '/projects' },
+    { label: 'Info', href: '/about' },
+    { label: 'Email', href: 'mailto:timothy.evan.heriawan@gmail.com' },
+]
 
 export function Hero() {
     return (
         <section
-            style={{ gridColumn: 'content-start / span 12' }} // Expanded to full 12 for better grid control
-            className="py-12 md:py-20 lg:py-32 relative border-r border-[#E8E7E4]"
+            style={{ gridColumn: 'content-start / span 12' }}
+            className="relative pt-16 pb-0 md:pt-24 border-r border-[#E8E7E4]"
         >
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-0">
+            {/* Dot grid */}
+            <div
+                aria-hidden
+                className="absolute inset-0 pointer-events-none z-0"
+                style={{
+                    backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.09) 1px, transparent 1px)',
+                    backgroundSize: '28px 28px',
+                    maskImage: 'radial-gradient(ellipse 90% 70% at 50% 30%, black 20%, transparent 100%)',
+                    WebkitMaskImage: 'radial-gradient(ellipse 90% 70% at 50% 30%, black 20%, transparent 100%)',
+                }}
+            />
 
-                {/* Left Side: Headline & Brand */}
-                <div className="md:col-span-8 pr-6 md:pr-12">
 
 
-                    <Fade delay={0.4}>
-                        <h1 className="text-[40px] sm:text-[60px] md:text-[80px] lg:text-[110px] font-bold leading-[0.85] tracking-[-0.05em] text-[#1A1A1A]">
-                            Building <br />
-                            <span className="relative inline-block group">
-                                <span className="relative z-10 transition-colors duration-500 group-hover:text-[#F7F7F5]">interfaces</span>
-                                {/* Subtle Tokyo Ghoul Flicker */}
-                                <span className="absolute inset-0 bg-[#7A1E1E] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom" />
+
+
+            <div className="relative z-10 flex flex-col">
+
+                {/* ── Overline ── */}
+                <motion.div
+                    className="flex items-center gap-3 mb-10 md:mb-14"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                >
+                    <span className="h-px w-5 bg-[#7A1E1E]" />
+                    <span className="text-[9px] font-mono tracking-[0.25em] uppercase text-[#6F6F6F]">
+                        Frontend / Data Systems
+                    </span>
+                </motion.div>
+
+                {/* ── Full-width headline block ── */}
+                <h1
+                    className="tracking-[-0.04em] text-[#1A1A1A] w-full"
+                    style={{ fontSize: 'clamp(38px, 11vw, 172px)', lineHeight: 0.88 }}
+                >
+                    <RevealWord delay={0.2}>
+                        <span className="block font-black">Building</span>
+                    </RevealWord>
+
+                    <RevealWord delay={0.36}>
+                        <span className="block font-bold">
+                            <span className="relative inline-block group cursor-default">
+                                <span className="relative z-10 transition-colors duration-500 group-hover:text-[#F7F7F5]">
+                                    interfaces
+                                </span>
+                                <span className="absolute inset-0 bg-[#7A1E1E] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom z-0" />
                             </span>
-                            <br />
-                            <motion.span
-                                whileHover={{ skewX: -8, x: 10 }}
-                                className="text-[#9F9F9F] hover:text-[#7A1E1E] transition-all duration-700 cursor-crosshair inline-block"
-                            >
+                        </span>
+                    </RevealWord>
+
+                    <RevealWord delay={0.52}>
+                        <span className="block font-bold">
+                            <span className="inline-block text-[#C8C8C8]">
                                 with clarity.
-                            </motion.span>
-                        </h1>
-                    </Fade>
+                            </span>
+                        </span>
+                    </RevealWord>
+                </h1>
 
-                    <Fade delay={0.6} className="mt-12 md:mt-20">
-                        <p className="text-[16px] md:text-[18px] text-[#4A4A4A] leading-[1.6] max-w-xl tracking-tight">
+                {/* ── Divider rule ── */}
+                <motion.div
+                    className="relative w-full h-px bg-[#E8E7E4] mt-12 md:mt-16 overflow-hidden"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.4, delay: 0.9 }}
+                >
+                    <motion.div
+                        className="absolute left-0 top-0 h-full bg-[#7A1E1E]"
+                        initial={{ width: 0 }}
+                        animate={{ width: '12%' }}
+                        transition={{ duration: 1.4, delay: 1, ease: [0.16, 1, 0.3, 1] }}
+                    />
+                </motion.div>
+
+                {/* ── Footnote row - body left, nav right ── */}
+                <motion.div
+                    className="grid grid-cols-1 md:grid-cols-12 gap-0 py-8 md:py-10"
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
+                >
+                    {/* Left - body copy + status + CTA */}
+                    <div className="md:col-span-7 flex flex-col justify-between gap-6 pr-0 md:pr-16 mb-8 md:mb-0">
+                        <p className="text-[14px] md:text-[15px] text-[#4A4A4A] leading-[1.75] max-w-[44ch] tracking-tight">
                             I focus on frontend development and data visualization,
-                            creating tools that <span className="text-[#1A1A1A] font-medium underline decoration-[#7A1E1E]/40 decoration-2 underline-offset-4">reduce friction</span> and communicate clearly.
+                            creating tools that{' '}
+                            <span className="text-[#1A1A1A] font-medium underline decoration-[#7A1E1E]/40 decoration-2 underline-offset-4">
+                                reduce friction
+                            </span>{' '}
+                            and communicate clearly.
                         </p>
-                    </Fade>
-                </div>
 
-                {/* Right Side: Links & Meta-Data */}
-                <div className="md:col-span-4 md:border-l border-[#E8E7E4] pl-0 md:pl-12 flex flex-col justify-between pt-12 md:pt-0">
-                    <Fade delay={0.8} className="space-y-8">
-                        {/* Navigation Links */}
-                        {/* Navigation Links */}
-                        <nav className="flex flex-col gap-4">
-                            {[
-                                { label: 'Work', href: '/projects' },
-                                { label: 'Info', href: '/about' },
-                                { label: 'Email', href: 'mailto:timothy.evan.heriawan@gmail.com' }
-                            ].map((item) => (
-                                <Link
-                                    key={item.label}
-                                    href={item.href}
-                                    {...(item.label === 'Email' ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                                    className="group flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.2em] text-[#9F9F9F] hover:text-[#1A1A1A] transition-colors"
-                                >
-                                    <span>{item.label}</span>
-                                    <span className="h-px w-0 bg-[#7A1E1E] group-hover:w-8 transition-all duration-500" />
-                                </Link>
-                            ))}
-                        </nav>
-                    </Fade>
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
+                            {/* Primary CTA */}
+                            <Link
+                                href="/projects"
+                                className="group inline-flex items-center gap-3 text-[10px] font-mono uppercase tracking-widest text-[#F7F7F5] bg-[#1A1A1A] px-5 py-2.5 hover:bg-[#7A1E1E] transition-colors duration-300"
+                            >
+                                View My Work
+                                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                            </Link>
 
-                    {/* Status Box - Optimized for Mobile Padding */}
-                    <Fade delay={1} className="mt-16 md:mt-20 border-t border-[#E8E7E4] pt-8 pb-4">
-                        <div className="space-y-4">
+                            {/* Status dot */}
                             <div className="flex items-center gap-3">
                                 <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7A1E1E] opacity-20"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#7A1E1E]"></span>
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7A1E1E] opacity-20" />
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#7A1E1E]" />
                                 </span>
                                 <span className="text-[9px] font-mono text-[#1A1A1A] uppercase tracking-[0.3em]">
-                                    Live Status: OPEN TO OPPORTUNITIES.
+                                    Open to Opportunities
                                 </span>
                             </div>
                         </div>
-                    </Fade>
-                </div>
+                    </div>
+
+                    {/* Right - nav links */}
+                    <nav className="md:col-span-5 md:border-l border-[#E8E7E4] md:pl-10 flex flex-col justify-center">
+                        {LINKS.map((item, i) => (
+                            <motion.div
+                                key={item.label}
+                                initial={{ opacity: 0, x: 10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{
+                                    duration: 0.55,
+                                    delay: 1.1 + i * 0.1,
+                                    ease: [0.16, 1, 0.3, 1],
+                                }}
+                            >
+                                <Link
+                                    href={item.href}
+                                    {...(item.label === 'Email' ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                                    className="group relative flex items-center justify-between py-3.5 border-b border-[#E8E7E4] first:border-t overflow-hidden"
+                                >
+                                    {/* Full-width underline - draws left→right on hover, retracts right→left on leave */}
+                                    <span
+                                        aria-hidden
+                                        className="absolute bottom-0 left-0 h-px w-full bg-[#7A1E1E] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out-expo"
+                                    />
+
+                                    <div className="flex items-center gap-3">
+                                        <span className="text-[8px] font-mono text-[#888888] tabular-nums group-hover:text-[#7A1E1E] transition-colors duration-300">
+                                            0{i + 1}
+                                        </span>
+                                        <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#6F6F6F] group-hover:text-[#1A1A1A] transition-colors duration-200">
+                                            {item.label}
+                                        </span>
+                                    </div>
+
+                                </Link>
+                            </motion.div>
+                        ))}
+                    </nav>
+                </motion.div>
             </div>
 
-            {/* Bottom Accent Line */}
             <div className="absolute bottom-0 left-0 w-full">
                 <Line />
             </div>

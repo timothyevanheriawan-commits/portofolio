@@ -8,7 +8,7 @@ export const motion = {
     slow: 0.28,
   },
 
-  // Single easing curve — use everywhere
+  // Single easing curve - use everywhere
   ease: [0.22, 1, 0.36, 1] as const,
 
   // Stagger delay between children
@@ -23,7 +23,7 @@ export const motion = {
 
 // Reusable variants
 export const variants = {
-  // Page/section entrance — use once per page
+  // Page/section entrance - use once per page
   fadeIn: {
     initial: { opacity: 0, y: motion.translate.md },
     animate: { opacity: 1, y: 0 },
@@ -54,13 +54,13 @@ export const variants = {
     transition: { duration: motion.duration.base, ease: motion.ease },
   },
 
-  // Hover — cards/rows
+  // Hover - cards/rows
   hoverLift: {
     y: -motion.translate.sm,
     transition: { duration: motion.duration.fast, ease: motion.ease },
   },
 
-  // Hover — links (underline)
+  // Hover - links (underline)
   hoverUnderline: {
     initial: { scaleX: 0 },
     hover: { scaleX: 1 },

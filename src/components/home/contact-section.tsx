@@ -34,12 +34,12 @@ export function ContactSection() {
                     <Fade delay={0}>
                         <div className="grid grid-cols-1 md:grid-cols-12 gap-0 mt-8 md:mt-12 mb-12 md:mb-16">
                             <div className="md:col-span-8 flex flex-col gap-2">
-                                <div className="flex items-center gap-2 text-[#7A1E1E] font-mono text-[10px] tracking-[0.3em]">
+                                <div className="flex items-center gap-2 text-[#7A1E1E] font-mono text-[11px] tracking-[0.4em] font-medium">
                                     <span>INDEX</span>
                                     <span className="text-[#E8E7E4]">/</span>
                                     <span>03</span>
                                 </div>
-                                <h2 className="text-[12px] font-mono text-[#1A1A1A] uppercase tracking-[0.15em] font-medium">
+                                <h2 className="text-[14px] md:text-[16px] font-mono text-[#1A1A1A] uppercase tracking-[0.2em] font-medium">
                                     Contact
                                 </h2>
                             </div>
@@ -84,13 +84,10 @@ export function ContactSection() {
                                         <span className="text-[9px] font-mono text-[#9F9F9F] uppercase tracking-[0.3em] group-hover:text-[#7A1E1E] transition-colors duration-300">
                                             {link.label}
                                         </span>
-                                        <span className="text-[14px] md:text-[15px] text-[#4A4A4A] group-hover:text-[#1A1A1A] transition-colors duration-300 truncate">
+                                        <span className="text-[14px] md:text-[15px] text-[#4A4A4A] group-hover:text-[#1A1A1A] transition-colors duration-300 break-all">
                                             {link.value}
                                         </span>
                                     </div>
-                                    <span className="text-[11px] font-mono text-[#C8C8C4] group-hover:text-[#7A1E1E] transition-colors duration-300 ml-6">
-                                        ↗
-                                    </span>
                                 </a>
                             </Fade>
                         ))}

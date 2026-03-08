@@ -28,8 +28,8 @@ State changes are handled via Server Actions combined with optimistic updates, a
 
 Visually, the interface avoids translucent or layered effects in favor of solid surfaces and clear borders. This improves numerical readability and prevents contrast issues when switching between light and dark modes.`,
     outcome: `The resulting MVP includes real-time net worth summaries, a date-grouped transaction ledger, and data export tools for CSV and PDF formats.`,
-    reflection: `This project reinforced the value of defining semantic design tokens early. Abstracting colors and surfaces into CSS variables made global theme changes predictable and prevented visual inconsistencies during iteration.`,
-    featured: true,
+    reflection: `Developing AuraFlow forced me to reconcile my desire for technical complexity with the user's need for absolute reliability. I learned that in financial software, the most "sophisticated" feature is often just a calculation the user can actually verify themselves.`,
+    featured: false,
   },
   {
     slug: "vertex",
@@ -59,7 +59,7 @@ Chart components are intentionally stateless, receiving pre-shaped datasets to a
 
 The UI favors dense information layouts over whitespace-heavy designs. This increases cognitive load slightly but allows operators to compare categories and time ranges without excessive navigation.`,
     outcome: `The MVP supports category-level stock distribution, low-stock alerts based on configurable thresholds, and historical demand visualization across selectable time windows.`,
-    reflection: `Working on Vertex highlighted how quickly dashboards become untrustworthy when calculations are split across the client and server. Centralizing derivations early reduced both bugs and mental overhead during iteration.`,
+    reflection: `Vertex was a lesson in data honesty. I realized that a dashboard's utility isn't measured by how many charts it has, but by how quickly an operator can spot an anomaly. Centralizing the math on the server wasn't just a performance choice; it was about ensuring one single version of the truth.`,
     featured: true,
   },
   {
@@ -83,7 +83,7 @@ Visualizations are derived directly from transformed datasets, avoiding post-pro
 
 The interface prioritizes clarity over customization, limiting user controls to prevent misinterpretation of weak signals.`,
     outcome: `The final dashboard highlights dominant complaint categories, sentiment distribution over time, and representative review excerpts for qualitative follow-up.`,
-    reflection: `This project reinforced that imperfect models can still be useful if their limitations are explicit. Designing for interpretability proved more valuable than chasing marginal accuracy gains.`,
+    reflection: `This project taught me that "perfect is the enemy of good" is especially true in analytics. A simple keyword frequency map delivered more immediate value to the BCA team than a complex sentiment model ever did, simply because they could actually explain it to their stakeholders.`,
     featured: false,
   },
   {
@@ -92,7 +92,7 @@ The interface prioritizes clarity over customization, limiting user controls to 
     description:
       "A static event website designed to present information for a fictional anime convention.",
     objective:
-      "A static event website designed to present information for a fictional anime convention.",
+      "Practice translating a creative brief into a cohesive UI system, focusing on visual hierarchy and thematic consistency.",
     year: "2026",
     role: "UI/UX Developer",
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
@@ -108,7 +108,7 @@ No data persistence, authentication, or server-side logic is present.`,
 These limitations were intentional and aligned with the project goal of demonstrating UI design skill rather than application logic.
 
 The central design decision was to strictly adhere to predefined UI criteria derived from the event theme. All layout, typography, and color choices were evaluated against this criteria to maintain consistency across the site.`,
-    outcome: `The project was completed and deployed as a live portfolio piece. This approach prioritized system coherence over feature breadth.`,
+    outcome: `Deployed as a live portfolio piece demonstrating UI design skill and strict adherence to a predefined visual criteria.`,
     reflection: `This project reinforced the importance of analyzing and understanding a brief before implementation. Clear interpretation and planning significantly reduce rework during the design and development process.`,
     featured: false,
   },
@@ -118,11 +118,11 @@ The central design decision was to strictly adhere to predefined UI criteria der
     description:
       "A web platform that allows users to browse Indonesian recipes and upload their own recipes for public viewing.",
     objective:
-      "A web platform that allows users to browse Indonesian recipes and upload their own recipes for public viewing.",
+      "Build a functional full-stack web application as a group final project, emphasizing frontend consistency and client-side implementation within course constraints.",
     year: "2025",
     role: "Frontend Developer",
     stack: ["Next.js", "PostgreSQL", "TypeScript", "Tailwind CSS"],
-    liveUrl: "https://csp-project-final.vercel.app",
+    liveUrl: "https://recipeshare-project.vercel.app",
     context: `RecipeShare was developed as a group final project for a Client-Side Programming course. The primary constraints were focus on frontend implementation, limited project timeline, and no requirement for role-based access control or administration features.
 
 The project scope emphasized client-side functionality and UI consistency rather than backend complexity.`,
@@ -133,9 +133,9 @@ The system follows a simple read-and-write flow without moderation layers: users
 These tradeoffs were accepted to keep the project aligned with course scope and time constraints.
 
 The most important design decision was establishing clear UI criteria for typography and color usage early in development. This decision aimed to make the interface feel consistent and natural, despite being a group project with multiple contributors.`,
-    outcome: `The project was successfully completed and deployed as a functional web application. By defining visual rules upfront, UI fragmentation was reduced during implementation.`,
-    reflection: `This project highlighted the importance of careful environment and configuration setup early in development. Small misconfigurations can slow down collaboration and debugging later in the project lifecycle.`,
-    featured: false,
+    outcome: `Successfully completed and deployed as a functional web application. Defining visual rules upfront reduced UI fragmentation across multiple contributors.`,
+    reflection: `RecipeShare was my first real experience with the "messy middle" of group frontend work. It proved that while code style guides are helpful, a shared visual language is what actually prevents a project from looking like a patchwork quilt by the final week.`,
+    featured: true,
   },
 ];
 

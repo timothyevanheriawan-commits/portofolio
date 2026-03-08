@@ -8,7 +8,7 @@ import { motion as config } from '@/lib/motion'
 import { cn } from '@/lib/utils' // Assuming this is where your cn helper lives
 
 // ============================================
-// FADE — Section entrance
+// FADE - Section entrance
 // ============================================
 interface FadeProps {
     children: ReactNode
@@ -45,7 +45,7 @@ export function Fade({ children, delay = 0, className }: FadeProps) {
 }
 
 // ============================================
-// LINE — Draws once on view
+// LINE - Draws once on view
 // ============================================
 interface LineProps {
     className?: string
@@ -80,7 +80,7 @@ export function Line({ className }: LineProps) {
 }
 
 // ============================================
-// STATUS — Static dot
+// STATUS - Static dot
 // ============================================
 interface StatusProps {
     className?: string
@@ -93,7 +93,7 @@ export function Status({ className }: StatusProps) {
 }
 
 // ============================================
-// EXPAND — For collapsible content
+// EXPAND - For collapsible content
 // ============================================
 interface ExpandProps {
     children: ReactNode
