@@ -8,6 +8,7 @@ import { IntroLoader } from '@/components/layout/intro-loader'
 import { NoiseTexture } from '@/components/ui/noise-texture'
 import { ScrollLine } from '@/components/ui/scroll-line'
 import NextTopLoader from 'nextjs-toploader'
+import { siteConfig } from '@/lib/site-config'
 import './globals.css'
 
 const inter = Inter({
@@ -39,26 +40,26 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'Timothy Evan',
-    template: 'Timothy Evan / %s',
+    default: siteConfig.name,
+    template: `${siteConfig.name} / %s`,
   },
   description: 'A clinical approach to frontend architecture and data systems. Focused on clarity, structure, and functional logic.',
   keywords: ['Frontend Systems', 'Interface Architecture', 'Data Analytics', 'Swiss Rationalism', 'React', 'Next.js'],
-  authors: [{ name: 'Timothy Evan' }],
-  creator: 'Timothy Evan',
-  metadataBase: new URL('https://timothy-evan.vercel.app'),
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
+  metadataBase: new URL(siteConfig.url),
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://timothy-evan.vercel.app',
-    siteName: 'Timothy Evan / System Archive',
-    title: 'Timothy Evan - Frontend Systems & Data',
+    url: siteConfig.url,
+    siteName: siteConfig.siteName,
+    title: siteConfig.title,
     description: 'Digital systems developed with clinical precision.',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Timothy Evan / Digital Systems Archive' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: `${siteConfig.name} / Digital Systems Archive` }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Timothy Evan / Systems',
+    title: `${siteConfig.name} / Systems`,
     description: 'Frontend architecture and data-informed design.',
   },
   robots: {

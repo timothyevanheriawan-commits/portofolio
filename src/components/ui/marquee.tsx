@@ -33,7 +33,7 @@ export function Marquee() {
                         <span className="text-[9px] font-mono uppercase tracking-[0.3em] text-[#9F9F9F] px-6">
                             {item}
                         </span>
-                        <span className="w-1 h-1 rounded-full bg-[#7A1E1E] opacity-40 flex-shrink-0" />
+                        <span className="w-1 h-1 rounded-full bg-[#7A1E1E] opacity-40 shrink-0" />
                     </span>
                 ))}
             </motion.div>

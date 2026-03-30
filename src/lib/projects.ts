@@ -18,6 +18,16 @@ export const projects: Project[] = [
       "Framer Motion",
     ],
     liveUrl: "https://auraflow-os.vercel.app",
+    screenshots: [
+      {
+        src: "/projects/auraflow/auraflow-1-mockup.png",
+        alt: "AuraFlow overview dashboard showing net worth summary and recent activity",
+      },
+      {
+        src: "/projects/auraflow/auraflow-2-mockup.png",
+        alt: "AuraFlow transaction history with date-grouped ledger and export tools",
+      },
+    ],
     context: `AuraFlow originated from frustration with consumer finance apps that obscure data behind automation and opaque sync behavior. While spreadsheets offer control, they break down under frequent updates and multi-account tracking.
 
 The project targets users who prefer explicit data entry and predictable calculations, valuing transparency and responsiveness over convenience features.`,
@@ -49,6 +59,16 @@ Visually, the interface avoids translucent or layered effects in favor of solid 
       "Tailwind CSS",
     ],
     liveUrl: "https://vertex-inventory.vercel.app",
+    screenshots: [
+      {
+        src: "/projects/vertex/vertex-1-mockup.png",
+        alt: "Vertex command center dashboard showing risk analysis, priority actions, and category split",
+      },
+      {
+        src: "/projects/vertex/vertex-2-mockup.png",
+        alt: "Vertex inventory management table with stock health indicators and low-stock alerts",
+      },
+    ],
     context: `Vertex was built to address a common gap in small to mid-scale inventory systems: visibility without interpretability. Many tools present forecasts but obscure how those numbers are derived, making it difficult for operators to trust or adjust decisions.
 
 The dashboard is aimed at users who want to reason about inventory behavior directly, using historical signals rather than fully automated predictions.`,
@@ -73,6 +93,16 @@ The UI favors dense information layouts over whitespace-heavy designs. This incr
     role: "Data Analyst & Dashboard Developer",
     stack: ["Python", "Streamlit", "Pandas", "NLTK", "Plotly"],
     liveUrl: "https://bca-mobile-dashboard.streamlit.app",
+    screenshots: [
+      {
+        src: "/projects/bca/bca-1-mockup.png",
+        alt: "BCA Product Intelligence dashboard overview with complaint metrics and topic filters",
+      },
+      {
+        src: "/projects/bca/bca-2-mockup.png",
+        alt: "BCA sentiment trend chart showing complaint volume over time across categories",
+      },
+    ],
     context: `User reviews often contain high-signal feedback, but their volume and inconsistency make manual analysis impractical. This project explores how lightweight NLP techniques can surface dominant themes without complex machine learning pipelines.
 
 The dashboard is designed for product and UX teams who need fast directional insight rather than statistically exhaustive sentiment models.`,
@@ -97,6 +127,16 @@ The interface prioritizes clarity over customization, limiting user controls to 
     role: "UI/UX Developer",
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     liveUrl: "https://kurofest.vercel.app",
+    screenshots: [
+      {
+        src: "/projects/kurofest/kurofest-1-mockup.png",
+        alt: "KuroFest hero section with large kanji typography and event branding",
+      },
+      {
+        src: "/projects/kurofest/kurofest-2-mockup.png",
+        alt: "KuroFest special guests section with editorial card layout",
+      },
+    ],
     context: `KuroFest was built as a portfolio-focused project rather than a functional production system. The primary goals were to practice translating a creative brief into a UI system and to explore visual hierarchy, layout, and thematic consistency.
 
 The project was intentionally constrained to be read-only, with no backend, database, or dynamic functionality.`,
@@ -123,6 +163,16 @@ The central design decision was to strictly adhere to predefined UI criteria der
     role: "Frontend Developer",
     stack: ["Next.js", "PostgreSQL", "TypeScript", "Tailwind CSS"],
     liveUrl: "https://recipeshare-project.vercel.app",
+    screenshots: [
+      {
+        src: "/projects/recipeshare/recipeshare-1-mockup.png",
+        alt: "RecipeShare hero page with Indonesian food photography and navigation",
+      },
+      {
+        src: "/projects/recipeshare/recipeshare-2-mockup.png",
+        alt: "RecipeShare browse page with recipe grid, category filters, and search",
+      },
+    ],
     context: `RecipeShare was developed as a group final project for a Client-Side Programming course. The primary constraints were focus on frontend implementation, limited project timeline, and no requirement for role-based access control or administration features.
 
 The project scope emphasized client-side functionality and UI consistency rather than backend complexity.`,

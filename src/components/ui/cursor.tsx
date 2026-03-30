@@ -7,79 +7,103 @@ export default function Cursor() {
     const [isHovered, setIsHovered] = useState(false)
     const [isClicked, setIsClicked] = useState(false)
 
-    // Using useMotionValue for raw coordinates
     const cursorX = useMotionValue(-100)
     const cursorY = useMotionValue(-100)
 
-    // Spring physics for that "smooth" Swiss feel
-    const springConfig = { damping: 25, stiffness: 250 }
-    const edgeX = useSpring(cursorX, springConfig)
-    const edgeY = useSpring(cursorY, springConfig)
+    // Tight spring — responsive, not floaty
+    const springConfig = { damping: 40, stiffness: 600, mass: 0.4 }
+    const x = useSpring(cursorX, springConfig)
+    const y = useSpring(cursorY, springConfig)
 
     useEffect(() => {
-        const moveCursor = (e: MouseEvent) => {
+        const move = (e: MouseEvent) => {
             cursorX.set(e.clientX)
             cursorY.set(e.clientY)
         }
-
-        const handleMouseDown = () => setIsClicked(true)
-        const handleMouseUp = () => setIsClicked(false)
-
-        // Check if hovering over links/buttons
-        const handleMouseOver = (e: MouseEvent) => {
-            const target = e.target as HTMLElement
-            if (
-                target.tagName === 'A' ||
-                target.tagName === 'BUTTON' ||
-                target.closest('a') ||
-                target.closest('button')
-            ) {
-                setIsHovered(true)
-            } else {
-                setIsHovered(false)
-            }
+        const down = () => setIsClicked(true)
+        const up = () => setIsClicked(false)
+        const over = (e: MouseEvent) => {
+            const t = e.target as HTMLElement
+            setIsHovered(
+                t.tagName === 'A' ||
+                t.tagName === 'BUTTON' ||
+                !!t.closest('a') ||
+                !!t.closest('button') ||
+                window.getComputedStyle(t).cursor === 'pointer'
+            )
         }
 
-        window.addEventListener('mousemove', moveCursor)
-        window.addEventListener('mousedown', handleMouseDown)
-        window.addEventListener('mouseup', handleMouseUp)
-        window.addEventListener('mouseover', handleMouseOver)
-
+        window.addEventListener('mousemove', move)
+        window.addEventListener('mousedown', down)
+        window.addEventListener('mouseup', up)
+        window.addEventListener('mouseover', over)
         return () => {
-            window.removeEventListener('mousemove', moveCursor)
-            window.removeEventListener('mousedown', handleMouseDown)
-            window.removeEventListener('mouseup', handleMouseUp)
-            window.removeEventListener('mouseover', handleMouseOver)
+            window.removeEventListener('mousemove', move)
+            window.removeEventListener('mousedown', down)
+            window.removeEventListener('mouseup', up)
+            window.removeEventListener('mouseover', over)
         }
     }, [cursorX, cursorY])
 
+    // Crosshair arm length — grows on hover, shrinks on click
+    const armLen = isClicked ? 4 : isHovered ? 10 : 0
+    // Center dot size
+    const dotSize = isClicked ? 3 : isHovered ? 2 : 4
+
     return (
         <motion.div
+            className="fixed top-0 left-0 z-[--z-cursor] pointer-events-none hidden md:block"
             style={{
-                translateX: edgeX,
-                translateY: edgeY,
-                x: "-50%",
-                y: "-50%",
+                translateX: x,
+                translateY: y,
+                x: '-50%',
+                y: '-50%',
             }}
-            animate={{
-                width: isHovered ? 40 : 12,
-                height: isHovered ? 40 : 12,
-                scale: isClicked ? 1.3 : 1, // Slightly less aggressive scale
-                backgroundColor: isClicked ? '#7A1E1E' : isHovered ? 'rgba(26,26,26,0)' : '#1A1A1A',
-                border: isHovered ? '1px solid #1A1A1A' : '0px solid rgba(26, 26, 26, 0)',
-            }}
-            transition={{
-                type: 'spring',
-                damping: 20,
-                stiffness: 300,
-                mass: 0.5,
-                scale: {
-                    type: "spring",
-                    stiffness: 400,
-                    damping: 10 // Lower damping makes it "boing" or pulse more on click
-                }
-            }}
-            className="fixed top-0 left-0 z-(--z-cursor) pointer-events-none mix-blend-difference rounded-full hidden md:block"
-        />
+        >
+            {/* Center dot */}
+            <motion.div
+                className="absolute rounded-full bg-text-primary"
+                style={{ top: '50%', left: '50%' }}
+                animate={{
+                    width: dotSize,
+                    height: dotSize,
+                    x: '-50%',
+                    y: '-50%',
+                    backgroundColor: isHovered ? '#7A1E1E' : isClicked ? '#7A1E1E' : '#1A1A1A',
+                    opacity: isClicked ? 0.5 : 1,
+                }}
+                transition={{ type: 'spring', damping: 30, stiffness: 500, mass: 0.3 }}
+            />
+
+            {/* Crosshair arms — only appear on hover */}
+            {/* Top */}
+            <motion.div
+                className="absolute bg-accent"
+                style={{ left: '50%', bottom: '50%', width: '1px', x: '-50%' }}
+                animate={{ height: armLen, opacity: isHovered ? 0.7 : 0, y: isHovered ? -2 : 0 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 400 }}
+            />
+            {/* Bottom */}
+            <motion.div
+                className="absolute bg-accent"
+                style={{ left: '50%', top: '50%', width: '1px', x: '-50%' }}
+                animate={{ height: armLen, opacity: isHovered ? 0.7 : 0, y: isHovered ? 2 : 0 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 400 }}
+            />
+            {/* Left */}
+            <motion.div
+                className="absolute bg-accent"
+                style={{ right: '50%', top: '50%', height: '1px', y: '-50%' }}
+                animate={{ width: armLen, opacity: isHovered ? 0.7 : 0, x: isHovered ? -2 : 0 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 400 }}
+            />
+            {/* Right */}
+            <motion.div
+                className="absolute bg-accent"
+                style={{ left: '50%', top: '50%', height: '1px', y: '-50%' }}
+                animate={{ width: armLen, opacity: isHovered ? 0.7 : 0, x: isHovered ? 2 : 0 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 400 }}
+            />
+        </motion.div>
     )
 }

@@ -1,10 +1,12 @@
 // src/app/projects/[slug]/page.tsx
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Container } from '@/components/layout/container'
 import { getProject, getAllProjects } from '@/lib/projects'
 import { cn } from '@/lib/utils'
 import { Project } from '@/lib/types'
+import { CaseStudyNav } from '@/components/projects/case-study-nav'
 
 interface Props {
     params: Promise<{ slug: string }>
@@ -96,27 +98,63 @@ export default async function ProjectPage({ params }: Props) {
                 )}
             </div>
 
+            {/* Screenshots */}
+            {project.screenshots && project.screenshots.length > 0 && (
+                <div className="mb-20 md:mb-28">
+
+                    {/* Label row */}
+                    <div className="flex items-center gap-3 mb-5">
+                        <span className="w-5 h-px bg-[#7A1E1E]" />
+                        <span className="text-[8px] font-mono text-[#9F9F9F] uppercase tracking-[0.3em]">Preview</span>
+                        <span className="h-px flex-1 bg-[#E8E7E4]" />
+                        {project.liveUrl?.startsWith('http') && (
+                            <a
+                                href={project.liveUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[8px] font-mono text-[#9F9F9F] uppercase tracking-[0.25em] hover:text-[#7A1E1E] transition-colors duration-200"
+                            >
+                                Live ↗
+                            </a>
+                        )}
+                    </div>
+
+                    {/* Screenshots grid */}
+                    <div className={cn(
+                        "grid gap-2",
+                        project.screenshots.length > 1
+                            ? "grid-cols-1 md:grid-cols-[3fr_2fr]"
+                            : "grid-cols-1"
+                    )}>
+                        {project.screenshots.map((shot, i) => (
+                            <div key={i} className="flex flex-col gap-2">
+                                <div className="group relative overflow-hidden border border-[#E8E7E4]">
+                                    <Image
+                                        src={shot.src}
+                                        alt={shot.alt}
+                                        width={1200}
+                                        height={800}
+                                        className="w-full h-auto block transition-opacity duration-500 opacity-95 group-hover:opacity-100"
+                                        priority={i === 0}
+                                    />
+                                </div>
+                                <span className="text-[8px] font-mono text-[#BFBFBF] uppercase tracking-[0.2em] leading-relaxed">
+                                    {String(i + 1).padStart(2, '0')} — {shot.alt}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Separator */}
+                    <div className="h-px bg-[#E8E7E4] mt-10 md:mt-14" />
+                </div>
+            )}
+
             {/* Content grid */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
 
                 {/* Sticky sidebar */}
-                <aside className="hidden lg:block lg:col-span-3">
-                    <div className="sticky top-28 space-y-6">
-                        <div className="h-px bg-[#7A1E1E] w-5" />
-                        <nav className="flex flex-col gap-3">
-                            {['Context', 'Architecture', 'Tradeoffs', 'Outcome', 'Reflection'].map((s) => (
-                                <a
-                                    key={s}
-                                    href={`#${s.toLowerCase()}`}
-                                    className="group flex items-center gap-3 text-[11px] font-mono uppercase tracking-widest text-[#9F9F9F] hover:text-[#1A1A1A] transition-colors duration-200"
-                                >
-                                    <span className="w-0 h-px bg-[#7A1E1E] group-hover:w-4 transition-all duration-300" />
-                                    {s}
-                                </a>
-                            ))}
-                        </nav>
-                    </div>
-                </aside>
+                <CaseStudyNav />
 
                 {/* Sections */}
                 <div className="lg:col-span-9 space-y-20 md:space-y-28">

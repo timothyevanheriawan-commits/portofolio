@@ -1,17 +1,29 @@
 'use client'
 
-import { useState } from 'react'
+import { useCallback, useEffect, useState, Suspense } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { Container } from '@/components/layout/container'
 import { cn } from '@/lib/utils'
 import { getAllProjects } from '@/lib/projects'
 import { Fade, Expand } from '@/components/ui/motion'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import Link from 'next/link'
 
-export default function ProjectsPage() {
+function ProjectsContent() {
     const allProjects = getAllProjects()
-    const [expandedId, setExpandedId] = useState<string | null>(null)
+    const router = useRouter()
+    const searchParams = useSearchParams()
     const [hoveredId, setHoveredId] = useState<string | null>(null)
+
+    // Sync expandedId with ?open= query param — Back nav restores state
+    const expandedId = searchParams.get('open')
+
+    const setExpandedId = useCallback((slug: string | null) => {
+        const params = new URLSearchParams(searchParams.toString())
+        if (slug) params.set('open', slug)
+        else params.delete('open')
+        router.replace(`?${params.toString()}`, { scroll: false })
+    }, [router, searchParams])
 
     return (
         <Container className="py-20 md:py-24">
@@ -19,7 +31,7 @@ export default function ProjectsPage() {
             {/* Header */}
             <Fade>
                 <header className="mb-14">
-                    <h1 className="text-[32px] md:text-[48px] font-black tracking-[-0.04em] text-[#1A1A1A] mb-4"
+                    <h1 className="text-[32px] md:text-[44px] font-semibold tracking-[-0.03em] text-[#1A1A1A] mb-4"
                         style={{ lineHeight: 0.92 }}>
                         INDEX
                     </h1>
@@ -53,36 +65,6 @@ export default function ProjectsPage() {
                                 onMouseEnter={() => setHoveredId(project.slug)}
                                 onMouseLeave={() => setHoveredId(null)}
                             >
-                                {/* Row hover bg */}
-                                <div className={cn(
-                                    "absolute top-0 bottom-px -left-[50vw] -right-[50vw] transition-opacity duration-400 pointer-events-none z-0",
-                                    "bg-[linear-gradient(to_right,transparent_0%,#F5F4F2_8%,#F5F4F2_92%,transparent_100%)]",
-                                    isExpanded ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-                                )} />
-
-                                {/* Ghost index number — appears on hover behind the row */}
-                                <AnimatePresence>
-                                    {(isHovered || isExpanded) && (
-                                        <motion.span
-                                            aria-hidden
-                                            className="absolute right-16 top-1/2 -translate-y-1/2 font-black tabular-nums leading-none pointer-events-none select-none z-0"
-                                            style={{
-                                                fontSize: 'clamp(60px, 8vw, 100px)',
-                                                color: 'transparent',
-                                                WebkitTextStroke: '1px rgba(0,0,0,0.06)',
-                                                letterSpacing: '-0.05em',
-                                            }}
-                                            initial={{ opacity: 0, x: 12 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            exit={{ opacity: 0, x: 12 }}
-                                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                                        >
-                                            {String(index + 1).padStart(2, '0')}
-                                        </motion.span>
-                                    )}
-                                </AnimatePresence>
-
-                                {/* Bottom maroon accent when expanded — doesn't clash with index number */}
                                 <div className={cn(
                                     'absolute bottom-0 left-0 right-0 h-px bg-[#7A1E1E] transition-opacity duration-300',
                                     isExpanded ? 'opacity-100' : 'opacity-0'
@@ -104,24 +86,33 @@ export default function ProjectsPage() {
                                                     {String(index + 1).padStart(2, '0')}
                                                 </span>
 
-                                                <div className="flex-1 min-w-0">
-                                                    {/* Always-visible meta — year + role + stack peek */}
-                                                    <div className="flex items-center gap-2 mb-3 md:mb-2">
+                                                {/* ... inside the map function ... */}
+                                                <div className="flex-1 min-w-0"> {/* min-w-0 is crucial for flex children to allow shrinking */}
+
+                                                    {/* Metadata Row: Added wrap and overflow hidden */}
+                                                    <div className="flex flex-wrap items-center gap-x-2 md:gap-x-3 mb-3 md:mb-2 overflow-hidden">
                                                         <span className="shrink-0 text-[9px] font-mono text-[#9F9F9F] uppercase tracking-widest tabular-nums">
                                                             {project.year}
                                                         </span>
+
                                                         <span className="shrink-0 text-[#7A1E1E] text-[9px] font-mono leading-none">—</span>
-                                                        <span className="shrink-0 text-[9px] font-mono text-[#9F9F9F] uppercase tracking-widest">
+
+                                                        {/* Role: Allow truncation if it's too long on mobile */}
+                                                        <span className="truncate text-[9px] font-mono text-[#9F9F9F] uppercase tracking-widest">
                                                             {project.role.replace(/\s*\(.*?\)/, '').replace('&', '+')}
                                                         </span>
+
                                                         <span className="shrink-0 text-[#E8E7E4] text-[9px] font-mono leading-none">·</span>
-                                                        <span className="shrink-0 text-[9px] font-mono text-[#BFBFBF] uppercase tracking-wider">
+
+                                                        {/* Stack: Limit to first 2 items and prevent overflow */}
+                                                        <span className="truncate text-[9px] font-mono text-[#BFBFBF] uppercase tracking-wider">
                                                             {project.stack.slice(0, 2).join(' · ')}
                                                         </span>
                                                     </div>
 
+                                                    {/* Title: Ensure break-words for long titles on small screens */}
                                                     <h2 className={cn(
-                                                        "text-[24px] md:text-[36px] font-bold tracking-[-0.04em] text-[#1A1A1A] transition-all duration-500 leading-tight",
+                                                        "text-[24px] md:text-[36px] font-semibold tracking-[-0.03em] text-[#1A1A1A] transition-all duration-500 leading-tight wrap-break-word",
                                                         !isExpanded && "group-hover:translate-x-2"
                                                     )}>
                                                         {project.title}
@@ -129,15 +120,15 @@ export default function ProjectsPage() {
                                                 </div>
                                             </div>
 
-                                            <div className="hidden md:flex md:col-span-4 h-full items-center justify-end pr-2">
-                                                <div className="flex items-center gap-6">
+                                            {/* Toggle — visible on ALL breakpoints */}
+                                            <div className="md:col-span-4 h-full flex items-center justify-end pr-2 mt-3 md:mt-0">
+                                                <div className="flex items-center gap-3">
                                                     <span className={cn(
                                                         "text-[9px] font-mono uppercase tracking-widest transition-all duration-300",
                                                         isExpanded ? "text-[#7A1E1E]" : "text-[#BFBFBF] group-hover:text-[#6F6F6F]"
                                                     )}>
                                                         {isExpanded ? 'Close' : 'Details'}
                                                     </span>
-                                                    {/* Animated +/× toggle */}
                                                     <div className="relative w-4 h-4 flex items-center justify-center">
                                                         <span className={cn(
                                                             "absolute block h-px w-4 bg-current transition-all duration-300",
@@ -167,7 +158,7 @@ export default function ProjectsPage() {
                                                         </span>
                                                     ))}
                                                 </div>
-                                                <div className="flex gap-4 md:hidden border-t border-[#E8E7E4] pt-6 mt-6">
+                                                <div className="flex gap-4 border-t border-[#E8E7E4] pt-6 mt-6 md:hidden">
                                                     <Link href={`/projects/${project.slug}`}
                                                         className="text-[11px] font-mono uppercase tracking-widest text-[#7A1E1E] flex items-center gap-2">
                                                         Case Study <span>→</span>
@@ -200,3 +191,23 @@ export default function ProjectsPage() {
         </Container>
     )
 }
+
+export default function ProjectsPage() {
+    return (
+        <Suspense fallback={
+            <Container className="py-20 md:py-24">
+                <div className="animate-pulse">
+                    <div className="h-12 w-32 bg-gray-200 mb-4" />
+                    <div className="h-4 w-64 bg-gray-200 mb-14" />
+                    <div className="space-y-8">
+                        {[1, 2, 3].map((i) => (
+                            <div key={i} className="h-24 bg-gray-100 rounded" />
+                        ))}
+                    </div>
+                </div>
+            </Container>
+        }>
+            <ProjectsContent />
+        </Suspense>
+    )
+}

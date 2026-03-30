@@ -1,39 +1,85 @@
 'use client'
 
+import { useState } from 'react'
 import { Fade, Line } from '@/components/ui/motion'
+import { motion, AnimatePresence } from 'framer-motion'
+import { siteConfig } from '@/lib/site-config'
 
 const contactLinks = [
     {
         label: 'Email',
-        value: 'timothy.evan.heriawan@gmail.com',
-        href: 'mailto:timothy.evan.heriawan@gmail.com',
+        value: siteConfig.email,
+        href: `mailto:${siteConfig.email}`,
+        copyable: true,
     },
     {
         label: 'GitHub',
-        value: 'github.com/timothyevanheriawan-commits',
-        href: 'https://github.com/timothyevanheriawan-commits',
+        value: `github.com/${siteConfig.githubHandle}`,
+        href: siteConfig.github,
+        copyable: false,
     },
     {
         label: 'LinkedIn',
-        value: 'linkedin.com/in/timothy-evan-heriawan',
-        href: 'https://linkedin.com/in/timothy-evan-heriawan/',
+        value: `linkedin.com/in/${siteConfig.linkedinHandle}`,
+        href: siteConfig.linkedin,
+        copyable: false,
     },
 ]
 
+type FormState = 'idle' | 'loading' | 'success' | 'error'
+
 export function ContactSection() {
+    const [formState, setFormState] = useState<FormState>('idle')
+    const [values, setValues] = useState({ name: '', email: '', message: '' })
+    const [focused, setFocused] = useState<string | null>(null)
+    const [copied, setCopied] = useState(false)
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        setFormState('loading')
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(values),
+            })
+            if (!res.ok) throw new Error()
+            setFormState('success')
+            setValues({ name: '', email: '', message: '' })
+        } catch {
+            setFormState('error')
+        }
+    }
+
+    async function handleCopy(e: React.MouseEvent, value: string) {
+        e.preventDefault()
+        try {
+            await navigator.clipboard.writeText(value)
+            setCopied(true)
+            setTimeout(() => setCopied(false), 2000)
+        } catch {
+            window.location.href = `mailto:${value}`
+        }
+    }
+
+    const inputBase =
+        'w-full bg-transparent border-b border-[#E8E7E4] py-3 text-[14px] text-[#1A1A1A] placeholder:text-[#BFBFBF] outline-none transition-colors duration-300 font-[var(--font-inter)] resize-none'
+
+    const labelBase =
+        'block text-[9px] font-mono uppercase tracking-[0.3em] mb-2 transition-colors duration-300'
+
     return (
         <section className="py-16 md:py-24 lg:py-32">
             <Line />
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-0 mt-10 md:mt-16">
 
-                {/* ━━ LEFT: HEADER + MESSAGE ━━ */}
+                {/* LEFT: HEADER + CHANNELS */}
                 <div className="md:col-span-5 pr-6 md:pr-16 mb-12 md:mb-0">
 
-                    {/* Eyebrow */}
                     <Fade delay={0}>
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-0 mt-8 md:mt-12 mb-12 md:mb-16">
-                            <div className="md:col-span-8 flex flex-col gap-2">
+                        <div className="mt-8 md:mt-12 mb-12 md:mb-16">
+                            <div className="flex flex-col gap-2">
                                 <div className="flex items-center gap-2 text-[#7A1E1E] font-mono text-[11px] tracking-[0.4em] font-medium">
                                     <span>INDEX</span>
                                     <span className="text-[#E8E7E4]">/</span>
@@ -46,10 +92,8 @@ export function ContactSection() {
                         </div>
                     </Fade>
 
-
-                    {/* Brief */}
-                    <Fade delay={0.3}>
-                        <div className="grid grid-cols-[auto_1fr] gap-x-4 items-start max-w-sm">
+                    <Fade delay={0.2}>
+                        <div className="grid grid-cols-[auto_1fr] gap-x-4 items-start max-w-sm mb-12">
                             <span className="text-[9px] font-mono uppercase tracking-[0.3em] text-[#9F9F9F] pt-[4px]">
                                 Re:
                             </span>
@@ -60,38 +104,196 @@ export function ContactSection() {
                         </div>
                     </Fade>
 
-                </div>
-
-                {/* ━━ RIGHT: CONTACT LINKS ━━ */}
-                <div className="md:col-span-7 md:border-l border-[#E8E7E4] pl-0 md:pl-16">
-
-                    <Fade delay={0.4}>
-                        <span className="block text-[9px] font-mono uppercase tracking-[0.3em] text-[#9F9F9F] mb-6">
+                    {/* Channel links */}
+                    <Fade delay={0.3}>
+                        <span className="block text-[9px] font-mono uppercase tracking-[0.3em] text-[#9F9F9F] mb-4">
                             Channels
                         </span>
-                    </Fade>
-
-                    <div className="flex flex-col">
-                        {contactLinks.map((link, i) => (
-                            <Fade key={link.label} delay={0.45 + i * 0.08}>
-                                <a
-                                    href={link.href}
-                                    target={link.href.startsWith('http') ? '_blank' : undefined}
-                                    rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                                    className="group grid grid-cols-[1fr_auto] items-center py-5 border-b border-[#E8E7E4] hover:border-[#1A1A1A] transition-colors duration-300"
-                                >
-                                    <div className="flex flex-col gap-1 min-w-0">
-                                        <span className="text-[9px] font-mono text-[#9F9F9F] uppercase tracking-[0.3em] group-hover:text-[#7A1E1E] transition-colors duration-300">
-                                            {link.label}
+                        <div className="flex flex-col">
+                            {contactLinks.map((link, i) => (
+                                link.copyable ? (
+                                    <button
+                                        key={link.label}
+                                        onClick={(e) => handleCopy(e, link.value)}
+                                        className="group grid grid-cols-[1fr_auto] items-center py-4 border-b border-[#E8E7E4] hover:border-[#1A1A1A] transition-colors duration-300 text-left w-full"
+                                        style={{ animationDelay: `${0.35 + i * 0.08}s` }}
+                                    >
+                                        <div className="flex flex-col gap-1 min-w-0">
+                                            <span className="text-[9px] font-mono text-[#9F9F9F] uppercase tracking-[0.3em] group-hover:text-[#7A1E1E] transition-colors duration-300">
+                                                {link.label}
+                                            </span>
+                                            <span className="text-[13px] md:text-[14px] text-[#4A4A4A] group-hover:text-[#1A1A1A] transition-colors duration-300 break-all">
+                                                {link.value}
+                                            </span>
+                                        </div>
+                                        <span className="text-[8px] font-mono uppercase tracking-[0.25em] text-[#BFBFBF] group-hover:text-[#7A1E1E] transition-colors duration-300 ml-4 min-w-[48px] text-right">
+                                            {copied ? 'Copied ✓' : 'Copy'}
                                         </span>
-                                        <span className="text-[14px] md:text-[15px] text-[#4A4A4A] group-hover:text-[#1A1A1A] transition-colors duration-300 break-all">
-                                            {link.value}
+                                    </button>
+                                ) : (
+                                    <a
+                                        key={link.label}
+                                        href={link.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="group grid grid-cols-[1fr_auto] items-center py-4 border-b border-[#E8E7E4] hover:border-[#1A1A1A] transition-colors duration-300"
+                                        style={{ animationDelay: `${0.35 + i * 0.08}s` }}
+                                    >
+                                        <div className="flex flex-col gap-1 min-w-0">
+                                            <span className="text-[9px] font-mono text-[#9F9F9F] uppercase tracking-[0.3em] group-hover:text-[#7A1E1E] transition-colors duration-300">
+                                                {link.label}
+                                            </span>
+                                            <span className="text-[13px] md:text-[14px] text-[#4A4A4A] group-hover:text-[#1A1A1A] transition-colors duration-300 break-all">
+                                                {link.value}
+                                            </span>
+                                        </div>
+                                        <span className="text-[10px] font-mono text-[#BFBFBF] group-hover:text-[#7A1E1E] transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ml-4">
+                                            ↗
+                                        </span>
+                                    </a>
+                                )
+                            ))}
+                        </div>
+                    </Fade>
+                </div>
+
+                {/* RIGHT: FORM */}
+                <div className="md:col-span-7 md:border-l border-[#E8E7E4] pl-0 md:pl-16">
+
+                    <Fade delay={0.35}>
+                        <span className="block text-[9px] font-mono uppercase tracking-[0.3em] text-[#9F9F9F] mb-8">
+                            Send a Message
+                        </span>
+
+                        <AnimatePresence mode="wait">
+                            {formState === 'success' ? (
+                                <motion.div
+                                    key="success"
+                                    initial={{ opacity: 0, y: 8 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -8 }}
+                                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                                    className="py-16 flex flex-col gap-4"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <span className="h-px w-5 bg-[#7A1E1E]" />
+                                        <span className="text-[9px] font-mono uppercase tracking-[0.3em] text-[#7A1E1E]">
+                                            Transmitted
                                         </span>
                                     </div>
-                                </a>
-                            </Fade>
-                        ))}
-                    </div>
+                                    <p className="text-[15px] text-[#4A4A4A] leading-[1.65] max-w-[36ch]">
+                                        Message received. I'll get back to you as soon as I can.
+                                    </p>
+                                    <button
+                                        onClick={() => setFormState('idle')}
+                                        className="mt-4 self-start text-[10px] font-mono uppercase tracking-widest text-[#9F9F9F] hover:text-[#1A1A1A] transition-colors duration-300"
+                                    >
+                                        Send another →
+                                    </button>
+                                </motion.div>
+                            ) : (
+                                <motion.form
+                                    key="form"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    onSubmit={handleSubmit}
+                                    className="flex flex-col gap-8"
+                                >
+                                    {/* Name */}
+                                    <div>
+                                        <label htmlFor="name" className={`${labelBase} ${focused === 'name' ? 'text-[#7A1E1E]' : 'text-[#9F9F9F]'}`}>
+                                            Name
+                                        </label>
+                                        <input
+                                            id="name" type="text" required placeholder="Your name"
+                                            value={values.name}
+                                            onChange={e => setValues(v => ({ ...v, name: e.target.value }))}
+                                            onFocus={() => setFocused('name')}
+                                            onBlur={() => setFocused(null)}
+                                            className={`${inputBase} ${focused === 'name' ? 'border-[#1A1A1A]' : ''}`}
+                                        />
+                                    </div>
+
+                                    {/* Email */}
+                                    <div>
+                                        <label htmlFor="email" className={`${labelBase} ${focused === 'email' ? 'text-[#7A1E1E]' : 'text-[#9F9F9F]'}`}>
+                                            Email
+                                        </label>
+                                        <input
+                                            id="email" type="email" required placeholder="your@email.com"
+                                            value={values.email}
+                                            onChange={e => setValues(v => ({ ...v, email: e.target.value }))}
+                                            onFocus={() => setFocused('email')}
+                                            onBlur={() => setFocused(null)}
+                                            className={`${inputBase} ${focused === 'email' ? 'border-[#1A1A1A]' : ''}`}
+                                        />
+                                    </div>
+
+                                    {/* Message */}
+                                    <div>
+                                        <label htmlFor="message" className={`${labelBase} ${focused === 'message' ? 'text-[#7A1E1E]' : 'text-[#9F9F9F]'}`}>
+                                            Message
+                                        </label>
+                                        <textarea
+                                            id="message" required rows={5} placeholder="What's on your mind?"
+                                            value={values.message}
+                                            onChange={e => setValues(v => ({ ...v, message: e.target.value }))}
+                                            onFocus={() => setFocused('message')}
+                                            onBlur={() => setFocused(null)}
+                                            className={`${inputBase} ${focused === 'message' ? 'border-[#1A1A1A]' : ''}`}
+                                        />
+                                    </div>
+
+                                    <AnimatePresence>
+                                        {formState === 'error' && (
+                                            <motion.p
+                                                initial={{ opacity: 0, y: 4 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0 }}
+                                                className="text-[11px] font-mono text-[#7A1E1E] uppercase tracking-widest -mt-4"
+                                            >
+                                                Something went wrong. Try emailing directly.
+                                            </motion.p>
+                                        )}
+                                    </AnimatePresence>
+
+                                    <div className="flex items-center gap-6">
+                                        <button
+                                            type="submit"
+                                            disabled={formState === 'loading'}
+                                            className="group relative inline-flex items-center gap-3 text-[10px] font-mono uppercase tracking-widest text-[#F7F7F5] bg-[#1A1A1A] px-6 py-3 hover:bg-[#7A1E1E] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        >
+                                            {formState === 'loading' ? (
+                                                <>
+                                                    <span className="inline-flex gap-1">
+                                                        {[0, 1, 2].map(i => (
+                                                            <motion.span
+                                                                key={i}
+                                                                className="block w-1 h-1 rounded-full bg-[#F7F7F5]"
+                                                                animate={{ opacity: [0.3, 1, 0.3] }}
+                                                                transition={{ duration: 0.9, repeat: Infinity, delay: i * 0.2 }}
+                                                            />
+                                                        ))}
+                                                    </span>
+                                                    Sending
+                                                </>
+                                            ) : (
+                                                <>
+                                                    Send Message
+                                                    <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                                                </>
+                                            )}
+                                        </button>
+
+                                        <span className="text-[9px] font-mono text-[#BFBFBF] uppercase tracking-widest">
+                                            or email directly ↑
+                                        </span>
+                                    </div>
+                                </motion.form>
+                            )}
+                        </AnimatePresence>
+                    </Fade>
                 </div>
             </div>
         </section>

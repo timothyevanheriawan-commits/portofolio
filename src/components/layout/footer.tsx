@@ -2,6 +2,7 @@
 
 import { Container } from './container'
 import { useMounted } from '@/hooks/use-mounted'
+import { siteConfig } from '@/lib/site-config'
 
 export function Footer() {
     const mounted = useMounted()
@@ -22,7 +23,7 @@ export function Footer() {
 
                         {/* Link removed, but keeping the color transition on footer hover */}
                         <span className="transition-colors duration-300 group-hover/footer:text-[#1A1A1A] text-[#9F9F9F]">
-                            Timothy Evan
+                            {siteConfig.name}
                         </span>
                     </div>
 
@@ -31,7 +32,7 @@ export function Footer() {
                         {[
                             { label: 'Work', href: '/projects' },
                             { label: 'About', href: '/about' },
-                            { label: 'Source', href: 'https://github.com/timothyevanheriawan-commits/portofolio' }
+                            { label: 'Source', href: siteConfig.source }
                         ].map((link) => (
                             <a
                                 key={link.label}

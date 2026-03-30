@@ -2,16 +2,18 @@
 
 import { Container } from '@/components/layout/container'
 import { Fade, Line } from '@/components/ui/motion'
+import { siteConfig } from '@/lib/site-config'
 
 export default function AboutPage() {
     return (
         <Container className="py-16 md:py-24">
-            <header className="mb-12 md:mb-16">
-                <Fade delay={0}>
-                    <h1 className="text-[32px] md:text-[44px] font-semibold tracking-[-0.03em] text-[#1A1A1A] mb-4">
-                        About
-                    </h1>
-                </Fade>
+            <header className="mb-14">
+                <h1
+                    className="text-[32px] md:text-[48px] font-black tracking-[-0.04em] text-[#1A1A1A] mb-4"
+                    style={{ lineHeight: 0.92 }}
+                >
+                    PROFILE
+                </h1>
             </header>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
@@ -21,12 +23,10 @@ export default function AboutPage() {
                         <section className="max-w-[52ch]">
                             <p className="text-[15px] md:text-[16px] text-[#4A4A4A] leading-[1.7] mb-6">
                                 4th-year Information Systems student at Petra Christian University.
-                                Building interfaces that communicate clearly and tools
-                                that reduce friction.
+                                Building interfaces that communicate clearly and tools that reduce friction.
                             </p>
-                            <p className="text-[15px] md:text-[16px] text-[#4A4A4A] leading-[1.7]">
-                                I learned by building, not tutorials. Implementation first,
-                                abstraction second.
+                            <p className="text-[15px] md:text-[16px] text-[#4A4A4A] leading-[1.7] mb-6">
+                                I learned by building, not tutorials. Implementation first, abstraction second.
                             </p>
                         </section>
                     </Fade>
@@ -166,9 +166,9 @@ export default function AboutPage() {
                             </h3>
                             <div className="flex flex-col gap-4">
                                 {[
-                                    { label: 'Email', value: 'timothy.evan.heriawan@gmail.com', href: 'mailto:timothy.evan.heriawan@gmail.com' },
-                                    { label: 'GitHub', value: 'timothyevanheriawan-commits', href: 'https://github.com/timothyevanheriawan-commits' },
-                                    { label: 'LinkedIn', value: 'timothy-evan-heriawan', href: 'https://linkedin.com/in/timothy-evan-heriawan/' }
+                                    { label: 'Email', value: siteConfig.email, href: `mailto:${siteConfig.email}` },
+                                    { label: 'GitHub', value: siteConfig.githubHandle, href: siteConfig.github },
+                                    { label: 'LinkedIn', value: siteConfig.linkedinHandle, href: siteConfig.linkedin }
                                 ].map((link) => (
                                     <div key={link.label} className="flex flex-col">
                                         <span className="text-[9px] font-mono text-[#BFBFBF] uppercase mb-1">{link.label}</span>
@@ -192,6 +192,20 @@ export default function AboutPage() {
                             <p className="text-[13px] text-[#6F6F6F] leading-relaxed">
                                 Open to internships and entry-level positions for 2026.
                             </p>
+                        </div>
+
+                        <div className="pt-8 border-t border-[#E8E7E4]">
+                            <h3 className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest mb-4">
+                                Resume
+                            </h3>
+                            <a
+                                href="/resume.pdf"
+                                download="Timothy-Evan-Resume.pdf"
+                                className="group inline-flex items-center gap-3 text-[10px] font-mono uppercase tracking-widest text-[#F7F7F5] bg-[#1A1A1A] px-5 py-2.5 hover:bg-[#7A1E1E] transition-colors duration-300 w-full justify-between"
+                            >
+                                <span>Download CV</span>
+                                <span className="transition-transform duration-300 group-hover:translate-y-0.5">↓</span>
+                            </a>
                         </div>
                         <div className="pt-8 border-t border-[#E8E7E4]">
                             <h3 className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest mb-6">

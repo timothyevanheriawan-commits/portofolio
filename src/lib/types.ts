@@ -8,6 +8,7 @@ export interface Project {
   stack: string[];
   repository?: string;
   liveUrl?: string;
+  screenshots?: { src: string; alt: string }[];
   context: string;
   architecture: string;
   tradeoffs: string;
