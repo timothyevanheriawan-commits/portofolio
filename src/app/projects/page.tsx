@@ -13,7 +13,6 @@ function ProjectsContent() {
     const allProjects = getAllProjects()
     const router = useRouter()
     const searchParams = useSearchParams()
-    const [hoveredId, setHoveredId] = useState<string | null>(null)
 
     // Sync expandedId with ?open= query param — Back nav restores state
     const expandedId = searchParams.get('open')
@@ -59,11 +58,7 @@ function ProjectsContent() {
                     
                     return (
                       <Fade key={project.slug} delay={index * 0.06}>
-                        <article
-                          className="border-b border-[#E8E7E4] group relative"
-                          onMouseEnter={() => setHoveredId(project.slug)}
-                          onMouseLeave={() => setHoveredId(null)}
-                        >
+                        <article className="border-b border-[#E8E7E4] group relative">
                           <div
                             className={cn(
                               "absolute bottom-0 left-0 right-0 h-px bg-[#7A1E1E] transition-opacity duration-300",
@@ -78,7 +73,7 @@ function ProjectsContent() {
                               }
                               aria-expanded={isExpanded}
                               aria-controls={`project-details-${project.slug}`}
-                              className="w-full py-6 md:py-9 text-left"
+                              className="w-full py-6 md:py-9 text-left focus-visible:outline-none focus-visible:bg-[#7A1E1E]/[0.03]"
                             >
                               <div className="grid grid-cols-1 md:grid-cols-12 gap-0 items-center">
                                 <div className="md:col-span-8 flex items-baseline gap-4 md:gap-8">

@@ -187,6 +187,75 @@ The most important design decision was establishing clear UI criteria for typogr
     reflection: `RecipeShare was my first real experience with the "messy middle" of group frontend work. It proved that while code style guides are helpful, a shared visual language is what actually prevents a project from looking like a patchwork quilt by the final week.`,
     featured: true,
   },
+  {
+    slug: "atlas-prms",
+    title: "Atlas",
+    description:
+      "A personal records management system disguised as enterprise software, built to manage original character headcanons with the density and bureaucracy of real institutional tools.",
+    objective:
+      "Explore how far a personal creative tool can be pushed to feel like software that has existed for years inside a company, rather than something built for a single hobbyist.",
+    year: "2026",
+    role: "Full-Stack Developer (Personal Project)",
+    stack: [
+      "TypeScript",
+      "Next.js",
+      "Supabase",
+      "Tailwind CSS v4",
+      "shadcn/ui",
+      "Zustand",
+      "TanStack Table",
+      "Tiptap",
+    ],
+    liveUrl: "https://atlas-prms.vercel.app/",
+    screenshots: [
+      {
+        src: "/projects/atlas/atlas-1-mockup.png",
+        alt: "Atlas PRMS workspace showing sidebar navigation, record list, and dense enterprise layout",
+      },
+    ],
+    context: `Atlas PRMS started as a personal tool for organizing original character headcanons, but the more interesting problem turned out to be disguise, not data modeling. Most personal organization tools look like personal organization tools: friendly, colorful, forgiving. Atlas set out to look like something else entirely — internal software a company has maintained and patched for years.
+
+The subject matter is deliberately playful; the execution is not. Fixed modules (General Information, Behavioral Analysis, Timeline, Preferences, Associations, Attachments, Internal Notes) replace user-created categories, reinforcing the idea that this is a system with a schema, not a notebook with a template.`,
+    architecture: `The application is built on Next.js and Supabase, with authentication gating a separate protected workspace from a public marketing surface. A desktop-inspired workspace — sidebar, toolbar, dense record list, and multi-tab editor — forms the core of the product, backed by a Zustand store for tab and editor state.
+
+Record content uses Tiptap for structured rich text, while TanStack Table drives the list and log views where density and sortability matter more than visual flourish. Activity logs were deliberately redesigned away from a chat-style feed toward a tabular, timestamped audit-log format, since chat bubbles read as consumer software no matter how the rest of the UI is styled.`,
+    tradeoffs: `The public landing page was intentionally deprioritized relative to the internal workspace, which created a visible inconsistency: the workspace reads as enterprise software, while the landing page still resembles a modern SaaS marketing site. This was an acceptable tradeoff during the build phase, since the workspace is what sells the concept, but it's flagged as the clearest remaining gap.
+
+Atlas also currently lacks the institutional "paper trail" that makes internal software feel aged rather than freshly built — release notes, a version archive, an administrator manual, legacy terminology. Building the functional core first was prioritized over backfilling a fictional product history, on the reasoning that credibility work only matters once the underlying system is solid.`,
+    outcome: `The result is a fully deployed, authenticated application with a convincing desktop-style workspace, structured record management (create/edit/delete/organize), a shared component library (tables, forms, toolbars, settings, confirmation dialogs), and enterprise-style activity logging.`,
+    reflection: `Atlas taught me that "enterprise feel" isn't a color palette or a font choice — it's bureaucracy simulated convincingly. The workspace convinced people the moment the activity log stopped looking like a chat feed and started looking like an audit trail. The lesson wasn't about UI polish; it was about which details signal "this software has a history" versus "this software was built yesterday."`,
+    featured: true,
+  },
+  {
+    slug: "10-3-1",
+    title: "10-3-1",
+    description:
+      "A daily math puzzle game where players combine three number tiles in sequence to hit a target value, with order and operator rules that reward logical deduction over arithmetic speed.",
+    objective:
+      "Design a small, replayable daily puzzle with a rule set simple enough to learn in seconds but deep enough to require genuine combinatorial thinking to fully solve.",
+    year: "2026",
+    role: "Solo Developer & Designer",
+    stack: ["TypeScript", "Next.js", "Tailwind CSS"],
+    liveUrl: "https://10-3-1-game.vercel.app/",
+    screenshots: [
+      {
+        src: "/projects/10-3-1/10-3-1-1-mockup.png",
+        alt: "10-3-1 gameplay screen showing target number and selectable tiles",
+      },
+    ],
+    context: `10-3-1 grew out of an interest in constraint-based puzzle mechanics: games like Wordle succeed not because the mechanic is complex, but because the rule set is small enough to hold entirely in your head while still producing genuine difficulty.
+
+The core twist — that the first tile's operator is discarded and order changes the outcome — turns a simple arithmetic game into a small combinatorics problem, without requiring the player to understand combinatorics to enjoy it.`,
+    architecture: `The game is built as a lightweight Next.js application with all puzzle logic — tile generation, operator evaluation with standard order of operations, and solution-space enumeration — computed client-side. A daily puzzle mode and a random mode share the same underlying combination engine, with statistics (streaks, win rate, average hints) tracked locally per player.
+
+The visual language leans on a restrained East Asian typographic motif, pairing kanji numerals with a muted paper-like background to distinguish it from typical bright, gamified puzzle UIs.`,
+    tradeoffs: `The game deliberately requires players to find every valid combination to register a full win, rather than stopping at the first correct answer. This raises the difficulty and average session length, but was chosen because "solve it once and move on" undersells the puzzle's actual depth.
+
+No backend or account system was built for this project; all progress and stats are local to the device. This keeps the game lightweight and fast to load, at the cost of cross-device continuity.`,
+    outcome: `The finished game supports daily and random puzzle modes, in-game hints, a solutions viewer, persistent stats tracking, and a shareable result summary similar in spirit to other daily puzzle games.`,
+    reflection: `10-3-1 was a good reminder that constraint is a design tool, not a limitation. The entire game is three tiles and four operators, but requiring players to find every solution — not just one — was the single decision that turned a quick diversion into something people actually return to daily.`,
+    featured: false,
+  },
 ];
 
 export function getProject(slug: string): Project | undefined {
