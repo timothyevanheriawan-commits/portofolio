@@ -144,7 +144,7 @@ export function Header() {
                       <NextLink
                         key={item.href}
                         href={item.href}
-                        className="relative px-7 h-full flex items-center border-r border-[#E8E7E4] group overflow-hidden focus-visible:outline-none focus-visible:bg-[#7A1E1E]/5"
+                        className="group flex items-center justify-between py-6 border-b border-[#E8E7E4] focus-visible:outline-none focus-visible:bg-[#7A1E1E]/5"
                       >
                         {/* Index marker — fades in on hover */}
                         <span className="absolute top-1.5 left-2 text-[6px] font-mono text-[#7A1E1E] opacity-0 group-hover:opacity-60 transition-opacity duration-300">
@@ -251,7 +251,7 @@ export function Header() {
               className="fixed inset-0 z-40 md:hidden bg-[#F7F7F5]"
             >
               <div className="h-full pt-20 pb-8 px-6 flex flex-col justify-between w-full max-w-md mx-auto">
-                <nav className="relative px-7 h-full flex items-center border-r border-[#E8E7E4] group overflow-hidden focus-visible:outline-none focus-visible:bg-[#7A1E1E]/5">
+                <nav className="relative">
                   <span className="block text-[9px] font-mono uppercase tracking-[0.3em] text-[#BFBFBF] mb-4">
                     Navigate
                   </span>
@@ -270,7 +270,7 @@ export function Header() {
                         <NextLink
                           href={item.href}
                           onClick={() => setMobileMenuOpen(false)}
-                          className="relative px-7 h-full flex items-center border-r border-[#E8E7E4] group overflow-hidden focus-visible:outline-none focus-visible:bg-[#7A1E1E]/5"
+                          className="group flex items-center justify-between py-6 border-b border-[#E8E7E4] focus-visible:outline-none focus-visible:bg-[#7A1E1E]/5"
                         >
                           <div className="flex items-baseline gap-5">
                             <span className="text-[10px] font-mono tabular-nums text-[#BFBFBF] group-hover:text-[#7A1E1E] transition-colors">
