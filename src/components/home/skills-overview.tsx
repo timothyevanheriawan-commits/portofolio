@@ -40,68 +40,68 @@ function DisciplineRow({
     const inView = useInView(ref, { once: true, margin: '-60px' })
 
     return (
-        <motion.div
-            ref={ref}
-            className={`grid grid-cols-1 md:grid-cols-12 border-t border-[#E8E7E4] ${!isLast ? '' : 'md:border-b'}`}
-            initial={{ opacity: 0, y: 12 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
-        >
-            {/* ── Left: index + category name ── */}
-            <div className="md:col-span-3 py-8 md:py-10 pr-6 flex flex-col gap-3 md:border-r border-[#E8E7E4]">
-                <span className="text-[9px] font-mono text-[#7A1E1E] tracking-[0.35em] uppercase">
-                    {discipline.index}
+      <motion.div
+        ref={ref}
+        className={`group/row grid grid-cols-1 md:grid-cols-12 border-t border-[#E8E7E4] transition-colors duration-300 hover:bg-[#7A1E1E]/[0.02] ${!isLast ? "" : "md:border-b"}`}
+        initial={{ opacity: 0, y: 12 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
+      >
+        {/* ── Left: index + category name ── */}
+        <div className="md:col-span-3 py-8 md:py-10 pr-6 flex flex-col gap-3 md:border-r border-[#E8E7E4]">
+          <span className="text-[9px] font-mono text-[#B5B5B5] tracking-[0.35em] uppercase">
+            {discipline.index}
+          </span>
+          {/* Large display category name — the key typographic move */}
+          <h3
+            className="font-display font-medium text-[#1A1A1A] leading-none tracking-[-0.03em] uppercase"
+            style={{ fontSize: "clamp(24px, 3.5vw, 40px)" }}
+          >
+            {discipline.category}
+          </h3>
+        </div>
+
+        {/* ── Center: discipline statement ── */}
+        <div className="md:col-span-5 pt-4 pb-6 md:py-10 md:px-10 flex items-end md:items-center md:border-r border-[#E8E7E4]">
+          <p className="text-[13px] md:text-[14px] text-[#6F6F6F] leading-[1.6] max-w-[38ch] tracking-[-0.01em]">
+            {discipline.statement}
+          </p>
+        </div>
+
+        {/* ── Right: skill tags ── */}
+        <div className="md:col-span-4 pt-4 pb-8 md:py-10 md:pl-10 flex items-end md:items-center">
+          <div className="flex flex-wrap gap-2">
+            {discipline.items.map((item, i) => (
+              <motion.span
+                key={item}
+                className="group relative inline-flex items-center text-[10px] font-mono uppercase tracking-wider text-[#4A4A4A] border border-[#E8E7E4] px-3 py-1.5 overflow-hidden cursor-default select-none"
+                initial={{ opacity: 0, y: 6 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{
+                  duration: 0.45,
+                  delay: delay + 0.15 + i * 0.06,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                whileHover={{ borderColor: "#7A1E1E" }}
+              >
+                {/* Fill on hover */}
+                <motion.span
+                  aria-hidden
+                  className="absolute inset-0 bg-[#7A1E1E]"
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  style={{ originX: 0 }}
+                />
+                <span className="relative z-10 group-hover:text-[#F7F7F5] transition-colors duration-200">
+                  {item}
                 </span>
-                {/* Large display category name — the key typographic move */}
-                <h3
-                    className="font-display font-medium text-[#1A1A1A] leading-none tracking-[-0.03em] uppercase"
-                    style={{ fontSize: 'clamp(24px, 3.5vw, 40px)' }}
-                >
-                    {discipline.category}
-                </h3>
-            </div>
-
-            {/* ── Center: discipline statement ── */}
-            <div className="md:col-span-5 py-0 pb-6 md:py-10 md:px-10 flex items-end md:items-center md:border-r border-[#E8E7E4]">
-                <p className="text-[13px] md:text-[14px] text-[#9F9F9F] leading-[1.6] max-w-[38ch] tracking-[-0.01em]">
-                    {discipline.statement}
-                </p>
-            </div>
-
-            {/* ── Right: skill tags ── */}
-            <div className="md:col-span-4 py-0 pb-8 md:py-10 md:pl-10 flex items-end md:items-center">
-                <div className="flex flex-wrap gap-2">
-                    {discipline.items.map((item, i) => (
-                        <motion.span
-                            key={item}
-                            className="group relative inline-flex items-center text-[10px] font-mono uppercase tracking-wider text-[#4A4A4A] border border-[#E8E7E4] px-3 py-1.5 overflow-hidden cursor-default select-none"
-                            initial={{ opacity: 0, y: 6 }}
-                            animate={inView ? { opacity: 1, y: 0 } : {}}
-                            transition={{
-                                duration: 0.45,
-                                delay: delay + 0.15 + i * 0.06,
-                                ease: [0.16, 1, 0.3, 1],
-                            }}
-                            whileHover={{ borderColor: '#7A1E1E' }}
-                        >
-                            {/* Fill on hover */}
-                            <motion.span
-                                aria-hidden
-                                className="absolute inset-0 bg-[#7A1E1E]"
-                                initial={{ scaleX: 0 }}
-                                whileHover={{ scaleX: 1 }}
-                                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                                style={{ originX: 0 }}
-                            />
-                            <span className="relative z-10 group-hover:text-[#F7F7F5] transition-colors duration-200">
-                                {item}
-                            </span>
-                        </motion.span>
-                    ))}
-                </div>
-            </div>
-        </motion.div>
-    )
+              </motion.span>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+    );
 }
 
 export function SkillsOverview() {

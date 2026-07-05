@@ -10,6 +10,15 @@ import { ScrollLine } from '@/components/ui/scroll-line'
 import NextTopLoader from 'nextjs-toploader'
 import { siteConfig } from '@/lib/site-config'
 import './globals.css'
+import { Fraunces } from "next/font/google";
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  style: ["italic"],
+  weight: ["500", "600"],
+  variable: "--font-serif",
+  display: "swap",
+});
 
 const inter = Inter({
   subsets: ['latin'],
@@ -33,10 +42,10 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
-  themeColor: '#F7F7F5',
-}
+  themeColor: "#FAFAF8",
+};
 
 export const metadata: Metadata = {
   title: {
@@ -73,10 +82,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+      className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${fraunces.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen flex flex-col antialiased bg-[#F7F7F5] text-[#1A1A1A] cursor-none relative">
+      <body className="min-h-screen flex flex-col antialiased bg-base text-primary cursor-none relative">
         <NextTopLoader
           color="#7A1E1E"
           initialPosition={0.08}
@@ -103,5 +112,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
       </body>
     </html>
-  )
+  );
 }

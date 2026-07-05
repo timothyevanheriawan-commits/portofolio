@@ -431,3 +431,8 @@
     background-color: var(--color-accent-subtle);
   }
 }
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+}

@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useMounted } from '@/hooks/use-mounted'
 
 const DURATION = 1800
+
 const ease = [0.87, 0, 0.13, 1] as const
 
 const STATUS_STEPS = [
@@ -68,146 +69,156 @@ export function IntroLoader() {
     }, [mounted])
 
     return (
-        <AnimatePresence>
-            {isLoading && (
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div
+            key="intro-loader"
+            className="fixed inset-0 z-10000 flex flex-col bg-[#1A1A1A] overflow-hidden select-none"
+            exit={{ opacity: 1 }}
+          >
+            {/* ── Top panel — slides up on exit ── */}
+            <motion.div
+              className="flex-1 flex flex-col justify-end px-8 md:px-16 pb-8"
+              exit={{ y: "-102%" }}
+              transition={{ duration: 0.9, ease }}
+            >
+              {/* Name — weight contrast, staggered reveal */}
+              <div className="flex flex-col leading-none mb-6">
+                <div className="overflow-hidden">
+                  <motion.span
+                    className="block text-[13px] md:text-[15px] font-mono font-light tracking-[0.5em] uppercase text-[#F7F7F5]"
+                    initial={{ y: "110%" }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 0.7, delay: 0.15, ease }}
+                  >
+                    Timothy
+                  </motion.span>
+                </div>
+                <div className="overflow-hidden">
+                  <motion.span
+                    className="block text-[13px] md:text-[15px] font-mono font-light tracking-[0.5em] uppercase text-[#F7F7F5]"
+                    initial={{ y: "110%" }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 0.7, delay: 0.28, ease }}
+                  >
+                    Evan
+                  </motion.span>
+                </div>
+
+                {/* Maroon accent line — draws in under the name */}
                 <motion.div
-                    key="intro-loader"
-                    className="fixed inset-0 z-10000 flex flex-col bg-[#1A1A1A] overflow-hidden select-none"
-                    exit={{ opacity: 1 }}
+                  className="h-px bg-[#7A1E1E] mt-4"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{
+                    duration: 0.9,
+                    delay: 0.55,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  style={{ originX: 0, width: "4rem" }}
+                />
+              </div>
+
+              {/* Version tag */}
+              <motion.p
+                className="text-[10px] font-mono text-[#F7F7F5] uppercase tracking-[0.4em]"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8, duration: 0.5 }}
+              >
+                Portfolio — V.2026
+              </motion.p>
+            </motion.div>
+
+            {/* ── Counter — centered, full visual weight ── */}
+            <motion.div
+              className="shrink-0 flex items-center justify-center py-4"
+              exit={{ scale: 0.96, opacity: 0 }}
+              transition={{ duration: 0.4, ease: "easeIn" }}
+            >
+              <motion.div
+                className="flex items-start gap-2 tabular-nums"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.4 }}
+              >
+                <span
+                  className="font-black text-[#F7F7F5] leading-none tracking-[-0.04em]"
+                  style={{ fontSize: "clamp(100px, 20vw, 220px)" }}
                 >
-                    {/* ── Top panel — slides up on exit ── */}
-                    <motion.div
-                        className="flex-1 flex flex-col justify-end px-8 md:px-16 pb-8"
-                        exit={{ y: '-102%' }}
-                        transition={{ duration: 0.9, ease }}
+                  {String(count).padStart(2, "0")}
+                </span>
+                <span className="text-[16px] md:text-[20px] font-mono text-[#F7F7F5] leading-none pb-[0.12em]">
+                  %
+                </span>
+              </motion.div>
+            </motion.div>
+
+            {/* ── Bottom panel — slides down on exit ── */}
+            <motion.div
+              className="flex-1 flex flex-col justify-start px-8 md:px-16 pt-8"
+              exit={{ y: "102%" }}
+              transition={{ duration: 0.9, ease }}
+            >
+              {/* Progress bar */}
+              <div className="w-full h-px bg-[#F7F7F5]/10 overflow-hidden mb-5">
+                <motion.div
+                  className="h-full bg-[#7A1E1E]"
+                  initial={{ width: "0%" }}
+                  animate={{ width: "100%" }}
+                  transition={{
+                    duration: (DURATION - 700) / 1000,
+                    delay: 0.35,
+                    ease: [0.33, 0, 0.67, 1],
+                  }}
+                />
+              </div>
+
+              {/* Status row */}
+              <div className="flex items-center justify-between">
+                <motion.p
+                  className="text-[10px] font-mono uppercase tracking-widest text-[#F7F7F5]"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.7, duration: 0.4 }}
+                >
+                  System / Boot
+                </motion.p>
+
+                <motion.div
+                  className="flex items-center gap-2"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.8, duration: 0.4 }}
+                >
+                  <motion.span
+                    className="block w-1.5 h-1.5 rounded-full bg-[#7A1E1E]"
+                    animate={
+                      count < 97 ? { opacity: [1, 0.2, 1] } : { opacity: 1 }
+                    }
+                    transition={{
+                      repeat: count < 97 ? Infinity : 0,
+                      duration: 0.9,
+                      ease: "easeInOut",
+                    }}
+                  />
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={status}
+                      className="text-[10px] font-mono text-[#F7F7F5] uppercase tracking-widest"
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.2 }}
                     >
-                        {/* Name — weight contrast, staggered reveal */}
-                        <div className="flex flex-col leading-none mb-6">
-                            <div className="overflow-hidden">
-                                <motion.span
-                                    className="block text-[13px] md:text-[15px] font-mono font-light tracking-[0.5em] uppercase text-[#F7F7F5]"
-                                    initial={{ y: '110%' }}
-                                    animate={{ y: 0 }}
-                                    transition={{ duration: 0.7, delay: 0.15, ease }}
-                                >
-                                    Timothy
-                                </motion.span>
-                            </div>
-                            <div className="overflow-hidden">
-                                <motion.span
-                                    className="block text-[13px] md:text-[15px] font-mono font-light tracking-[0.5em] uppercase text-[#F7F7F5]"
-                                    initial={{ y: '110%' }}
-                                    animate={{ y: 0 }}
-                                    transition={{ duration: 0.7, delay: 0.28, ease }}
-                                >
-                                    Evan
-                                </motion.span>
-                            </div>
-
-                            {/* Maroon accent line — draws in under the name */}
-                            <motion.div
-                                className="h-px bg-[#7A1E1E] mt-4"
-                                initial={{ scaleX: 0 }}
-                                animate={{ scaleX: 1 }}
-                                transition={{ duration: 0.9, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                                style={{ originX: 0, width: '4rem' }}
-                            />
-                        </div>
-
-                        {/* Version tag */}
-                        <motion.p
-                            className="text-[10px] font-mono text-[#F7F7F5] uppercase tracking-[0.4em]"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.8, duration: 0.5 }}
-                        >
-                            Portfolio — V.2026
-                        </motion.p>
-                    </motion.div>
-
-                    {/* ── Counter — centered, full visual weight ── */}
-                    <motion.div
-                        className="shrink-0 flex items-center justify-center py-4"
-                        exit={{ scale: 0.96, opacity: 0 }}
-                        transition={{ duration: 0.4, ease: 'easeIn' }}
-                    >
-                        <motion.div
-                            className="flex items-start gap-2 tabular-nums"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.3, duration: 0.4 }}
-                        >
-                            <span
-                                className="font-black text-[#F7F7F5] leading-none tracking-[-0.04em]"
-                                style={{ fontSize: 'clamp(100px, 20vw, 220px)' }}
-                            >
-                                {String(count).padStart(2, '0')}
-                            </span>
-                            <span className="text-[16px] md:text-[20px] font-mono text-[#F7F7F5] mt-4">
-                                %
-                            </span>
-                        </motion.div>
-                    </motion.div>
-
-                    {/* ── Bottom panel — slides down on exit ── */}
-                    <motion.div
-                        className="flex-1 flex flex-col justify-start px-8 md:px-16 pt-8"
-                        exit={{ y: '102%' }}
-                        transition={{ duration: 0.9, ease }}
-                    >
-                        {/* Progress bar */}
-                        <div className="w-full h-px bg-[#F7F7F5]/10 overflow-hidden mb-5">
-                            <motion.div
-                                className="h-full bg-[#7A1E1E]"
-                                initial={{ width: '0%' }}
-                                animate={{ width: '100%' }}
-                                transition={{
-                                    duration: (DURATION - 700) / 1000,
-                                    delay: 0.35,
-                                    ease: [0.33, 0, 0.67, 1],
-                                }}
-                            />
-                        </div>
-
-                        {/* Status row */}
-                        <div className="flex items-center justify-between">
-                            <motion.p
-                                className="text-[10px] font-mono uppercase tracking-widest text-[#F7F7F5]"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 0.7, duration: 0.4 }}
-                            >
-                                Portfolio / Index
-                            </motion.p>
-
-                            <motion.div
-                                className="flex items-center gap-2"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 0.8, duration: 0.4 }}
-                            >
-                                <motion.span
-                                    className="block w-1.5 h-1.5 rounded-full bg-[#7A1E1E]"
-                                    animate={count < 97 ? { opacity: [1, 0.2, 1] } : { opacity: 1 }}
-                                    transition={{ repeat: count < 97 ? Infinity : 0, duration: 0.9, ease: 'easeInOut' }}
-                                />
-                                <AnimatePresence mode="wait">
-                                    <motion.span
-                                        key={status}
-                                        className="text-[10px] font-mono text-[#F7F7F5] uppercase tracking-widest"
-                                        initial={{ opacity: 0, y: 4 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -4 }}
-                                        transition={{ duration: 0.2 }}
-                                    >
-                                        {status}
-                                    </motion.span>
-                                </AnimatePresence>
-                            </motion.div>
-                        </div>
-                    </motion.div>
+                      {status}
+                    </motion.span>
+                  </AnimatePresence>
                 </motion.div>
-            )}
-        </AnimatePresence>
-    )
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    );
 }
