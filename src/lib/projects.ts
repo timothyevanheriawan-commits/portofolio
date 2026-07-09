@@ -17,7 +17,7 @@ export const projects: Project[] = [
       "Tailwind CSS",
       "Framer Motion",
     ],
-    liveUrl: "https://auraflow-os.vercel.app",
+    liveUrl: "[https://auraflow-os.vercel.app](https://auraflow-os.vercel.app)",
     screenshots: [
       {
         src: "/projects/auraflow/auraflow-1-mockup.png",
@@ -58,7 +58,8 @@ Visually, the interface avoids translucent or layered effects in favor of solid 
       "Recharts",
       "Tailwind CSS",
     ],
-    liveUrl: "https://vertex-inventory.vercel.app",
+    liveUrl:
+      "[https://vertex-inventory.vercel.app](https://vertex-inventory.vercel.app)",
     screenshots: [
       {
         src: "/projects/vertex/vertex-1-mockup.png",
@@ -80,7 +81,7 @@ Chart components are intentionally stateless, receiving pre-shaped datasets to a
 The UI favors dense information layouts over whitespace-heavy designs. This increases cognitive load slightly but allows operators to compare categories and time ranges without excessive navigation.`,
     outcome: `The MVP supports category-level stock distribution, low-stock alerts based on configurable thresholds, and historical demand visualization across selectable time windows.`,
     reflection: `Vertex was a lesson in data honesty. I realized that a dashboard's utility isn't measured by how many charts it has, but by how quickly an operator can spot an anomaly. Centralizing the math on the server wasn't just a performance choice; it was about ensuring one single version of the truth.`,
-    featured: true,
+    featured: false,
   },
   {
     slug: "bca-product-intelligence",
@@ -92,7 +93,8 @@ The UI favors dense information layouts over whitespace-heavy designs. This incr
     year: "2025",
     role: "Data Analyst & Dashboard Developer",
     stack: ["Python", "Streamlit", "Pandas", "NLTK", "Plotly"],
-    liveUrl: "https://bca-mobile-dashboard.streamlit.app",
+    liveUrl:
+      "[https://bca-mobile-dashboard.streamlit.app](https://bca-mobile-dashboard.streamlit.app)",
     screenshots: [
       {
         src: "/projects/bca/bca-1-mockup.png",
@@ -126,7 +128,7 @@ The interface prioritizes clarity over customization, limiting user controls to 
     year: "2026",
     role: "UI/UX Developer",
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    liveUrl: "https://kurofest.vercel.app",
+    liveUrl: "[https://kurofest.vercel.app](https://kurofest.vercel.app)",
     screenshots: [
       {
         src: "/projects/kurofest/kurofest-1-mockup.png",
@@ -162,7 +164,8 @@ The central design decision was to strictly adhere to predefined UI criteria der
     year: "2025",
     role: "Frontend Developer",
     stack: ["Next.js", "PostgreSQL", "TypeScript", "Tailwind CSS"],
-    liveUrl: "https://recipeshare-project.vercel.app",
+    liveUrl:
+      "[https://recipeshare-project.vercel.app](https://recipeshare-project.vercel.app)",
     screenshots: [
       {
         src: "/projects/recipeshare/recipeshare-1-mockup.png",
@@ -179,7 +182,7 @@ The project scope emphasized client-side functionality and UI consistency rather
     architecture: `The application is a frontend-driven web system built with Next.js. Core functionality includes rendering a list of user-submitted recipes, client-side forms for recipe submission, and basic data persistence via an external backend service.
 
 The system follows a simple read-and-write flow without moderation layers: users can read all recipes, users can submit new recipes, with no intermediate validation beyond basic input handling.`,
-    tradeoffs: `No moderation workflow was implemented. All submitted content is treated equally, with no approval process. 
+    tradeoffs: `No moderation workflow was implemented. All submitted content is treated equally, with no approval process.
 These tradeoffs were accepted to keep the project aligned with course scope and time constraints.
 
 The most important design decision was establishing clear UI criteria for typography and color usage early in development. This decision aimed to make the interface feel consistent and natural, despite being a group project with multiple contributors.`,
@@ -206,25 +209,25 @@ The most important design decision was establishing clear UI criteria for typogr
       "TanStack Table",
       "Tiptap",
     ],
-    liveUrl: "https://atlas-prms.vercel.app/",
+    liveUrl: "[https://atlas-prms.vercel.app/](https://atlas-prms.vercel.app/)",
     screenshots: [
       {
         src: "/projects/atlas/atlas-1-mockup.png",
         alt: "Atlas PRMS workspace showing sidebar navigation, record list, and dense enterprise layout",
       },
     ],
-    context: `Atlas PRMS started as a personal tool for organizing original character headcanons, but the more interesting problem turned out to be disguise, not data modeling. Most personal organization tools look like personal organization tools: friendly, colorful, forgiving. Atlas set out to look like something else entirely — internal software a company has maintained and patched for years.
+    context: `Atlas PRMS started as a personal tool for organizing original character headcanons, but the more interesting problem turned out to be disguise, not data modeling. Most personal organization tools look like personal organization tools: friendly, colorful, forgiving. Atlas set out to look like something else entirely  internal software a company has maintained and patched for years.
 
 The subject matter is deliberately playful; the execution is not. Fixed modules (General Information, Behavioral Analysis, Timeline, Preferences, Associations, Attachments, Internal Notes) replace user-created categories, reinforcing the idea that this is a system with a schema, not a notebook with a template.`,
-    architecture: `The application is built on Next.js and Supabase, with authentication gating a separate protected workspace from a public marketing surface. A desktop-inspired workspace — sidebar, toolbar, dense record list, and multi-tab editor — forms the core of the product, backed by a Zustand store for tab and editor state.
+    architecture: `The application is built on Next.js and Supabase, with authentication gating a separate protected workspace from a public marketing surface. A desktop-inspired workspace  sidebar, toolbar, dense record list, and multi-tab editor  forms the core of the product, backed by a Zustand store for tab and editor state.
 
 Record content uses Tiptap for structured rich text, while TanStack Table drives the list and log views where density and sortability matter more than visual flourish. Activity logs were deliberately redesigned away from a chat-style feed toward a tabular, timestamped audit-log format, since chat bubbles read as consumer software no matter how the rest of the UI is styled.`,
     tradeoffs: `The public landing page was intentionally deprioritized relative to the internal workspace, which created a visible inconsistency: the workspace reads as enterprise software, while the landing page still resembles a modern SaaS marketing site. This was an acceptable tradeoff during the build phase, since the workspace is what sells the concept, but it's flagged as the clearest remaining gap.
 
-Atlas also currently lacks the institutional "paper trail" that makes internal software feel aged rather than freshly built — release notes, a version archive, an administrator manual, legacy terminology. Building the functional core first was prioritized over backfilling a fictional product history, on the reasoning that credibility work only matters once the underlying system is solid.`,
+Atlas also currently lacks the institutional "paper trail" that makes internal software feel aged rather than freshly built  release notes, a version archive, an administrator manual, legacy terminology. Building the functional core first was prioritized over backfilling a fictional product history, on the reasoning that credibility work only matters once the underlying system is solid.`,
     outcome: `The result is a fully deployed, authenticated application with a convincing desktop-style workspace, structured record management (create/edit/delete/organize), a shared component library (tables, forms, toolbars, settings, confirmation dialogs), and enterprise-style activity logging.`,
-    reflection: `Atlas taught me that "enterprise feel" isn't a color palette or a font choice — it's bureaucracy simulated convincingly. The workspace convinced people the moment the activity log stopped looking like a chat feed and started looking like an audit trail. The lesson wasn't about UI polish; it was about which details signal "this software has a history" versus "this software was built yesterday."`,
-    featured: true,
+    reflection: `Atlas taught me that "enterprise feel" isn't a color palette or a font choice  it's bureaucracy simulated convincingly. The workspace convinced people the moment the activity log stopped looking like a chat feed and started looking like an audit trail. The lesson wasn't about UI polish; it was about which details signal "this software has a history" versus "this software was built yesterday."`,
+    featured: false,
   },
   {
     slug: "10-3-1",
@@ -236,7 +239,8 @@ Atlas also currently lacks the institutional "paper trail" that makes internal s
     year: "2026",
     role: "Solo Developer & Designer",
     stack: ["TypeScript", "Next.js", "Tailwind CSS"],
-    liveUrl: "https://10-3-1-game.vercel.app/",
+    liveUrl:
+      "[https://10-3-1-game.vercel.app/](https://10-3-1-game.vercel.app/)",
     screenshots: [
       {
         src: "/projects/10-3-1/10-3-1-1-mockup.png",
@@ -245,19 +249,59 @@ Atlas also currently lacks the institutional "paper trail" that makes internal s
     ],
     context: `10-3-1 grew out of an interest in constraint-based puzzle mechanics: games like Wordle succeed not because the mechanic is complex, but because the rule set is small enough to hold entirely in your head while still producing genuine difficulty.
 
-The core twist — that the first tile's operator is discarded and order changes the outcome — turns a simple arithmetic game into a small combinatorics problem, without requiring the player to understand combinatorics to enjoy it.`,
-    architecture: `The game is built as a lightweight Next.js application with all puzzle logic — tile generation, operator evaluation with standard order of operations, and solution-space enumeration — computed client-side. A daily puzzle mode and a random mode share the same underlying combination engine, with statistics (streaks, win rate, average hints) tracked locally per player.
+The core twist  that the first tile's operator is discarded and order changes the outcome  turns a simple arithmetic game into a small combinatorics problem, without requiring the player to understand combinatorics to enjoy it.`,
+    architecture: `The game is built as a lightweight Next.js application with all puzzle logic  tile generation, operator evaluation with standard order of operations, and solution-space enumeration  computed client-side. A daily puzzle mode and a random mode share the same underlying combination engine, with statistics (streaks, win rate, average hints) tracked locally per player.
 
 The visual language leans on a restrained East Asian typographic motif, pairing kanji numerals with a muted paper-like background to distinguish it from typical bright, gamified puzzle UIs.`,
     tradeoffs: `The game deliberately requires players to find every valid combination to register a full win, rather than stopping at the first correct answer. This raises the difficulty and average session length, but was chosen because "solve it once and move on" undersells the puzzle's actual depth.
 
 No backend or account system was built for this project; all progress and stats are local to the device. This keeps the game lightweight and fast to load, at the cost of cross-device continuity.`,
     outcome: `The finished game supports daily and random puzzle modes, in-game hints, a solutions viewer, persistent stats tracking, and a shareable result summary similar in spirit to other daily puzzle games.`,
-    reflection: `10-3-1 was a good reminder that constraint is a design tool, not a limitation. The entire game is three tiles and four operators, but requiring players to find every solution — not just one — was the single decision that turned a quick diversion into something people actually return to daily.`,
+    reflection: `10-3-1 was a good reminder that constraint is a design tool, not a limitation. The entire game is three tiles and four operators, but requiring players to find every solution  not just one  was the single decision that turned a quick diversion into something people actually return to daily.`,
     featured: false,
   },
-];
+  {
+    slug: "kopitiam-tjoa",
+    title: "Kopitiam Tjoa",
+    description:
+      "A heritage coffee shop website for a fictional Peranakan kopitiam, built with a full ordering flow, live business-hours status, and a custom Supabase backend.",
+    objective:
+      "Design and build a small but production-grade full-stack site, not just a static mockup, where menu data, order state, and operating status are all backed by a real database rather than hardcoded content.",
+    year: "2026",
+    role: "Full-Stack Developer (Personal Project)",
+    stack: [
+      "TypeScript",
+      "Next.js 16",
+      "React 19",
+      "Supabase",
+      "Tailwind CSS v4",
+      "Zustand",
+    ],
+    liveUrl: "https://kopitiam-tjoa.vercel.app",
+    screenshots: [
+      {
+        src: "/projects/kopitiam/kopitiam-1-mockup.png",
+        alt: "Kopitiam Tjoa homepage with heritage signage graphic and live business hours status",
+      },
+      {
+        src: "/projects/kopitiam/kopitiam-2-mockup.png",
+        alt: "Kopitiam Tjoa order confirmation and live tracking page showing order receipt, step-by-step progress timeline, and itemized receipt break down",
+      },
+    ],
+    context: `Kopitiam Tjoa is a heritage coffee shop concept rooted in Peranakan visual language, the kind of shop that has run on the same recipes and the same hand-painted sign since 1968. The project began as a static HTML mockup to lock down the visual identity, then was rebuilt as a full Next.js and Supabase application once the design direction felt right.
 
+The goal was to avoid the common portfolio shortcut of a beautiful frontend backed by placeholder data. Menu items, order records, and business hours all live in a real database with real constraints, not a hardcoded array pretending to be one.`,
+    architecture: `The application is built on Next.js App Router with Supabase as the backend, using Row Level Security policies to control data access rather than relying on client-side checks. Menu data is fetched server-side rather than shipped as static content, and cart state is managed with Zustand.
+
+A consistent visual system carries the Peranakan-inspired palette (heritage green, signage red, warm ivory) across every component, keeping color and spacing decisions centralized instead of scattered per component. Business hours and open/closed status are computed from a shared settings table, with a manual override field so a real shop owner could mark an early closure without touching code.`,
+    tradeoffs: `Supabase's server timezone runs in UTC, while the shop operates on WIB. Early in development, open/closed status was computed using the server's local time directly, which meant the site could report itself open or closed several hours off from reality. This was traced to raw date reads inside the status logic and fixed by explicitly converting all day and time calculations to WIB before comparison, a reminder that code working correctly on a local machine doesn't guarantee correct behavior once a server actually runs in a different timezone than its users.
+
+The project also deliberately avoids third-party ordering or payment integrations, keeping the order flow self-contained. This limits real-world usability but keeps the scope focused on demonstrating full-stack data modeling rather than integrating external services.`,
+    outcome: `The site currently supports a live menu backed by Supabase, a working cart and order flow, and real-time business-hours status. Development is ongoing, with ordering, rate limiting, and UI polish passes still being refined.`,
+    reflection: `Kopitiam Tjoa has been a lesson in how many small details a real full-stack product actually has: timezone handling, database permissions, rate limiting, that a static mockup never forces you to confront. It's also taught me to verify behavior in the actual running environment rather than trusting a clean TypeScript compile as proof that something works.`,
+    featured: true,
+  },
+];
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
 }
