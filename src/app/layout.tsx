@@ -87,7 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="min-h-screen flex flex-col antialiased bg-base text-primary cursor-none relative">
         <NextTopLoader
-          color="#7A1E1E"
+          color="var(--color-accent)"
           initialPosition={0.08}
           crawlSpeed={200}
           height={2}

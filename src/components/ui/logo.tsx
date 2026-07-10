@@ -43,7 +43,7 @@ export function MarkLogo({ size = 28, className, hover = true }: MarkLogoProps) 
             {/* Top stroke */}
             <rect x="15" y="4" width="8" height="2.5" rx="0.5" fill="currentColor" />
             {/* Mid stroke - maroon accent, sits at exact midpoint */}
-            <rect x="15" y="12.75" width="6" height="2.5" rx="0.5" fill="#7A1E1E" />
+            <rect x="15" y="12.75" width="6" height="2.5" rx="0.5" fill="var(--color-accent)" />
             {/* Bottom stroke */}
             <rect x="15" y="21.5" width="8" height="2.5" rx="0.5" fill="currentColor" />
         </svg>
@@ -54,7 +54,7 @@ export function WordmarkLogo({ className }: { className?: string }) {
     return (
         <div className={cn('flex items-center gap-3', className)}>
             <MarkLogo size={22} hover={false} />
-            <span className="text-[12px] font-bold tracking-[0.06em] uppercase text-[#1A1A1A]">
+            <span className="text-[12px] font-bold tracking-[0.06em] uppercase text-[var(--color-text-primary)]">
                 Timothy Evan
             </span>
         </div>

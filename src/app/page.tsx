@@ -6,7 +6,8 @@ import { ContactSection } from '@/components/home/contact-section'
 import { PageTransition } from '@/components/ui/page-transition'
 import { SectionDivider } from '@/components/ui/section-divider'
 import { Marquee } from '@/components/ui/marquee'
-import { Reveal } from '@/components/ui/reveal'
+import { Fade } from "@/components/ui/motion";
+
 
 export default function HomePage() {
   return (
@@ -18,20 +19,20 @@ export default function HomePage() {
       <Marquee />
 
       <Container>
-        <Reveal>
+        <Fade>
           <SectionDivider index="01" current="Intro" next="Selected Work" />
           <SelectedProjects />
-        </Reveal>
+       </Fade>
 
-        <Reveal delay={0.05}>
+        <Fade delay={0.05}>
           <SectionDivider index="02" current="Selected Work" next="Capabilities" />
           <SkillsOverview />
-        </Reveal>
+       </Fade>
 
-        <Reveal delay={0.05}>
+        <Fade delay={0.05}>
           <SectionDivider index="03" current="Capabilities" next="Contact" />
           <ContactSection />
-        </Reveal>
+       </Fade>
       </Container>
     </PageTransition>
   )

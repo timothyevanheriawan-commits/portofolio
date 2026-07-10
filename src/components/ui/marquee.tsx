@@ -17,7 +17,7 @@ export function Marquee() {
   const shouldReduceMotion = useReducedMotion();
   return (
     <div
-      className="relative w-full overflow-hidden border-y border-[#E8E7E4] py-3 my-0"
+      className="relative w-full overflow-hidden border-y border-[var(--color-border)] py-3 my-0"
       aria-hidden="true"
     >
       {/* Fade edges */}
@@ -45,10 +45,10 @@ export function Marquee() {
       >
         {doubled.map((item, i) => (
           <span key={i} className="flex items-center">
-            <span className="text-[9px] font-mono uppercase tracking-[0.3em] text-[#9F9F9F] px-6">
+            <span className="text-[9px] font-mono uppercase tracking-[0.3em] text-[var(--color-text-faint)] px-6">
               {item}
             </span>
-            <span className="w-1 h-1 rounded-full bg-[#7A1E1E] opacity-40 shrink-0" />
+            <span className="w-1 h-1 rounded-full bg-[var(--color-accent)] opacity-40 shrink-0" />
           </span>
         ))}
       </motion.div>

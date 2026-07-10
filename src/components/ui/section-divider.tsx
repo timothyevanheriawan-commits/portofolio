@@ -19,7 +19,7 @@ export function SectionDivider({ index, current, next }: SectionDividerProps) {
 
                 {/* Maroon lead tick */}
                 <motion.div
-                    className="shrink-0 w-5 h-px bg-[#7A1E1E]"
+                    className="shrink-0 w-5 h-px bg-[var(--color-accent)]"
                     initial={{ scaleX: 0, originX: 0 }}
                     animate={{ scaleX: inView ? 1 : 0 }}
                     transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
@@ -27,7 +27,7 @@ export function SectionDivider({ index, current, next }: SectionDividerProps) {
 
                 {/* Index */}
                 <motion.span
-                    className="shrink-0 text-[9px] font-mono tabular-nums text-[#7A1E1E] tracking-[0.3em]"
+                    className="shrink-0 text-[9px] font-mono tabular-nums text-[var(--color-accent)] tracking-[0.3em]"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: inView ? 1 : 0 }}
                     transition={{ duration: 0.3, delay: 0.15 }}
@@ -36,7 +36,7 @@ export function SectionDivider({ index, current, next }: SectionDividerProps) {
                 </motion.span>
 
                 {/* Rule — grows to fill */}
-                <div className="relative flex-1 h-px bg-[#E8E7E4]">
+                <div className="relative flex-1 h-px bg-[var(--color-border)]">
                     <motion.div
                         className="absolute inset-y-0 left-0 bg-[#a6a6a6]"
                         initial={{ width: 0 }}
@@ -47,7 +47,7 @@ export function SectionDivider({ index, current, next }: SectionDividerProps) {
 
                 {/* Next label */}
                 <motion.span
-                    className="shrink-0 text-[8px] font-mono uppercase tracking-[0.25em] text-[#BFBFBF]"
+                    className="shrink-0 text-[8px] font-mono uppercase tracking-[0.25em] text-[var(--color-text-ghost)]"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: inView ? 1 : 0 }}
                     transition={{ duration: 0.3, delay: 0.5 }}

@@ -1,6 +1,6 @@
 "use client";
 
-import { Line } from "@/components/ui/motion";
+import { Fade, Line } from "@/components/ui/motion";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
@@ -39,14 +39,15 @@ function ShapeField() {
     if (!ctx) return;
     const c = ctx;
 
+    const styles = getComputedStyle(canvas);
+    const MAROON =
+      styles.getPropertyValue("--color-accent").trim() || "#7A1E1E";
+    const DARK =
+      styles.getPropertyValue("--color-text-primary").trim() || "#1A1A1A";
+
     let w = 0,
       h = 0,
       raf: number;
-
-    // Configuration for the Swiss modular grid
-    const COLS = 12;
-    const MAROON = "#7A1E1E";
-    const DARK = "#1A1A1A";
 
     function resize() {
       const dpr = Math.min(devicePixelRatio, 2);
@@ -60,6 +61,7 @@ function ShapeField() {
     function draw(ts: number) {
       raf = requestAnimationFrame(draw);
       c.clearRect(0, 0, w, h);
+  const COLS = 12;
 
       const colWidth = w / COLS;
       const rows = Math.ceil(h / colWidth);
@@ -160,7 +162,7 @@ export function Hero() {
   return (
     <section
       style={{ gridColumn: "content-start / span 12" }}
-      className="relative pt-16 pb-0 md:pt-24 border-r border-[#E8E7E4]"
+      className="relative pt-16 pb-0 md:pt-24 border-r border-[var(--color-border)]"
     >
       {/* Background — geometric shapes, right half only */}
       <div
@@ -173,9 +175,32 @@ export function Hero() {
       <div className="relative z-10 flex flex-col">
         {/* Background Technical Number */}
         <div className="absolute right-8 md:right-20 top-16 md:top-24 pointer-events-none select-none">
-          <span className="text-[24vw] md:text-[18vw] font-black leading-none tracking-tighter text-[#1A1A1A]/[0.035]">
-            01
-          </span>
+          {/* Background Technical Number */}
+          <div className="absolute right-8 md:right-20 top-16 md:top-24 pointer-events-none select-none">
+            <span className="text-[24vw] md:text-[18vw] font-black leading-none tracking-tighter text-[var(--color-text-primary)]/[0.02]">
+              01
+            </span>
+          </div>
+
+          {/* ← ADD THE VERTICAL MARGIN LABEL HERE */}
+          <div
+            aria-hidden
+            className="hidden lg:flex absolute right-6 top-28 bottom-28 flex-col items-center justify-between pointer-events-none select-none z-10"
+          >
+            <span
+              className="font-mono text-[9px] tracking-[0.3em] uppercase text-[var(--color-text-tertiary)]"
+              style={{ writingMode: "vertical-rl" }}
+            >
+              Index — 01
+            </span>
+            <span className="w-px flex-1 bg-[var(--color-border)]" />
+            <span
+              className="font-mono text-[9px] tracking-[0.3em] uppercase text-[var(--color-text-tertiary)]"
+              style={{ writingMode: "vertical-rl" }}
+            >
+              Surabaya, ID
+            </span>
+          </div>
         </div>
         {/* ── Overline ── */}
         <motion.div
@@ -184,15 +209,15 @@ export function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <span className="h-px w-5 bg-[#7A1E1E]" />
-          <span className="text-[9px] font-mono tracking-[0.25em] uppercase text-[#6F6F6F]">
+          <span className="h-px w-5 bg-[var(--color-accent)]" />
+          <span className="text-[9px] font-mono tracking-[0.25em] uppercase text-[var(--color-text-secondary)]">
             Frontend / Data Systems
           </span>
         </motion.div>
 
         {/* ── Full-width headline block ── */}
         <h1
-          className="tracking-[-0.04em] text-[#1A1A1A] w-full"
+          className="tracking-[-0.04em] text-[var(--color-text-primary)] w-full"
           style={{ fontSize: "clamp(38px, 11vw, 172px)", lineHeight: 0.88 }}
         >
           <RevealWord delay={0.2}>
@@ -203,12 +228,12 @@ export function Hero() {
             <span className="relative inline-block group cursor-default">
               <span
                 aria-hidden
-                className="absolute left-0 right-0 -bottom-1 h-[8px] bg-[#7A1E1E]/20"
+                className="absolute left-0 right-0 -bottom-1 h-[8px] bg-[var(--color-accent)]/20"
               />
-              <span className="relative z-10 transition-colors duration-500 group-hover:text-[#F7F7F5]">
+              <span className="relative z-10 transition-colors duration-500 group-hover:text-[var(--color-bg-header)]">
                 interfaces
               </span>
-              <span className="absolute inset-0 bg-[#7A1E1E] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom z-0" />
+              <span className="absolute inset-0 bg-[var(--color-accent)] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom z-0" />
             </span>
           </RevealWord>
 
@@ -221,13 +246,13 @@ export function Hero() {
 
         {/* ── Divider rule ── */}
         <motion.div
-          className="relative w-full h-px bg-[#E8E7E4] mt-12 md:mt-16 overflow-hidden"
+          className="relative w-full h-px bg-[var(--color-border)] mt-12 md:mt-16 overflow-hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.9 }}
         >
           <motion.div
-            className="absolute left-0 top-0 h-full bg-[#7A1E1E]"
+            className="absolute left-0 top-0 h-full bg-[var(--color-accent)]"
             initial={{ width: 0 }}
             animate={{ width: "12%" }}
             transition={{ duration: 1.4, delay: 1, ease: [0.16, 1, 0.3, 1] }}
@@ -235,18 +260,16 @@ export function Hero() {
         </motion.div>
 
         {/* ── Footnote row - body left, nav right ── */}
-        <motion.div
+        <Fade
+          delay={1.0}
           className="grid grid-cols-1 md:grid-cols-12 gap-0 py-8 md:py-10"
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
         >
           {/* Left - body copy + status + CTA */}
           <div className="md:col-span-7 flex flex-col justify-between gap-6 pr-0 md:pr-16 mb-8 md:mb-0">
-            <p className="text-[14px] md:text-[15px] text-[#4A4A4A] leading-[1.75] max-w-[44ch] tracking-tight">
+            <p className="text-[14px] md:text-[15px] text-[var(--color-text-body)] leading-[1.75] max-w-[44ch] tracking-tight">
               I focus on frontend development and data visualization, creating
               tools that{" "}
-              <span className="text-[#1A1A1A] font-medium underline decoration-[#7A1E1E]/40 decoration-2 underline-offset-4">
+              <span className="text-[var(--color-text-primary)] font-medium underline decoration-[var(--color-accent)]/40 decoration-2 underline-offset-4">
                 reduce friction
               </span>{" "}
               and communicate clearly.
@@ -256,7 +279,7 @@ export function Hero() {
               {/* Primary CTA */}
               <Link
                 href="/projects"
-                className="group inline-flex items-center gap-3 text-[10px] font-mono uppercase tracking-widest text-[#F7F7F5] bg-[#1A1A1A] px-5 py-2.5 hover:bg-[#7A1E1E] transition-colors duration-300 focus-visible:outline-none focus-visible:bg-[#7A1E1E]"
+                className="group inline-flex items-center gap-3 text-[10px] font-mono uppercase tracking-widest text-[var(--color-bg-header)] bg-[var(--color-text-primary)] px-5 py-2.5 hover:bg-[var(--color-accent)] transition-colors duration-300 focus-visible:outline-none focus-visible:bg-[var(--color-accent)]"
               >
                 View My Work
                 <span className="transition-transform duration-300 group-hover:translate-x-1">
@@ -267,10 +290,10 @@ export function Hero() {
               {/* Status dot */}
               <div className="flex items-center gap-3">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7A1E1E] opacity-20" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#7A1E1E]" />
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-accent)] opacity-20" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--color-accent)]" />
                 </span>
-                <span className="text-[9px] font-mono text-[#1A1A1A] uppercase tracking-[0.3em]">
+                <span className="text-[9px] font-mono text-[var(--color-text-primary)] uppercase tracking-[0.3em]">
                   Open to Opportunities
                 </span>
               </div>
@@ -278,7 +301,7 @@ export function Hero() {
           </div>
 
           {/* Right - nav links */}
-          <nav className="md:col-span-5 md:border-l border-[#E8E7E4] md:pl-10 flex flex-col justify-center">
+          <nav className="md:col-span-5 md:border-l border-[var(--color-border)] md:pl-10 flex flex-col justify-center">
             {LINKS.map((item, i) => (
               <motion.div
                 key={item.label}
@@ -295,19 +318,19 @@ export function Hero() {
                   {...(item.label === "Email"
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
-                  className="group relative flex items-center justify-between py-3.5 border-b border-[#E8E7E4] first:border-t overflow-hidden focus-visible:outline-none focus-visible:bg-[#7A1E1E]/5"
+                  className="group relative flex items-center justify-between py-3.5 border-b border-[var(--color-border)] first:border-t overflow-hidden focus-visible:outline-none focus-visible:bg-[var(--color-accent)]/5"
                 >
                   {/* Full-width underline - draws left→right on hover, retracts right→left on leave */}
                   <span
                     aria-hidden
-                    className="absolute bottom-0 left-0 h-px w-full bg-[#7A1E1E] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out-expo"
+                    className="absolute bottom-0 left-0 h-px w-full bg-[var(--color-accent)] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out-expo"
                   />
 
                   <div className="flex items-center gap-3">
-                    <span className="text-[8px] font-mono text-[#888888] tabular-nums group-hover:text-[#7A1E1E] transition-colors duration-300">
+                    <span className="text-[8px] font-mono text-[var(--color-text-secondary)] tabular-nums group-hover:text-[var(--color-accent)] transition-colors duration-300">
                       0{i + 1}
                     </span>
-                    <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#6F6F6F] group-hover:text-[#1A1A1A] transition-colors duration-200">
+                    <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)] transition-colors duration-200">
                       {item.label}
                     </span>
                   </div>
@@ -315,7 +338,7 @@ export function Hero() {
               </motion.div>
             ))}
           </nav>
-        </motion.div>
+        </Fade>
       </div>
 
       <div className="absolute bottom-0 left-0 w-full">

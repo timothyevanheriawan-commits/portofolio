@@ -17,7 +17,7 @@ export const projects: Project[] = [
       "Tailwind CSS",
       "Framer Motion",
     ],
-    liveUrl: "[https://auraflow-os.vercel.app](https://auraflow-os.vercel.app)",
+    liveUrl: "https://auraflow-os.vercel.app",
     screenshots: [
       {
         src: "/projects/auraflow/auraflow-1-mockup.png",
@@ -59,7 +59,7 @@ Visually, the interface avoids translucent or layered effects in favor of solid 
       "Tailwind CSS",
     ],
     liveUrl:
-      "[https://vertex-inventory.vercel.app](https://vertex-inventory.vercel.app)",
+      "https://vertex-inventory.vercel.app",
     screenshots: [
       {
         src: "/projects/vertex/vertex-1-mockup.png",
@@ -94,7 +94,7 @@ The UI favors dense information layouts over whitespace-heavy designs. This incr
     role: "Data Analyst & Dashboard Developer",
     stack: ["Python", "Streamlit", "Pandas", "NLTK", "Plotly"],
     liveUrl:
-      "[https://bca-mobile-dashboard.streamlit.app](https://bca-mobile-dashboard.streamlit.app)",
+      "https://bca-mobile-dashboard.streamlit.app",
     screenshots: [
       {
         src: "/projects/bca/bca-1-mockup.png",
@@ -128,7 +128,7 @@ The interface prioritizes clarity over customization, limiting user controls to 
     year: "2026",
     role: "UI/UX Developer",
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    liveUrl: "[https://kurofest.vercel.app](https://kurofest.vercel.app)",
+    liveUrl: "https://kurofest.vercel.app",
     screenshots: [
       {
         src: "/projects/kurofest/kurofest-1-mockup.png",
@@ -165,7 +165,7 @@ The central design decision was to strictly adhere to predefined UI criteria der
     role: "Frontend Developer",
     stack: ["Next.js", "PostgreSQL", "TypeScript", "Tailwind CSS"],
     liveUrl:
-      "[https://recipeshare-project.vercel.app](https://recipeshare-project.vercel.app)",
+      "https://recipeshare-project.vercel.app",
     screenshots: [
       {
         src: "/projects/recipeshare/recipeshare-1-mockup.png",
@@ -209,7 +209,7 @@ The most important design decision was establishing clear UI criteria for typogr
       "TanStack Table",
       "Tiptap",
     ],
-    liveUrl: "[https://atlas-prms.vercel.app/](https://atlas-prms.vercel.app/)",
+    liveUrl: "https://atlas-prms.vercel.app/",
     screenshots: [
       {
         src: "/projects/atlas/atlas-1-mockup.png",
@@ -240,7 +240,7 @@ Atlas also currently lacks the institutional "paper trail" that makes internal s
     role: "Solo Developer & Designer",
     stack: ["TypeScript", "Next.js", "Tailwind CSS"],
     liveUrl:
-      "[https://10-3-1-game.vercel.app/](https://10-3-1-game.vercel.app/)",
+      "https://10-3-1-game.vercel.app",
     screenshots: [
       {
         src: "/projects/10-3-1/10-3-1-1-mockup.png",

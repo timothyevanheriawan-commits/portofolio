@@ -19,19 +19,19 @@ export function SelectedProjects() {
             <Fade delay={0}>
                 <div className="flex items-end justify-between mt-8 md:mt-12 mb-12">
                     <div className="flex flex-col gap-3">
-                        <div className="flex items-center gap-2 text-[#7A1E1E] font-mono text-[11px] tracking-[0.4em] font-medium">
+                        <div className="flex items-center gap-2 text-[var(--color-accent)] font-mono text-[11px] tracking-[0.4em] font-medium">
                             <span>INDEX</span>
-                            <span className="text-[#E8E7E4]">/</span>
+                            <span className="text-[var(--color-border)]">/</span>
                             <span>01</span>
                         </div>
-                        <h2 className="text-[14px] md:text-[16px] font-mono text-[#1A1A1A] uppercase tracking-[0.2em] font-medium">
+                        <h2 className="text-[14px] md:text-[16px] font-mono text-[var(--color-text-primary)] uppercase tracking-[0.2em] font-medium">
                             Selected Work
                         </h2>
                     </div>
                     <div className="hidden md:block pb-1">
                         <HoverLink
                             href="/projects"
-                            className="text-[10px] font-mono uppercase tracking-widest text-[#9F9F9F] hover:text-[#1A1A1A] transition-colors"
+                            className="text-[10px] font-mono uppercase tracking-widest text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors"
                         >
                             View Archive →
                         </HoverLink>
@@ -55,13 +55,13 @@ export function SelectedProjects() {
                           colClass,
                           isExpanded
                             ? "border-[#C8C8C4]"
-                            : "border-[#E8E7E4] hover:border-[#C8C8C4]",
+                            : "border-[var(--color-border)] hover:border-[#C8C8C4]",
                         )}
                       >
                         {/* Top maroon strip */}
                         <div
                           className={cn(
-                            "absolute top-0 left-0 right-0 h-px bg-[#7A1E1E] transition-transform duration-500 origin-left",
+                            "absolute top-0 left-0 right-0 h-px bg-[var(--color-accent)] transition-transform duration-500 origin-left",
                             isExpanded
                               ? "scale-x-100"
                               : "scale-x-0 group-hover:scale-x-100",
@@ -71,9 +71,9 @@ export function SelectedProjects() {
                         {/* Hover/expanded bg */}
                         <div
                           className={cn(
-                            "absolute inset-0 bg-[#7A1E1E]/[0.03] pointer-events-none transition-opacity duration-300",
+                            "absolute inset-0 bg-[var(--color-accent)]/[0.03] pointer-events-none transition-opacity duration-300",
                             isExpanded
-                              ? "opacity-100 !bg-[#7A1E1E]/[0.04]"
+                              ? "opacity-100 !bg-[var(--color-accent)]/[0.04]"
                               : "opacity-0 group-hover:opacity-100",
                           )}
                         />
@@ -94,14 +94,14 @@ export function SelectedProjects() {
                                 className={cn(
                                   "text-[10px] font-mono tabular-nums transition-colors duration-300",
                                   isExpanded
-                                    ? "text-[#7A1E1E]"
-                                    : "text-[#C8C8C4] group-hover:text-[#9F9F9F]",
+                                    ? "text-[var(--color-accent)]"
+                                    : "text-[#C8C8C4] group-hover:text-[var(--color-text-faint)]",
                                 )}
                               >
                                 NO.{String(index + 1).padStart(2, "0")}
                               </span>
-                              <span className="text-[#E8E7E4]">/</span>
-                              <span className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-wider">
+                              <span className="text-[var(--color-border)]">/</span>
+                              <span className="text-[10px] font-mono text-[var(--color-text-faint)] uppercase tracking-wider">
                                 {project.year}
                               </span>
                             </div>
@@ -109,8 +109,8 @@ export function SelectedProjects() {
                               className={cn(
                                 "text-[10px] font-mono uppercase tracking-widest transition-colors duration-300",
                                 isExpanded
-                                  ? "text-[#7A1E1E]"
-                                  : "text-[#9F9F9F] group-hover:text-[#1A1A1A]",
+                                  ? "text-[var(--color-accent)]"
+                                  : "text-[var(--color-text-faint)] group-hover:text-[var(--color-text-primary)]",
                               )}
                             >
                               {isExpanded ? "− Close" : "+ Details"}
@@ -118,14 +118,14 @@ export function SelectedProjects() {
                           </div>
 
                           {/* Role */}
-                          <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#9F9F9F] mb-3">
+                          <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-[var(--color-text-faint)] mb-3">
                             {project.role}
                           </p>
 
                           {/* Title */}
                           <h2
                             className={cn(
-                              "font-medium tracking-[-0.03em] text-[#1A1A1A] leading-tight transition-colors duration-300",
+                              "font-medium tracking-[-0.03em] text-[var(--color-text-primary)] leading-tight transition-colors duration-300",
                               isFeature
                                 ? "text-[24px] md:text-[32px]"
                                 : "text-[20px] md:text-[22px]",
@@ -140,8 +140,8 @@ export function SelectedProjects() {
                           isOpen={isExpanded}
                           id={`bento-details-${project.slug}`}
                         >
-                          <div className="relative z-10 px-6 md:px-8 pb-8 pt-4 border-t border-[#E8E7E4]">
-                            <p className="text-[14px] text-[#4A4A4A] leading-[1.65] mb-6 max-w-[52ch]">
+                          <div className="relative z-10 px-6 md:px-8 pb-8 pt-4 border-t border-[var(--color-border)]">
+                            <p className="text-[14px] text-[var(--color-text-body)] leading-[1.65] mb-6 max-w-[52ch]">
                               {project.description}
                             </p>
 
@@ -150,7 +150,7 @@ export function SelectedProjects() {
                               {project.stack.map((tech) => (
                                 <span
                                   key={tech}
-                                  className="text-[9px] font-mono uppercase tracking-wider text-[#4A4A4A] border border-[#E8E7E4] px-2 py-1"
+                                  className="text-[9px] font-mono uppercase tracking-wider text-[var(--color-text-body)] border border-[var(--color-border)] px-2 py-1"
                                 >
                                   {tech}
                                 </span>
@@ -161,7 +161,7 @@ export function SelectedProjects() {
                             <div className="flex items-center gap-6">
                               <Link
                                 href={`/projects/${project.slug}`}
-                                className="group/cta inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-[#1A1A1A] hover:text-[#7A1E1E] transition-colors"
+                                className="group/cta inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors"
                               >
                                 Case Study
                                 <span className="transition-transform duration-300 group-hover/cta:translate-x-1">
@@ -173,7 +173,7 @@ export function SelectedProjects() {
                                   href={project.liveUrl}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="group/cta inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-widest text-[#9F9F9F] hover:text-[#1A1A1A] transition-colors"
+                                  className="group/cta inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-widest text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)] transition-colors"
                                 >
                                   Live Site
                                   <span className="transition-transform duration-300 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5">
@@ -193,7 +193,7 @@ export function SelectedProjects() {
             <div className="mt-10 md:hidden">
                 <Link
                     href="/projects"
-                    className="text-[10px] font-mono uppercase tracking-widest text-[#9F9F9F] flex items-center justify-center gap-2"
+                    className="text-[10px] font-mono uppercase tracking-widest text-[var(--color-text-faint)] flex items-center justify-center gap-2"
                 >
                     View Archive →
                 </Link>

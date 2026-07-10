@@ -69,7 +69,7 @@ export default function Cursor() {
                     height: dotSize,
                     x: '-50%',
                     y: '-50%',
-                    backgroundColor: isHovered ? '#7A1E1E' : isClicked ? '#7A1E1E' : '#1A1A1A',
+                    backgroundColor: isHovered ? 'var(--color-accent)' : isClicked ? 'var(--color-accent)' : 'var(--color-text-primary)',
                     opacity: isClicked ? 0.5 : 1,
                 }}
                 transition={{ type: 'spring', damping: 30, stiffness: 500, mass: 0.3 }}

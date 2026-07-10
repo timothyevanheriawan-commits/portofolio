@@ -74,7 +74,7 @@ export function Line({ className }: LineProps) {
                 scaleX: { duration: 1.5, ease: "circOut" },
                 opacity: { duration: 3, repeat: Infinity, ease: "easeInOut" }
             }}
-            className="h-px w-full bg-[#7A1E1E] origin-left"
+            className="h-px w-full bg-[var(--color-accent)] origin-left"
         />
     )
 }

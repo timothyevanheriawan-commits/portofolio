@@ -9,7 +9,7 @@ export default function AboutPage() {
       <Container className="py-16 md:py-24">
         <header className="mb-14">
           <h1
-            className="text-[32px] md:text-[48px] font-black tracking-[-0.04em] text-[#1A1A1A] mb-4"
+            className="text-[32px] md:text-[48px] font-black tracking-[-0.04em] text-(--color-text-primary) mb-4"
             style={{ lineHeight: 0.92 }}
           >
             PROFILE
@@ -21,12 +21,12 @@ export default function AboutPage() {
           <div className="lg:col-span-8 lg:pr-16 space-y-12 md:space-y-16">
             <Fade delay={0.1}>
               <section className="max-w-[52ch]">
-                <p className="text-[15px] md:text-[16px] text-[#4A4A4A] leading-[1.7] mb-6">
+                <p className="text-[15px] md:text-[16px] text-(--color-text-body) leading-[1.7] mb-6">
                   4th-year Information Systems student at Petra Christian
                   University. Building interfaces that communicate clearly and
                   tools that reduce friction.
                 </p>
-                <p className="text-[15px] md:text-[16px] text-[#4A4A4A] leading-[1.7] mb-6">
+                <p className="text-[15px] md:text-[16px] text-[var(--color-text-body)] leading-[1.7] mb-6">
                   I learned by building, not tutorials. Implementation first,
                   abstraction second.
                 </p>
@@ -37,19 +37,19 @@ export default function AboutPage() {
 
             <Fade delay={0.2}>
               <section className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <h2 className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest pt-1">
+                <h2 className="text-[10px] font-mono text-[var(--color-text-faint)] uppercase tracking-widest pt-1">
                   Education
                 </h2>
                 <div className="md:col-span-3">
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-1 gap-1 sm:gap-4">
-                    <span className="text-[15px] font-bold text-[#1A1A1A]">
+                    <span className="text-[15px] font-bold text-[var(--color-text-primary)]">
                       Petra Christian University
                     </span>
-                    <span className="text-[11px] font-mono text-[#7A1E1E]">
+                    <span className="text-[11px] font-mono text-[var(--color-accent)]">
                       2022-2026
                     </span>
                   </div>
-                  <p className="text-[13px] text-[#6F6F6F]">
+                  <p className="text-[13px] text-[var(--color-text-secondary)]">
                     Bachelor of Science in Information Systems
                   </p>
                 </div>
@@ -61,20 +61,20 @@ export default function AboutPage() {
             {/* NEW SECTION: PROFESSIONAL EXPERIENCE */}
             <Fade delay={0.25}>
               <section className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-4">
-                <h2 className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest pt-1">
+                <h2 className="text-[10px] font-mono text-[var(--color-text-faint)] uppercase tracking-widest pt-1">
                   Professional
                 </h2>
                 <div className="md:col-span-3 space-y-8">
                   <div>
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-1 gap-1 sm:gap-4">
-                      <span className="text-[15px] font-bold text-[#1A1A1A]">
+                      <span className="text-[15px] font-bold text-[var(--color-text-primary)]">
                         Search Engine Optimization Analyst
                       </span>
-                      <span className="text-[11px] font-mono text-[#7A1E1E]">
+                      <span className="text-[11px] font-mono text-[var(--color-accent)]">
                         2025
                       </span>
                     </div>
-                    <p className="text-[13px] text-[#6F6F6F] mb-4">
+                    <p className="text-[13px] text-[var(--color-text-secondary)] mb-4">
                       Deus Code · Internship
                     </p>
                     <ul className="space-y-3">
@@ -87,9 +87,9 @@ export default function AboutPage() {
                       ].map((item, i) => (
                         <li
                           key={i}
-                          className="text-[13px] text-[#6F6F6F] flex items-start gap-3 leading-relaxed"
+                          className="text-[13px] text-[var(--color-text-secondary)] flex items-start gap-3 leading-relaxed"
                         >
-                          <span className="mt-2 w-1 h-1 rounded-full bg-[#7A1E1E] shrink-0" />
+                          <span className="mt-2 w-1 h-1 rounded-full bg-[var(--color-accent)] shrink-0" />
                           {item}
                         </li>
                       ))}
@@ -104,24 +104,24 @@ export default function AboutPage() {
             {/* RE-LABELED SECTION: ORGANIZATIONAL EXPERIENCE */}
             <Fade delay={0.3}>
               <section className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-4">
-                <h2 className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest pt-1">
+                <h2 className="text-[10px] font-mono text-[var(--color-text-faint)] uppercase tracking-widest pt-1">
                   Organizational
                 </h2>
                 <div className="md:col-span-3 space-y-8">
                   {/* Role 01 */}
                   <div>
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-1 gap-1 sm:gap-4">
-                      <span className="text-[14px] font-bold text-[#1A1A1A]">
+                      <span className="text-[14px] font-bold text-[var(--color-text-primary)]">
                         Coordinator of Logistics
                       </span>
-                      <span className="text-[11px] font-mono text-[#7A1E1E]">
+                      <span className="text-[11px] font-mono text-[var(--color-accent)]">
                         2023-2024
                       </span>
                     </div>
-                    <p className="text-[13px] text-[#6F6F6F] mb-2">
+                    <p className="text-[13px] text-[var(--color-text-secondary)] mb-2">
                       UKM Ilustrasi Petra
                     </p>
-                    <p className="text-[13px] text-[#9F9F9F] leading-relaxed max-w-[50ch]">
+                    <p className="text-[13px] text-[var(--color-text-faint)] leading-relaxed max-w-[50ch]">
                       Led the logistics division in managing equipment
                       procurement and operational setup for student organization
                       activities.
@@ -129,16 +129,16 @@ export default function AboutPage() {
                   </div>
 
                   {/* Role 02 */}
-                  <div className="pt-4 border-t border-[#F0F0EE]">
+                  <div className="pt-4 border-t border-[var(--color-border-light)]">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-1 gap-1 sm:gap-4">
-                      <span className="text-[14px] font-bold text-[#1A1A1A]">
+                      <span className="text-[14px] font-bold text-[var(--color-text-primary)]">
                         Technical Logistics Staff
                       </span>
-                      <span className="text-[11px] font-mono text-[#9F9F9F]">
+                      <span className="text-[11px] font-mono text-[var(--color-text-faint)]">
                         2023-2024
                       </span>
                     </div>
-                    <p className="text-[13px] text-[#6F6F6F] mb-3">
+                    <p className="text-[13px] text-[var(--color-text-secondary)] mb-3">
                       Various Committees (WGG, SAN X LKTI, Tutorial UAS)
                     </p>
                     <ul className="space-y-2">
@@ -149,9 +149,9 @@ export default function AboutPage() {
                       ].map((item, i) => (
                         <li
                           key={i}
-                          className="text-[12px] text-[#9F9F9F] flex items-start gap-2"
+                          className="text-[12px] text-[var(--color-text-faint)] flex items-start gap-2"
                         >
-                          <span className="mt-1.5 w-1 h-px bg-[#E8E7E4]" />
+                          <span className="mt-1.5 w-1 h-px bg-[var(--color-border)]" />
                           {item}
                         </li>
                       ))}
@@ -165,7 +165,7 @@ export default function AboutPage() {
 
             <Fade delay={0.35}>
               <section className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <h2 className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest pt-1">
+                <h2 className="text-[10px] font-mono text-[var(--color-text-faint)] uppercase tracking-widest pt-1">
                   Philosophy
                 </h2>
                 <div className="md:col-span-3">
@@ -188,10 +188,10 @@ export default function AboutPage() {
                         key={item.id}
                         className="flex gap-4 items-start group"
                       >
-                        <span className="text-[#7A1E1E] font-mono text-[11px] mt-1 opacity-60 group-hover:opacity-100 transition-opacity">
+                        <span className="text-[var(--color-accent)] font-mono text-[11px] mt-1 opacity-60 group-hover:opacity-100 transition-opacity">
                           {item.id}
                         </span>
-                        <p className="text-[14px] md:text-[15px] text-[#4A4A4A] leading-relaxed">
+                        <p className="text-[14px] md:text-[15px] text-[var(--color-text-body)] leading-relaxed">
                           {item.text}
                         </p>
                       </li>
@@ -203,10 +203,10 @@ export default function AboutPage() {
           </div>
 
           {/* Sidebar */}
-          <aside className="lg:col-span-4 mt-16 lg:mt-0 lg:border-l border-[#E8E7E4] lg:pl-12">
+          <aside className="lg:col-span-4 mt-16 lg:mt-0 lg:border-l border-[var(--color-border)] lg:pl-12">
             <Fade delay={0.4} className="lg:sticky lg:top-24 space-y-10">
               <div>
-                <h3 className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest mb-6">
+                <h3 className="text-[10px] font-mono text-[var(--color-text-faint)] uppercase tracking-widest mb-6">
                   Contact
                 </h3>
                 <div className="flex flex-col gap-4">
@@ -228,14 +228,14 @@ export default function AboutPage() {
                     },
                   ].map((link) => (
                     <div key={link.label} className="flex flex-col">
-                      <span className="text-[9px] font-mono text-[#BFBFBF] uppercase mb-1">
+                      <span className="text-[9px] font-mono text-[var(--color-text-ghost)] uppercase mb-1">
                         {link.label}
                       </span>
                       <a
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover-underline text-[12px] text-[#4A4A4A] hover:text-[#1A1A1A] transition-colors break-all leading-relaxed focus-visible:outline-none focus-visible:text-[#7A1E1E]"
+                        className="hover-underline text-[12px] text-[var(--color-text-body)] hover:text-[var(--color-text-primary)] transition-colors break-all leading-relaxed focus-visible:outline-none focus-visible:text-[var(--color-accent)]"
                       >
                         {link.value}
                       </a>
@@ -244,23 +244,23 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              <div className="pt-8 border-t border-[#E8E7E4]">
-                <h3 className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest mb-3">
+              <div className="pt-8 border-t border-[var(--color-border)]">
+                <h3 className="text-[10px] font-mono text-[var(--color-text-faint)] uppercase tracking-widest mb-3">
                   Status
                 </h3>
-                <p className="text-[13px] text-[#6F6F6F] leading-relaxed">
+                <p className="text-[13px] text-[var(--color-text-secondary)] leading-relaxed">
                   Open to internships and entry-level positions for 2026.
                 </p>
               </div>
 
-              <div className="pt-8 border-t border-[#E8E7E4]">
-                <h3 className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest mb-4">
+              <div className="pt-8 border-t border-[var(--color-border)]">
+                <h3 className="text-[10px] font-mono text-[var(--color-text-faint)] uppercase tracking-widest mb-4">
                   Resume
                 </h3>
                 <a
                   href="/resume.pdf"
                   download="Timothy-Evan-Resume.pdf"
-                  className="group inline-flex items-center gap-3 text-[10px] font-mono uppercase tracking-widest text-[#F7F7F5] bg-[#1A1A1A] px-5 py-2.5 hover:bg-[#7A1E1E] transition-colors duration-300 w-full justify-between focus-visible:outline-none focus-visible:bg-[#7A1E1E]"
+                  className="group inline-flex items-center gap-3 text-[10px] font-mono uppercase tracking-widest text-[var(--color-bg-header)] bg-[var(--color-text-primary)] px-5 py-2.5 hover:bg-[var(--color-accent)] transition-colors duration-300 w-full justify-between focus-visible:outline-none focus-visible:bg-[var(--color-accent)]"
                 >
                   <span>Download CV</span>
                   <span className="transition-transform duration-300 group-hover:translate-y-0.5">
@@ -268,8 +268,8 @@ export default function AboutPage() {
                   </span>
                 </a>
               </div>
-              <div className="pt-8 border-t border-[#E8E7E4]">
-                <h3 className="text-[10px] font-mono text-[#9F9F9F] uppercase tracking-widest mb-6">
+              <div className="pt-8 border-t border-[var(--color-border)]">
+                <h3 className="text-[10px] font-mono text-[var(--color-text-faint)] uppercase tracking-widest mb-6">
                   CAPABILITIES
                 </h3>
                 <div className="space-y-5">
@@ -280,10 +280,10 @@ export default function AboutPage() {
                   ].map((item) => (
                     <div key={item.skill} className="group">
                       <div className="flex justify-between items-center mb-2">
-                        <span className="text-[11px] font-mono text-[#4A4A4A] group-hover:text-[#1A1A1A] transition-colors">
+                        <span className="text-[11px] font-mono text-[var(--color-text-body)] group-hover:text-[var(--color-text-primary)] transition-colors">
                           {item.skill}
                         </span>
-                        <span className="text-[9px] font-mono text-[#BFBFBF] tabular-nums">
+                        <span className="text-[9px] font-mono text-[var(--color-text-ghost)] tabular-nums">
                           0{item.level}/05
                         </span>
                       </div>
@@ -294,8 +294,8 @@ export default function AboutPage() {
                             key={i}
                             className={`h-1.5 w-full transition-all duration-500 ${
                               i < item.level
-                                ? "bg-[#7A1E1E] opacity-100 group-hover:bg-[#1A1A1A]"
-                                : "bg-[#E8E7E4]"
+                                ? "bg-[var(--color-accent)] opacity-100 group-hover:bg-[var(--color-text-primary)]"
+                                : "bg-[var(--color-border)]"
                             }`}
                           />
                         ))}

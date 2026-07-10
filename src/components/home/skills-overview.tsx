@@ -42,19 +42,19 @@ function DisciplineRow({
     return (
       <motion.div
         ref={ref}
-        className={`group/row grid grid-cols-1 md:grid-cols-12 border-t border-[#E8E7E4] transition-colors duration-300 hover:bg-[#7A1E1E]/[0.02] ${!isLast ? "" : "md:border-b"}`}
+        className={`group/row grid grid-cols-1 md:grid-cols-12 border-t border-[var(--color-border)] transition-colors duration-300 hover:bg-[var(--color-accent)]/[0.02] ${!isLast ? "" : "md:border-b"}`}
         initial={{ opacity: 0, y: 12 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
       >
         {/* ── Left: index + category name ── */}
-        <div className="md:col-span-3 py-8 md:py-10 pr-6 flex flex-col gap-3 md:border-r border-[#E8E7E4]">
-          <span className="text-[9px] font-mono text-[#B5B5B5] tracking-[0.35em] uppercase">
+        <div className="md:col-span-3 py-8 md:py-10 pr-6 flex flex-col gap-3 md:border-r border-[var(--color-border)]">
+          <span className="text-[9px] font-mono text-[var(--color-text-ghost)] tracking-[0.35em] uppercase">
             {discipline.index}
           </span>
           {/* Large display category name — the key typographic move */}
           <h3
-            className="font-display font-medium text-[#1A1A1A] leading-none tracking-[-0.03em] uppercase"
+            className="font-display font-medium text-[var(--color-text-primary)] leading-none tracking-[-0.03em] uppercase"
             style={{ fontSize: "clamp(24px, 3.5vw, 40px)" }}
           >
             {discipline.category}
@@ -62,8 +62,8 @@ function DisciplineRow({
         </div>
 
         {/* ── Center: discipline statement ── */}
-        <div className="md:col-span-5 pt-4 pb-6 md:py-10 md:px-10 flex items-end md:items-center md:border-r border-[#E8E7E4]">
-          <p className="text-[13px] md:text-[14px] text-[#6F6F6F] leading-[1.6] max-w-[38ch] tracking-[-0.01em]">
+        <div className="md:col-span-5 pt-4 pb-6 md:py-10 md:px-10 flex items-end md:items-center md:border-r border-[var(--color-border)]">
+          <p className="text-[13px] md:text-[14px] text-[var(--color-text-secondary)] leading-[1.6] max-w-[38ch] tracking-[-0.01em]">
             {discipline.statement}
           </p>
         </div>
@@ -74,7 +74,7 @@ function DisciplineRow({
             {discipline.items.map((item, i) => (
               <motion.span
                 key={item}
-                className="group relative inline-flex items-center text-[10px] font-mono uppercase tracking-wider text-[#4A4A4A] border border-[#E8E7E4] px-3 py-1.5 overflow-hidden cursor-default select-none"
+                className="group relative inline-flex items-center text-[10px] font-mono uppercase tracking-wider text-[var(--color-text-body)] border border-[var(--color-border)] px-3 py-1.5 overflow-hidden cursor-default select-none"
                 initial={{ opacity: 0, y: 6 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{
@@ -82,18 +82,18 @@ function DisciplineRow({
                   delay: delay + 0.15 + i * 0.06,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                whileHover={{ borderColor: "#7A1E1E" }}
+                whileHover={{ borderColor: "var(--color-accent)" }}
               >
                 {/* Fill on hover */}
                 <motion.span
                   aria-hidden
-                  className="absolute inset-0 bg-[#7A1E1E]"
+                  className="absolute inset-0 bg-[var(--color-accent)]"
                   initial={{ scaleX: 0 }}
                   whileHover={{ scaleX: 1 }}
                   transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                   style={{ originX: 0 }}
                 />
-                <span className="relative z-10 group-hover:text-[#F7F7F5] transition-colors duration-200">
+                <span className="relative z-10 group-hover:text-[var(--color-bg-header)] transition-colors duration-200">
                   {item}
                 </span>
               </motion.span>
@@ -113,12 +113,12 @@ export function SkillsOverview() {
             <Fade delay={0}>
                 <div className="flex items-end justify-between mt-8 md:mt-12 mb-12 md:mb-16">
                     <div className="flex flex-col gap-3">
-                        <div className="flex items-center gap-2 text-[#7A1E1E] font-mono text-[11px] tracking-[0.4em] font-medium">
+                        <div className="flex items-center gap-2 text-[var(--color-accent)] font-mono text-[11px] tracking-[0.4em] font-medium">
                             <span>INDEX</span>
-                            <span className="text-[#E8E7E4]">/</span>
+                            <span className="text-[var(--color-border)]">/</span>
                             <span>02</span>
                         </div>
-                        <h2 className="text-[14px] md:text-[16px] font-mono text-[#1A1A1A] uppercase tracking-[0.2em] font-medium">
+                        <h2 className="text-[14px] md:text-[16px] font-mono text-[var(--color-text-primary)] uppercase tracking-[0.2em] font-medium">
                             Capabilities
                         </h2>
                     </div>

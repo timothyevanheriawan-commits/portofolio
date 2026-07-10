@@ -31,7 +31,7 @@ export function CaseStudyNav() {
     return (
         <aside className="hidden lg:block lg:col-span-3">
             <div className="sticky top-28 space-y-6">
-                <div className="h-px bg-[#7A1E1E] w-5" />
+                <div className="h-px bg-[var(--color-accent)] w-5" />
                 <nav className="flex flex-col gap-3">
                     {SECTIONS.map((s) => {
                         const isActive = activeId === s.toLowerCase()
@@ -41,11 +41,11 @@ export function CaseStudyNav() {
                                 href={`#${s.toLowerCase()}`}
                                 className={cn(
                                     "group flex items-center gap-3 text-[11px] font-mono uppercase tracking-widest transition-colors duration-200",
-                                    isActive ? "text-[#1A1A1A]" : "text-[#9F9F9F] hover:text-[#1A1A1A]"
+                                    isActive ? "text-[var(--color-text-primary)]" : "text-[var(--color-text-faint)] hover:text-[var(--color-text-primary)]"
                                 )}
                             >
                                 <span className={cn(
-                                    "h-px bg-[#7A1E1E] transition-all duration-300",
+                                    "h-px bg-[var(--color-accent)] transition-all duration-300",
                                     isActive ? "w-4" : "w-0 group-hover:w-4"
                                 )} />
                                 {s}

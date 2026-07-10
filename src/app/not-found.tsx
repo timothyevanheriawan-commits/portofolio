@@ -10,23 +10,23 @@ export default function NotFound() {
 
                     {/* Overline */}
                     <div className="flex items-center gap-3 mb-12">
-                        <span className="h-px w-5 bg-[#7A1E1E]" />
-                        <span className="text-[9px] font-mono tracking-[0.25em] uppercase text-[#6F6F6F]">
+                        <span className="h-px w-5 bg-[var(--color-accent)]" />
+                        <span className="text-[9px] font-mono tracking-[0.25em] uppercase text-[var(--color-text-secondary)]">
                             404 / Not Found
                         </span>
                     </div>
 
                     {/* Headline */}
                     <h1
-                        className="font-black tracking-[-0.04em] text-[#1A1A1A] mb-8"
+                        className="font-black tracking-[-0.04em] text-[var(--color-text-primary)] mb-8"
                         style={{ fontSize: 'clamp(64px, 10vw, 140px)', lineHeight: 0.88 }}
                     >
                         Wrong
                         <br />
-                        <span className="text-[#BFBFBF]">turn.</span>
+                        <span className="text-[var(--color-text-ghost)]">turn.</span>
                     </h1>
 
-                    <p className="text-[15px] text-[#4A4A4A] leading-[1.75] max-w-[38ch] mb-12">
+                    <p className="text-[15px] text-[var(--color-text-body)] leading-[1.75] max-w-[38ch] mb-12">
                         This page doesn't exist. It may have been moved,
                         deleted, or you might have mistyped the URL.
                     </p>
@@ -34,14 +34,14 @@ export default function NotFound() {
                     <div className="flex flex-col sm:flex-row gap-4">
                         <Link
                             href="/"
-                            className="group inline-flex items-center gap-3 text-[11px] font-mono uppercase tracking-widest text-[#F7F7F5] bg-[#1A1A1A] px-6 py-3 hover:bg-[#7A1E1E] transition-colors duration-300"
+                            className="group inline-flex items-center gap-3 text-[11px] font-mono uppercase tracking-widest text-[var(--color-bg-header)] bg-[var(--color-text-primary)] px-6 py-3 hover:bg-[var(--color-accent)] transition-colors duration-300"
                         >
                             Back to Home
                             <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                         </Link>
                         <Link
                             href="/projects"
-                            className="group inline-flex items-center gap-3 text-[11px] font-mono uppercase tracking-widest text-[#1A1A1A] border border-[#E8E7E4] px-6 py-3 hover:border-[#1A1A1A] transition-colors duration-300"
+                            className="group inline-flex items-center gap-3 text-[11px] font-mono uppercase tracking-widest text-[var(--color-text-primary)] border border-[var(--color-border)] px-6 py-3 hover:border-[var(--color-text-primary)] transition-colors duration-300"
                         >
                             View Projects
                             <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>

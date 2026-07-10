@@ -20,7 +20,7 @@ export function ScrollLine() {
     return (
         <motion.div
             aria-hidden
-            className="fixed left-0 top-0 w-px bg-[#7A1E1E] origin-top z-[9997]"
+            className="fixed left-0 top-0 w-px bg-[var(--color-accent)] origin-top z-[9997]"
             style={{
                 height: '100vh',
                 scaleY,
